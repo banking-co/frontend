@@ -1,0 +1,72 @@
+$default-font-family: -apple-system, system-ui, Helvetica Neue
+
+.Text
+  color: var(--text-primary)
+  font:
+    family: Roboto, sans-serif
+    feature-settings: "clig" off, "liga" off
+    style: normal
+
+  &_mode
+    &--default
+      color: var(--gray)
+
+    &--destroy
+      color: var(--red) !important
+
+    &--progress
+      color: var(--green) !important
+
+  &--secondary
+    color: var(--text-secondary)
+
+  &--muted
+    color: var(--text-muted)
+
+  &--accent
+    color: var(--accent)
+
+  &--bold
+    font-weight: 500
+
+  &_tag
+    &--h1
+      font-size: 22px
+      line-height: 24px
+
+    &--h2
+      font-size: 18px
+      line-height: 18px
+
+    &--p
+      font-size: 16px
+      line-height: 18px
+
+    &--span
+      font-size: 14px
+      line-height: 18px
+
+
+  &_reverse
+    display: flex !important
+    flex-direction: row-reverse
+
+  &__link
+    display: flex
+    align-items: center
+    gap: 6px
+    transition: .3s
+    padding: 6px 8px
+    border-radius: 8px
+
+    & > svg
+      width: 15px
+      height: 15px
+      color: inherit
+
+    &_accent-chevron > svg
+      color: var(--accent) !important
+
+    &:active
+      background-color: var(--primary)
+      overflow: hidden
