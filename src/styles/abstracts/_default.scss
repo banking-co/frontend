@@ -1,0 +1,37 @@
+html {
+  height: 100%;
+  overflow: hidden;
+  quotes: "“" "”" !important;
+}
+
+body {
+  height: -webkit-fill-available;
+  height: 100%;
+  background-color: var(--background) !important;
+}
+
+#root {
+  height: inherit;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

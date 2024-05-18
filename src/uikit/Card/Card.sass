@@ -1,0 +1,33 @@
+.Card
+  position: relative
+  overflow: hidden
+  background-color: var(--secondary)
+  padding: 12px
+  border-radius: 10px
+  box-sizing: border-box
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &--disabled
+    &::before
+      content: ""
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      background-color: var(--secondary)
+      opacity: .6
+
+  &__container
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+  &__extra
+    width: 100%
+
+  &--shaped
+    aspect-ratio: 1 / 1

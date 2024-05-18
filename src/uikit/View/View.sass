@@ -1,0 +1,104 @@
+.View
+  position: relative
+  overflow: hidden
+  width: 100vw
+  height: 100%
+  background: var(--background)
+
+.View--active,
+.View--back
+  display: block
+  width: 100%
+  height: 100%
+
+.View--back
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  z-index: 1
+
+.View--active
+  position: relative
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+.View--to-back.View--animate.View--active::before,
+.View--to-next.View--animate.View--back::before
+  content: ""
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background-color: rgba(0, 0, 0, 0.3)
+  z-index: 1
+
+.View--to-next.View--back.View--animate
+  -webkit-animation: _toLeft 0.3s ease forwards
+  animation: _toLeft 0.3s ease forwards
+
+.View--to-next.View--active.View--animate
+  z-index: 2
+  -webkit-animation: _nextAnimation 0.3s ease forwards
+  animation: _nextAnimation 0.3s ease forwards
+
+.View--to-next.View--back::before
+  -webkit-animation: _upShadow 0.3s ease forwards
+  animation: _upShadow 0.3s ease forwards
+
+.View--to-back.View--back.View--animate
+  z-index: 2
+  -webkit-animation: _backAnimation 0.3s ease forwards
+  animation: _backAnimation 0.3s ease forwards
+
+.View--to-back.View--active.View--animate
+  -webkit-animation: _fromLeft 0.3s ease forwards
+  animation: _fromLeft 0.3s ease forwards
+
+.View--to-back.View--active::before
+  -webkit-animation: _downShadow 0.3s ease forwards
+  animation: _downShadow 0.3s ease forwards
+
+@keyframes _upShadow
+  from
+    opacity: 0
+
+  to
+    opacity: 1
+
+@keyframes _downShadow
+  from
+    opacity: 1
+
+  to
+    opacity: 0
+
+@keyframes _toLeft
+  from
+    transform: translateX(0%)
+
+  to
+    transform: translateX(-10%)
+
+@keyframes _fromLeft
+  from
+    transform: translateX(-10%)
+
+  to
+    transform: translateX(0%)
+
+@keyframes _nextAnimation
+  from
+    transform: translateX(100%)
+
+  to
+    transform: translateX(0%)
+
+@keyframes _backAnimation
+  from
+    transform: translateX(0%)
+
+  to
+    transform: translateX(100%)

@@ -1,0 +1,29 @@
+.Tag
+  border-radius: 8px
+  overflow: hidden
+  padding: 6px 8px
+  display: flex
+  gap: 6px
+  align-items: center
+
+  &__icons
+    $svg-size: 18px
+    width: $svg-size
+    height: $svg-size
+    color: inherit !important
+
+  &_center
+    justify-content: center
+
+  &_mode
+    &--default
+      background-color: var(--secondary)
+      color: var(--gray)
+
+    &--destroy
+      color: var(--red)
+      background-color: var(--red-secondary)
+
+    &--progress
+      color: var(--green)
+      background-color: var(--green-secondary)

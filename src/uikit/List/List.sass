@@ -1,0 +1,32 @@
+.List
+  &__item
+    display: flex
+    position: relative
+    padding: var(--padding-default)
+    align-items: center
+    overflow: hidden
+    justify-content: space-between
+
+    &__text
+      display: flex
+      align-items: center
+      gap: var(--padding-middle)
+
+    &__chevron
+      display: flex
+      align-items: center
+
+    &:not(:last-child)
+      &::before
+        content: ""
+        position: absolute
+        bottom: -1px
+        right: 0
+        width: calc(100% - var(--padding-default))
+        height: 2px
+        background-color: var(--background)
+
+    & > svg
+      width: 24px
+      height: 24px
+      stroke-width: 1.7

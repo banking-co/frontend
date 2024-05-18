@@ -1,0 +1,36 @@
+.UserCard
+  display: flex
+  overflow: hidden
+  width: 100%
+  position: relative
+  gap: var(--padding-default)
+  box-sizing: border-box
+
+  &__info
+    display: flex
+    justify-content: center
+    flex: 1
+    overflow: hidden
+    flex-direction: column
+
+    &--default
+      gap: var(--padding-smallest)
+
+    &__name
+      display: flex
+      align-items: center
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+      gap: 4px
+
+      & > .Text
+        font:
+          size: 18px
+
+        &:nth-child(2)
+          display: block
+          max-width: 100%
+          white-space: nowrap
+          overflow: hidden
+          text-overflow: ellipsis

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "noEmit": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+  },
+  "extends": "./tsconfig.paths.json",
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "types": ["**/*.d.ts"]
+}
