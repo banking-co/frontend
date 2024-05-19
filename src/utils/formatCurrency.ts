@@ -12,11 +12,11 @@ export const formatCurrency = (cents: number, options?: Options): string => {
   }
 
   const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
+    style: "decimal",
     currency: "USD",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
-  return formatter.format(cents / 100).replace("$", options?.symbol || "$");
+  return `${options?.symbol || ""}${formatter.format(cents / 100)}`;
 };

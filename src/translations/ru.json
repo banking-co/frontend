@@ -2,8 +2,9 @@
   "app": {
     "name": "Rabotyaga",
     "balances": {
-      "first": "Основной",
-      "second": "Вторичный",
+      "primary": "Валютный",
+      "secondary": "Криптовалютный",
+      "tertiary": "Донатный",
       "name": "счет",
       "about": "О {{ type }}"
     },
