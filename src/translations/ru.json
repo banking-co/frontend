@@ -5,8 +5,7 @@
       "primary": "Валютный",
       "secondary": "Криптовалютный",
       "tertiary": "Донатный",
-      "name": "счет",
-      "about": "О {{ type }}"
+      "name": "счет"
     },
     "farms": {
       "title": "Майнинг",
@@ -99,5 +98,10 @@
       "back": "назад",
       "soon": "скоро"
     }
+  },
+  "about": {
+    "title": "О {{ type }}",
+    "balance": "счетах",
+    "rating": "рейтинге"
   }
 }

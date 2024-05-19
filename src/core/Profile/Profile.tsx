@@ -6,14 +6,7 @@ import { calculatingRating } from "utils";
 import { Card, Column, Line, PercentageVisualization, Tag, Text } from "uikit";
 import { BalanceCard, CurrencyExchangeRate } from "components";
 
-import {
-  IconArrowBigDown,
-  IconCurrencyBitcoin,
-  IconCurrencyDollar,
-  IconDiamond,
-  IconReload,
-  IconTrendingUp,
-} from "assets/icons/";
+import { IconArrowBigDown, IconReload, IconTrendingUp } from "assets/icons/";
 
 import { Mode } from "store/models";
 import type { ProfileProps } from "./Profile.interface";
@@ -25,11 +18,6 @@ export const Profile: ProfileProps = () => {
   return (
     <>
       <BalanceCard
-        balances={[
-          { count: 2323242, symbol: <IconCurrencyDollar /> },
-          { count: 213412412, symbol: <IconCurrencyBitcoin /> },
-          { count: 23424, symbol: <IconDiamond /> },
-        ]}
         tags={[
           { icon: <IconArrowBigDown />, text: "123,34", mode: Mode.Destroy },
           {

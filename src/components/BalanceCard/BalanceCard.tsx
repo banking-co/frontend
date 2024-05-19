@@ -6,7 +6,12 @@ import { formatCurrency } from "utils";
 
 import { Line, Column, Tag, Text } from "uikit";
 
-import { IconReload } from "assets/icons/";
+import {
+  IconCurrencyBitcoin,
+  IconCurrencyDollar,
+  IconDiamond,
+  IconReload,
+} from "assets/icons/";
 
 import { BalanceCardProps } from "./BalanceCard.interface";
 
@@ -15,21 +20,33 @@ export const BalanceCard: BalanceCardProps = (props) => {
   const timeAgo = useTimeAgo();
   const [currentBalance, setCurrentBalance] = createSignal<0 | 1 | 2>(0);
 
-  const forattedReloadDate = createMemo(() =>
+  const balances = {
+    0: {
+      count: 2323242,
+      symbol: <IconCurrencyDollar />,
+      text: t("app.balances.primary"),
+    },
+    1: {
+      count: 213412412,
+      symbol: <IconCurrencyBitcoin />,
+      text: t("app.balances.secondary"),
+    },
+    2: {
+      count: 23424,
+      symbol: <IconDiamond />,
+      text: t("app.balances.tertiary"),
+    },
+  };
+
+  const formatReloadDate = createMemo(() =>
     timeAgo(new Date(Date.now() - 12333412).getTime()),
   );
-
-  const currentBalanceText = {
-    0: t("app.balances.primary"),
-    1: t("app.balances.secondary"),
-    2: t("app.balances.tertiary"),
-  };
 
   return (
     <Column classList={{ BalanceCard: true }} gap={8}>
       <Line gap={4}>
         <Text
-          text={currentBalanceText[currentBalance()]}
+          text={balances[currentBalance()].text}
           tag={"span"}
           isAccent
           onClick={() =>
@@ -47,17 +64,17 @@ export const BalanceCard: BalanceCardProps = (props) => {
       <Line gap={8}>
         <Line gap={4}>
           <div class="BalanceCard__icon-balance">
-            {props.balances[currentBalance()].symbol}
+            {balances[currentBalance()].symbol}
           </div>
           <Text
-            text={formatCurrency(props.balances[currentBalance()].count, {
+            text={formatCurrency(balances[currentBalance()].count, {
               symbol: "",
             })}
             tag={"h1"}
           />
         </Line>
         <Text
-          text={forattedReloadDate()}
+          text={formatReloadDate()}
           tag="span"
           linkIcon={<IconReload />}
           isLink
@@ -70,7 +87,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
           return <Tag icon={item.icon} value={item.text} mode={item.mode} />;
         })}
         <Text
-          text={t("app.balances.about", { type: "РЕЙТИНГЕ" })}
+          text={t("about.title", { type: t("about.balance") })}
           tag={"span"}
           onClick={() => console.log("click")}
           isMuted
