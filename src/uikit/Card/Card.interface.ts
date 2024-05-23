@@ -6,10 +6,10 @@ interface CardParams extends JSX.HTMLAttributes<HTMLElement> {
   title: string;
 
   disable?: boolean;
-
   extra?: JSX.Element;
 
   isSquare?: boolean;
+  titleWrap?: boolean;
 }
 
 export type CardProps = Component<CardParams>;

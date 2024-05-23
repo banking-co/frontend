@@ -36,10 +36,14 @@ export const Profile: ProfileProps = () => {
       <Position
         type="line"
         gap={12}
-        style={{ "min-height": "157px", "max-height": "169.5px" }}
+        style={{
+          "min-height": "157px",
+          "max-height": "169.5px",
+        }}
       >
         <Card
           title={t("app.bank.card.management.title")}
+          titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
           extra={
@@ -58,6 +62,7 @@ export const Profile: ProfileProps = () => {
         />
         <Card
           title={t("app.bank.card.contracts.title")}
+          titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
           extra={
@@ -68,16 +73,17 @@ export const Profile: ProfileProps = () => {
                 gap: "8px",
               }}
             >
-              <Text
-                text={t("app.bank.card.contracts.extra.title")}
-                tag="span"
-                isMuted
-              />
               <Tag value="Можно взять" isCenter mode={Mode.Progress} />
             </div>
           }
           style={{ height: "100%" }}
-        />
+        >
+          <Text
+            text={t("app.bank.card.contracts.extra.title")}
+            tag="span"
+            isMuted
+          />
+        </Card>
       </Position>
       {process.env?.IS_MVP === "0" && (
         <>

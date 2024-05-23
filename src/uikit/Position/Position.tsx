@@ -23,7 +23,7 @@ export const Position: PositionProps = (props) => {
     <div
       class={componentClassName()}
       classList={{ [`${props.class}`]: !!props.class, ...props.classList }}
-      style={getDefaultStyles(props)}
+      style={Object.assign(getDefaultStyles(props), props.style)}
     >
       {props.children}
     </div>

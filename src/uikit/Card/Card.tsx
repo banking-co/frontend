@@ -22,6 +22,7 @@ export const Card: CardProps = (props) => {
     >
       <div class="Card__container">
         <CardHeader
+          titleWrap={props.titleWrap}
           title={props.title}
           propagation={props.disable ? undefined : props.propagation}
           icon={props.icon}
