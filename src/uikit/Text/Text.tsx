@@ -50,7 +50,7 @@ export const Text: TextProps = (props) => {
         type="line"
         class={"Text__currency"}
         disableWrap={!props.isCurrency}
-        gap={4}
+        gap={2}
       >
         {props.isCurrency && (
           <div class="Text__currency-icon">
