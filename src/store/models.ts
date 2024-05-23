@@ -63,3 +63,9 @@ export enum Currency {
   BYN = "byn",
   USD = "usd",
 }
+
+export enum TextCurrencyType {
+  Dollar = "dollar",
+  Bitcoin = "bitcoin",
+  Donate = "donate",
+}

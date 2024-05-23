@@ -1,9 +1,13 @@
 import type { Component, JSX } from "solid-js";
 
-interface ColumnParams extends JSX.HTMLAttributes<HTMLElement> {
+interface PositionParams extends JSX.HTMLAttributes<HTMLElement> {
+  type: "line" | "column";
+
   justifyContent?: "space-between" | "flex-start";
   alignItems?: "center" | "flex-end" | "baseline";
+
   gap?: number | string;
+  disableWrap?: boolean;
 }
 
-export type ColumnProps = Component<ColumnParams>;
+export type PositionProps = Component<PositionParams>;

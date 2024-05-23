@@ -5,7 +5,7 @@ import { useTranslation } from "hooks";
 
 import { formatCurrency } from "utils";
 
-import { Column, FlagIcon, Line, Tag, Text } from "uikit";
+import { Position, FlagIcon, Tag, Text } from "uikit";
 
 import {
   CurrencyExchangeRateProps,
@@ -32,19 +32,19 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
       {items()?.map((item, index, array) => {
         return (
           <>
-            <Line justifyContent="space-between">
-              <Column gap={4}>
-                <Line gap={8}>
+            <Position type="line" justifyContent="space-between">
+              <Position type="column" gap={4}>
+                <Position type="line" gap={8}>
                   <FlagIcon currency={item.type} />
                   <Text tag="p" text={t(`currency.${item.type}.title`)} />
-                </Line>
+                </Position>
                 <Text
                   tag="span"
                   isMuted
                   text={t(`currency.${item.type}.text`)}
                 />
-              </Column>
-              <Line gap={24}>
+              </Position>
+              <Position type="line" gap={24}>
                 <Tag
                   value={formatCurrency(item.exchange.sell)}
                   mode={Mode.Destroy}
@@ -53,8 +53,8 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
                   value={formatCurrency(item.exchange.buy)}
                   mode={Mode.Progress}
                 />
-              </Line>
-            </Line>
+              </Position>
+            </Position>
             {array.length - 1 !== index && (
               <div class="CurrencyExchangeRate__divider" />
             )}

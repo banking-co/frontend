@@ -6,7 +6,7 @@ import { AppHeader } from "../AppHeader/AppHeader";
 export const AppContainer: AppContainerProps = (props) => {
   return (
     <>
-      <AppHeader withBack />
+      <AppHeader withBack={false} />
       <main class="AppContainer" classList={props.classList}>
         <div class="AppContainer__wrapper">{props.children}</div>
       </main>

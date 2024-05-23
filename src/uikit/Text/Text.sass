@@ -1,5 +1,17 @@
 $default-font-family: -apple-system, system-ui, Helvetica Neue
 
+@mixin get-font-size($size, $height)
+  font:
+    size: $size
+  line-height: $height
+
+  .Text__currency-icon
+    height: $height - 2px
+
+@mixin get-width-and-height($height, $width)
+  height: $height
+  width: $width
+
 .Text
   color: var(--text-primary)
   font:
@@ -31,21 +43,16 @@ $default-font-family: -apple-system, system-ui, Helvetica Neue
 
   &_tag
     &--h1
-      font-size: 22px
-      line-height: 24px
+      @include get-font-size(22px, 24px)
 
     &--h2
-      font-size: 18px
-      line-height: 18px
+      @include get-font-size(18px, 18px)
 
     &--p
-      font-size: 16px
-      line-height: 18px
+      @include get-font-size(16px, 18px)
 
     &--span
-      font-size: 14px
-      line-height: 18px
-
+      @include get-font-size(14px, 18px)
 
   &_reverse
     display: flex !important
@@ -60,8 +67,7 @@ $default-font-family: -apple-system, system-ui, Helvetica Neue
     border-radius: 8px
 
     & > svg
-      width: 15px
-      height: 15px
+      @include get-width-and-height(15px, 15px)
       color: inherit
 
     &_accent-chevron > svg

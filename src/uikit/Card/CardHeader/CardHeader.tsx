@@ -15,7 +15,7 @@ export const CardHeader: CardHeaderProps = (props) => {
   const propagation = createMemo(() => {
     switch (props.propagation) {
       case "arrow":
-        return <IconChevronRight width={20} height={20} />;
+        return <IconChevronRight />;
       case "text":
         return (
           <Text text={t("app.card.propagation.text")} tag={"span"} isAccent />
@@ -28,7 +28,11 @@ export const CardHeader: CardHeaderProps = (props) => {
   return (
     <div class="CardHeader">
       <div class="CardHeader__container">
-        {props.icon && <IconWrapper>{props.icon}</IconWrapper>}
+        {props.icon && (
+          <IconWrapper height={28} width={28}>
+            {props.icon}
+          </IconWrapper>
+        )}
         <div class="CardHeader__title">
           <Text text={props.title} tag="p" />
         </div>

@@ -4,7 +4,13 @@ import { IconWrapperProps } from "./IconWrapper.interface";
 
 export const IconWrapper: IconWrapperProps = (props) => {
   return (
-    <div class="IconWrapper" style={{ width: "28px", height: "28px" }}>
+    <div
+      class="IconWrapper"
+      style={{
+        width: `${props.width || 28}px`,
+        height: `${props.height || 28}px`,
+      }}
+    >
       {props.children}
     </div>
   );

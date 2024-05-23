@@ -4,16 +4,12 @@ import { createMemo, createSignal } from "solid-js";
 import { useTranslation, useTimeAgo } from "hooks";
 import { formatCurrency } from "utils";
 
-import { Line, Column, Tag, Text } from "uikit";
-
-import {
-  IconCurrencyBitcoin,
-  IconCurrencyDollar,
-  IconDiamond,
-  IconReload,
-} from "assets/icons/";
+import { Position, Tag, Text } from "uikit";
 
 import { BalanceCardProps } from "./BalanceCard.interface";
+import { TextCurrencyType } from "store/models";
+
+import { IconReload } from "assets/icons";
 
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
@@ -23,17 +19,17 @@ export const BalanceCard: BalanceCardProps = (props) => {
   const balances = {
     0: {
       count: 2323242,
-      symbol: <IconCurrencyDollar />,
+      currencyType: TextCurrencyType.Dollar,
       text: t("app.balances.primary"),
     },
     1: {
       count: 213412412,
-      symbol: <IconCurrencyBitcoin />,
+      currencyType: TextCurrencyType.Bitcoin,
       text: t("app.balances.secondary"),
     },
     2: {
       count: 23424,
-      symbol: <IconDiamond />,
+      currencyType: TextCurrencyType.Donate,
       text: t("app.balances.tertiary"),
     },
   };
@@ -43,8 +39,8 @@ export const BalanceCard: BalanceCardProps = (props) => {
   );
 
   return (
-    <Column classList={{ BalanceCard: true }} gap={8}>
-      <Line gap={4}>
+    <Position type="column" classList={{ BalanceCard: true }} gap={8}>
+      <Position type="line" gap={4}>
         <Text
           text={balances[currentBalance()].text}
           tag={"span"}
@@ -60,19 +56,18 @@ export const BalanceCard: BalanceCardProps = (props) => {
           }
         />
         <Text text={t("app.balances.name")} tag={"span"} isMuted />
-      </Line>
-      <Line gap={8}>
-        <Line gap={4}>
-          <div class="BalanceCard__icon-balance">
-            {balances[currentBalance()].symbol}
-          </div>
+      </Position>
+      <Position type="line" gap={8}>
+        <Position type="line" gap={4}>
           <Text
             text={formatCurrency(balances[currentBalance()].count, {
               symbol: "",
             })}
+            isCurrency
+            currencyType={balances[currentBalance()].currencyType}
             tag={"h1"}
           />
-        </Line>
+        </Position>
         <Text
           text={formatReloadDate()}
           tag="span"
@@ -81,8 +76,8 @@ export const BalanceCard: BalanceCardProps = (props) => {
           reverse
           isMuted
         />
-      </Line>
-      <Line gap={12}>
+      </Position>
+      <Position type="line" gap={12}>
         {props.tags?.map((item) => {
           return <Tag icon={item.icon} value={item.text} mode={item.mode} />;
         })}
@@ -94,7 +89,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
           isLink
           isAccentChevron
         />
-      </Line>
-    </Column>
+      </Position>
+    </Position>
   );
 };

@@ -3,15 +3,28 @@ import "./Text.sass";
 import { createMemo } from "solid-js";
 
 import { Dynamic } from "solid-js/web";
+import { Position } from "uikit";
 
-import { IconChevronRight } from "assets/icons";
+import {
+  IconChevronRight,
+  IconCurrencyBitcoin,
+  IconCurrencyDollar,
+  IconDiamond,
+} from "assets/icons";
 
 import type { TextProps } from "./Text.interface";
+import { TextCurrencyType } from "../../store/models";
 
 export const Text: TextProps = (props) => {
   const formattedText = createMemo(() => {
     return props.text.replaceAll("=>", "→").replaceAll("$interpunct", "·");
   });
+
+  const currencyIcon = {
+    [TextCurrencyType.Dollar]: <IconCurrencyDollar />,
+    [TextCurrencyType.Bitcoin]: <IconCurrencyBitcoin />,
+    [TextCurrencyType.Donate]: <IconDiamond />,
+  };
 
   return (
     <Dynamic
@@ -33,7 +46,19 @@ export const Text: TextProps = (props) => {
       style={props.style}
       onClick={props.onClick}
     >
-      {formattedText()}
+      <Position
+        type="line"
+        class={"Text__currency"}
+        disableWrap={!props.isCurrency}
+        gap={4}
+      >
+        {props.isCurrency && (
+          <div class="Text__currency-icon">
+            {currencyIcon[props.currencyType || TextCurrencyType.Dollar]}
+          </div>
+        )}
+        {formattedText()}
+      </Position>
       {props.isLink && (props.linkIcon || <IconChevronRight />)}
     </Dynamic>
   );
