@@ -41,12 +41,9 @@ export const Profile: ProfileProps = () => {
       <Position
         type="line"
         gap={12}
-        style={{
-          "min-height": "157px",
-          "max-height": "169.5px",
-        }}
       >
         <Card
+          classList={{ "Profile__bank-cards": true }}
           title={t("app.bank.card.management.title")}
           titleWrap
           icon={<IconReload />}
@@ -63,7 +60,6 @@ export const Profile: ProfileProps = () => {
               />
             </Position>
           }
-          style={{ height: "100%" }}
         >
           <Text
             text={t("app.bank.card.management.subtitle")}
@@ -72,6 +68,7 @@ export const Profile: ProfileProps = () => {
           />
         </Card>
         <Card
+          classList={{ "Profile__bank-cards": true }}
           title={t("app.bank.card.upgrades.title")}
           titleWrap
           icon={<IconReload />}
@@ -87,7 +84,6 @@ export const Profile: ProfileProps = () => {
               <Tag value="Можно улучшить" isCenter mode={Mode.Progress} />
             </div>
           }
-          style={{ height: "100%" }}
         >
           <Text
             text={t("app.bank.card.upgrades.subtitle")}
