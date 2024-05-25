@@ -47,5 +47,11 @@ body {
   --radius-default: var(--radius-middle);
 
   --header-height: 56px;
-  --tabbar-height: 48px;
+
+  // todo:
+  // icons: 28px
+
+  --tabbar-height-android: 64px;
+  --tabbar-height-ios: 64px;
+  --tabbar-height: var(--tabbar-height-android);
 }
