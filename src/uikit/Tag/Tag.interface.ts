@@ -6,6 +6,7 @@ export interface TagParams extends JSX.HTMLAttributes<HTMLElement> {
   icon?: JSX.Element;
   value: string;
 
+  isCurrency?: boolean;
   isCenter?: boolean;
 }
 

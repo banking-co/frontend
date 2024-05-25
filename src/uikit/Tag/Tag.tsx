@@ -3,6 +3,7 @@ import "./Tag.sass";
 import { Text } from "uikit";
 
 import { TagProps } from "./Tag.interface";
+import { TextCurrencyType } from "../../store/models";
 
 export const Tag: TagProps = (props) => {
   return (
@@ -14,7 +15,13 @@ export const Tag: TagProps = (props) => {
       }}
     >
       {props.icon && <div class="Tag__icons">{props.icon}</div>}
-      <Text text={props.value} tag={"span"} mode={props.mode} />
+      <Text
+        isCurrency={props.isCurrency}
+        currencyType={TextCurrencyType.Dollar}
+        text={props.value}
+        tag={"span"}
+        mode={props.mode}
+      />
     </div>
   );
 };

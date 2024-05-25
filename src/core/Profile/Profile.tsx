@@ -9,6 +9,7 @@ import { BalanceCard, CurrencyExchangeRate } from "components";
 import {
   IconArrowBigDown,
   IconBonus,
+  IconExchangeRate,
   IconReload,
   IconTrendingUp,
 } from "assets/icons/";
@@ -25,7 +26,11 @@ export const Profile: ProfileProps = () => {
     <>
       <BalanceCard
         tags={[
-          { icon: <IconArrowBigDown />, text: "123,34", mode: Mode.Destroy },
+          {
+            icon: <IconArrowBigDown />,
+            text: "5" + "%",
+            mode: Mode.Destroy,
+          },
           {
             icon: <IconTrendingUp />,
             text: calculatingRating(134),
@@ -59,9 +64,15 @@ export const Profile: ProfileProps = () => {
             </Position>
           }
           style={{ height: "100%" }}
-        />
+        >
+          <Text
+            text={t("app.bank.card.management.subtitle")}
+            tag="span"
+            isMuted
+          />
+        </Card>
         <Card
-          title={t("app.bank.card.contracts.title")}
+          title={t("app.bank.card.upgrades.title")}
           titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
@@ -73,13 +84,13 @@ export const Profile: ProfileProps = () => {
                 gap: "8px",
               }}
             >
-              <Tag value="Можно взять" isCenter mode={Mode.Progress} />
+              <Tag value="Можно улучшить" isCenter mode={Mode.Progress} />
             </div>
           }
           style={{ height: "100%" }}
         >
           <Text
-            text={t("app.bank.card.contracts.extra.title")}
+            text={t("app.bank.card.upgrades.subtitle")}
             tag="span"
             isMuted
           />
@@ -111,7 +122,11 @@ export const Profile: ProfileProps = () => {
       >
         <Text text={t("app.bonus.info.available")} tag={"span"} isMuted />
       </Card>
-      <Card title={t("app.currency.title")} propagation={"text"}>
+      <Card
+        title={t("app.currency.title")}
+        icon={<IconExchangeRate />}
+        propagation={"text"}
+      >
         <CurrencyExchangeRate />
       </Card>
     </>

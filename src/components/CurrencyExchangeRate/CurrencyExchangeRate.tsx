@@ -46,10 +46,12 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
               </Position>
               <Position type="line" gap={24}>
                 <Tag
+                  isCurrency
                   value={formatCurrency(item.exchange.sell)}
                   mode={Mode.Destroy}
                 />
                 <Tag
+                  isCurrency
                   value={formatCurrency(item.exchange.buy)}
                   mode={Mode.Progress}
                 />

@@ -10,6 +10,8 @@ export { default as IconCurrencyBitcoin } from "./IconCurrencyBitcoin.svg";
 export { default as IconDiamond } from "./IconDiamond.svg";
 export { default as IconBonus } from "./IconGift.svg";
 export { default as IconGift } from "./IconGift.svg";
+export { default as IconExchangeRate } from "./IconArrowsExchange.svg";
+export { default as IconArrowsExchange } from "./IconArrowsExchange.svg";
 
 /*
 export { default as } from "."

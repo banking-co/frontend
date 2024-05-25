@@ -39,13 +39,12 @@
       },
       "card": {
         "management": {
-          "title": "Управление"
+          "title": "Управление",
+          "subtitle": "Почти как офис"
         },
-        "contracts": {
-          "title": "Контракты",
-          "extra": {
-            "title": "Контракт истекает"
-          }
+        "upgrades": {
+          "title": "Улучшения",
+          "subtitle": "Прокачка банка"
         }
       }
     }
