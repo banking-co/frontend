@@ -38,10 +38,7 @@ export const Profile: ProfileProps = () => {
           },
         ]}
       />
-      <Position
-        type="line"
-        gap={12}
-      >
+      <Position type="line" gap={12}>
         <Card
           classList={{ "Profile__bank-cards": true }}
           title={t("app.bank.card.management.title")}
