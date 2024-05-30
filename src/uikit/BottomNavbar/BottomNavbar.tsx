@@ -8,7 +8,24 @@ import { Position, Text } from "uikit";
 
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
-export const BottomNavbar: BottomNavbarProps = (props) => {
+import { IconDots, IconHome } from "assets/icons";
+
+const items = [
+  {
+    icon: <IconHome />,
+    key: "profile",
+  },
+  // {
+  //   icon: <IconBriefcase />,
+  //   key: "etc",
+  // },
+  {
+    icon: <IconDots />,
+    key: "menu",
+  },
+];
+
+export const BottomNavbar: BottomNavbarProps = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = createSignal("");
@@ -29,7 +46,7 @@ export const BottomNavbar: BottomNavbarProps = (props) => {
   return (
     <nav class="BottomNavbar">
       <ul class="BottomNavbar__wrapper">
-        {props.items.map((item) => {
+        {items.map((item) => {
           return (
             <li
               class="BottomNavbar__item"

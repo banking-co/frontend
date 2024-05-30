@@ -11,11 +11,8 @@ body {
 }
 
 #root {
-  height: inherit;
-  box-sizing: border-box;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  box-sizing: border-box;
 }
 
 body,

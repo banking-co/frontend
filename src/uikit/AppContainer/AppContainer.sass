@@ -1,16 +1,22 @@
 .AppContainer
-  display: block
-  flex-direction: column
+  display: grid
+  grid-template-rows: calc(var(--header-height) + var(--safe_area_inset_top)) 1fr var(--tabbar-height)
   position: relative
-  overflow: hidden auto
+  overflow: hidden
   height: 100%
 
+  &__container
+    padding: 12px
+    height: 100%
+    overflow: hidden auto
+    box-sizing: border-box
+
   &__wrapper
+    position: relative
     display: flex
     flex-direction: column
     gap: 12px
-    padding: 12px
-    min-height: 100%
+    overflow: hidden
     box-sizing: border-box
 
 
