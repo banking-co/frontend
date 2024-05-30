@@ -1,7 +1,12 @@
 import { AppContainer } from "uikit";
 
 import type { AppProps } from "./App.interface";
+import { AppLoading } from "../AppLoading/AppLoading";
 
 export const App: AppProps = (props) => {
-  return <AppContainer children={props.children} />;
+  return (
+    <AppLoading>
+      <AppContainer children={props.children} />
+    </AppLoading>
+  );
 };

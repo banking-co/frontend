@@ -1,6 +1,6 @@
 export * from "./App/App";
+export * from "./AppLoading/AppLoading";
 export * from "./Fallback/Fallback";
-export * from "./Loading/Loading";
 
 export * from "./Profile/Profile";
 

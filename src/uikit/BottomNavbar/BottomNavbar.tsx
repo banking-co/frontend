@@ -13,15 +13,11 @@ import { IconDots, IconHome } from "assets/icons";
 const items = [
   {
     icon: <IconHome />,
-    key: "profile",
+    key: "/",
   },
-  // {
-  //   icon: <IconBriefcase />,
-  //   key: "etc",
-  // },
   {
     icon: <IconDots />,
-    key: "menu",
+    key: "/menu",
   },
 ];
 
@@ -32,9 +28,15 @@ export const BottomNavbar: BottomNavbarProps = () => {
 
   const setActiveTabFromUrl = () => {
     const pathname = location.pathname;
-    const pathParts = pathname.split("/").filter(Boolean);
-    const firstPart = pathParts[0];
-    setActiveTab(firstPart);
+    if (pathname.length <= 1) {
+      return setActiveTab("/");
+    }
+
+    for (let item of items) {
+      if (pathname.match(item.key)) {
+        return setActiveTab(item.key);
+      }
+    }
   };
 
   onMount(setActiveTabFromUrl);

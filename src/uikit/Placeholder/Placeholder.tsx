@@ -7,9 +7,12 @@ import type { PlaceholderProps } from "./Placeholder.interface";
 export const Placeholder: PlaceholderProps = (props) => {
   return (
     <div
+      ref={props.ref}
       class="Placeholder"
       classList={{
         Placeholder__center: !!props.isCenter,
+        Placeholder__fullscreen: !!props.isFullScreen,
+        ...props.classList,
       }}
     >
       <div class="Placeholder__container">
