@@ -19,3 +19,4 @@ export * from "./Tag/Tag";
 export * from "./FlagIcon/FlagIcon";
 export * from "./Position/Position";
 export * from "./PercentageVisualization/PercentageVisualization";
+export * from "./Spinner/Spinner";

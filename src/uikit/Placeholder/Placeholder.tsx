@@ -13,11 +13,12 @@ export const Placeholder: PlaceholderProps = (props) => {
       }}
     >
       <div class="Placeholder__container">
-        <Text text={props.title} tag="h1" isAccent isBold />
-        <Text text={props.text} tag="p" isSecondary />
+        {props.title && <Text text={props.title} tag="h1" isAccent isBold />}
+        {props.text && <Text text={props.text} tag="p" isSecondary />}
         {props.description && (
           <Text text={props.description as string} tag="span" isMuted />
         )}
+        {props.children}
       </div>
     </div>
   );
