@@ -1,10 +1,10 @@
 .BottomNavbar
   position: relative
   width: 100%
-  height: calc(var(--tabbar-height) + var(--safe_area_inset_bottom))
+  height: var(--tabbar-height)
+  padding-bottom: var(--safe_area_inset_bottom)
   background-color: var(--secondary)
   box-sizing: border-box
-  color: var(--accent--extra)
   overflow: hidden
   z-index: 2
   border-top: 1px solid rgba(50, 53, 62, 10)
@@ -25,9 +25,23 @@
     padding-bottom: var(--safe_area_inset_bottom)
     color: var(--gray)
 
-    & > svg
-      width: 24px
+    & > div
+      & > svg
+        width: 24px
+        padding: 2px 20px
+        border-radius: 100px
+        transition: .3s
+
+      & > span
+        font-size: 10px
+        color: inherit
 
     &_active
-      & > svg
-        color: var(--accent)
+      & > div
+        & > svg,
+        & > span
+          color: var(--accent)
+
+        & > svg
+          background: var(--accent-secondary)
+

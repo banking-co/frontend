@@ -4,7 +4,7 @@ import { createSignal, onMount } from "solid-js";
 import { useLocation, useNavigate } from "@solidjs/router";
 import { throttle } from "lodash";
 
-import { Ripple } from "uikit";
+import { Position, Text } from "uikit";
 
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
@@ -41,7 +41,10 @@ export const BottomNavbar: BottomNavbarProps = (props) => {
                 setActiveTab(item.key);
               }}
             >
-              {item.icon}
+              <Position type={"column"} gap={2} alignItems={"center"}>
+                {item.icon}
+                <Text text={"Test"} tag={"span"} />
+              </Position>
             </li>
           );
         })}
