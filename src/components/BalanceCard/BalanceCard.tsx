@@ -18,7 +18,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
 
   const balances = {
     0: {
-      count: 2323242,
+      count: 123,
       currencyType: TextCurrencyType.Dollar,
       text: t("app.balances.primary"),
     },
@@ -57,17 +57,13 @@ export const BalanceCard: BalanceCardProps = (props) => {
         />
         <Text text={t("app.balances.name")} tag={"span"} isMuted />
       </Position>
-      <Position type="line" gap={8}>
-        <Position type="line" gap={4}>
-          <Text
-            text={formatCurrency(balances[currentBalance()].count, {
-              symbol: "",
-            })}
-            isCurrency
-            currencyType={balances[currentBalance()].currencyType}
-            tag={"h1"}
-          />
-        </Position>
+      <Position type="line" gap={8} alignItems={"center"}>
+        <Text
+          text={formatCurrency(balances[currentBalance()].count)}
+          isCurrency
+          currencyType={balances[currentBalance()].currencyType}
+          tag={"h1"}
+        />
         <Text
           text={formatReloadDate()}
           tag="span"
