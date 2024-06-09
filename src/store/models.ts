@@ -69,3 +69,14 @@ export enum TextCurrencyType {
   Bitcoin = "bitcoin",
   Donate = "donate",
 }
+
+export enum Device {
+  Desktop = "desktop",
+  Mobile = "mobile",
+}
+
+export enum Platform {
+  Desktop = "desktop",
+  iOS = "ios",
+  Android = "android",
+}
