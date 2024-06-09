@@ -6,3 +6,4 @@ export * from "./formatCurrency";
 export * from "./getCountryFlag";
 export * from "./decWord";
 export * from "./calculatingRating";
+export * from "./getDevice";
