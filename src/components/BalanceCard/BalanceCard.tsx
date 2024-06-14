@@ -39,7 +39,13 @@ export const BalanceCard: BalanceCardProps = (props) => {
   );
 
   return (
-    <Position type="column" classList={{ BalanceCard: true }} gap={8}>
+    <Position
+      type="column"
+      classList={{ BalanceCard: true }}
+      justifyContent={"center"}
+      alignItems={"center"}
+      gap={8}
+    >
       <Position type="line" gap={4}>
         <Text
           text={balances[currentBalance()].text}

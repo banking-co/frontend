@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { Route, HashRouter } from "@solidjs/router";
+import { Route, Router } from "@solidjs/router";
 
 import { App, Fallback, Profile } from "core";
 
@@ -18,12 +18,12 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(
   () => (
-    <HashRouter base={baseRoutePath} root={App}>
+    <Router base={baseRoutePath} root={App}>
       <Route path="/">
         <Route path="/" component={Profile} />
       </Route>
       <Route path="*404" component={Fallback} />
-    </HashRouter>
+    </Router>
   ),
   root!,
 );
