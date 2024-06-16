@@ -13,12 +13,19 @@ body {
     --safe_area_inset_left: env(safe-area-inset-left);
   }
 
+  @supports (padding-top: constant(safe-area-inset-top)) {
+    --safe_area_inset_top: constant(safe-area-inset-top);
+    --safe_area_inset_right: constant(safe-area-inset-right);
+    --safe_area_inset_bottom: constant(safe-area-inset-bottom);
+    --safe_area_inset_left: constant(safe-area-inset-left);
+  }
+
   --gray: #99a2ad;
   --green: #00d86b;
   --red: #ff3425;
-  --yellow: #F3C937;
-  --violet: #9E4BE5;
-  --blue: #58B8E6;
+  --yellow: #f3c937;
+  --violet: #9e4be5;
+  --blue: #58b8e6;
   --accent: #e54c70;
 
   --background: #15171c;
@@ -47,12 +54,24 @@ body {
   --radius-small: calc(var(--radius-middle) / 2);
   --radius-default: var(--radius-middle);
 
+  /*
+   *default value without attr
+   *modified value with data-attr
+  */
+
   --header-height: 56px;
+  --tabbar-height: 64px;
 
-  // todo:
-  // icons: 28px
+  &[data-platform="iOS"] {
+    --header-height: 56px;
+    --tabbar-height: 64px;
+  }
 
-  --tabbar-height-android: 64px;
-  --tabbar-height-ios: 64px;
-  --tabbar-height: var(--tabbar-height-android);
+  --header-height-safe-area: calc(
+    var(--header-height) + var(--safe_area_inset_top)
+  );
+
+  --tabbar-height-safe-area: calc(
+    var(--tabbar-height) + var(--safe_area_inset_bottom)
+  );
 }

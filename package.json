@@ -29,6 +29,7 @@
   "dependencies": {
     "@solid-primitives/i18n": "^2.1.1",
     "@solidjs/router": "^0.13.3",
+    "@vkontakte/vk-bridge": "^2.14.2",
     "date-fns": "^3.6.0",
     "elum-router": "^0.0.20",
     "elum-state": "^0.8.4",

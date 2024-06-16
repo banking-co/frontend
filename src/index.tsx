@@ -2,6 +2,8 @@
 import { render } from "solid-js/web";
 import { Route, HashRouter } from "@solidjs/router";
 
+import bridge from "@vkontakte/vk-bridge";
+
 import { App, Fallback, Profile } from "core";
 
 import "./styles/main.scss";
@@ -27,3 +29,11 @@ render(
   ),
   root!,
 );
+
+bridge.send("VKWebAppInit");
+
+bridge.subscribe((e) => {
+  setTimeout(() => {
+    console.log(e);
+  }, 3000);
+});
