@@ -1,6 +1,10 @@
 {
   "app": {
     "name": "Rabotyaga",
+    "navigation": {
+      "home": "Главная",
+      "menu": "Меню"
+    },
     "balances": {
       "primary": "Валютный",
       "secondary": "Криптовалютный",

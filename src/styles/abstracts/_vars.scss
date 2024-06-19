@@ -43,6 +43,19 @@ body {
   --text-success: var(--text-secondary);
   --text-warning: var(--text-secondary);
 
+  &[data-theme="light"] {
+    --background: #eae8e3;
+    --secondary: #e2e0d8;
+    --primary: #cdcac1;
+
+    --text-primary: #030303;
+    --text-secondary: #2e2e2e;
+    --text-muted: rgba(46, 46, 46, 60%);
+    --text-error: var(--text-secondary);
+    --text-success: var(--text-secondary);
+    --text-warning: var(--text-secondary);
+  }
+
   --padding-large: 16px;
   --padding-middle: 12px;
   --padding-small: 8px;

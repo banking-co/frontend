@@ -9,15 +9,18 @@ import { Position, Text } from "uikit";
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
 import { IconDots, IconHome } from "assets/icons";
+import { useTranslation } from "hooks";
 
 const items = [
   {
     icon: <IconHome />,
     key: "/",
+    title: "home",
   },
   {
     icon: <IconDots />,
     key: "/menu",
+    title: "menu",
   },
 ];
 
@@ -25,6 +28,7 @@ export const BottomNavbar: BottomNavbarProps = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = createSignal("");
+  const t = useTranslation();
 
   const setActiveTabFromUrl = () => {
     const pathname = location.pathname;
@@ -62,7 +66,10 @@ export const BottomNavbar: BottomNavbarProps = () => {
             >
               <Position type={"column"} gap={2} alignItems={"center"}>
                 {item.icon}
-                <Text text={"Test"} tag={"span"} />
+                <Text
+                  text={t(`app.navigation.${item.title}` as any) || ""}
+                  tag={"span"}
+                />
               </Position>
             </li>
           );

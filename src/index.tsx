@@ -4,9 +4,10 @@ import { Route, HashRouter } from "@solidjs/router";
 
 import bridge from "@vkontakte/vk-bridge";
 
-import { App, Fallback, Profile } from "core";
+import { App, Fallback, Profile, Menu } from "core";
 
 import "./styles/main.scss";
+import { dataset } from "utils";
 
 const root = document.getElementById("root");
 const baseRoutePath = "/";
@@ -23,6 +24,7 @@ render(
     <HashRouter base={baseRoutePath} root={App}>
       <Route path="/">
         <Route path="/" component={Profile} />
+        <Route path="/menu" component={Menu} />
       </Route>
       <Route path="*404" component={Fallback} />
     </HashRouter>
@@ -33,7 +35,16 @@ render(
 bridge.send("VKWebAppInit");
 
 bridge.subscribe((e) => {
-  setTimeout(() => {
-    console.log(e);
-  }, 3000);
+  const { type, data } = e.detail;
+  const bodyData = dataset(document.body);
+
+  switch (type) {
+    case "VKWebAppUpdateConfig":
+      const theme =
+        data.scheme === "space_gray" || data.scheme === "vkcom_dark"
+          ? "dark"
+          : "light";
+
+      return bodyData.set({ theme });
+  }
 });
