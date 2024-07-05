@@ -5,7 +5,7 @@ import { Text } from "uikit/Text/Text";
 
 export const Grid: GridProps = (props) => {
   return (
-    <div class="Grid">
+    <div className="Grid">
       {props.title && <Text tag="h2" text={props.title} />}
       {props.children}
       {props.description && (

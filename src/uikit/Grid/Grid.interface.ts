@@ -1,8 +1,8 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface GridParams extends JSX.HTMLAttributes<HTMLElement> {
+interface GridParams extends HTMLAttributes<HTMLElement> {
   title?: string;
   description?: string;
 }
 
-export type GridProps = Component<GridParams>;
+export type GridProps = FC<GridParams>;

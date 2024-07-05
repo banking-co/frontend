@@ -1,13 +1,13 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 
-interface PlaceholderParams extends JSX.HTMLAttributes<HTMLDivElement> {
-  icon?: JSX.Element;
+interface PlaceholderParams extends HTMLAttributes<HTMLDivElement> {
+  icon?: ReactNode;
   title?: string;
   text?: string;
   description?: string;
-  extra?: JSX.Element;
+  extra?: ReactNode;
   isCenter?: boolean;
   isFullScreen?: boolean;
 }
 
-export type PlaceholderProps = Component<PlaceholderParams>;
+export type PlaceholderProps = FC<PlaceholderParams>;

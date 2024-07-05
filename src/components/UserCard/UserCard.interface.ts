@@ -1,4 +1,4 @@
-import type { Component } from "solid-js";
+import type { FC } from "react";
 
 interface UserCardParams {
   userId: number;
@@ -6,4 +6,4 @@ interface UserCardParams {
   onClick?: (userId: number) => void;
 }
 
-export type UserCardProps = Component<UserCardParams>;
+export type UserCardProps = FC<UserCardParams>;

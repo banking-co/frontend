@@ -1,4 +1,4 @@
-import { useTranslation } from "hooks";
+import { useTranslation } from "i18nano";
 import { decWord } from "utils";
 
 export const useTimeAgo = () => {

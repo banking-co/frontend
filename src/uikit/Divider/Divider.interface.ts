@@ -1,5 +1,5 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface DividerParams extends JSX.HTMLAttributes<HTMLElement> {}
+interface DividerParams extends HTMLAttributes<HTMLElement> {}
 
-export type DividerProps = Component<DividerParams>;
+export type DividerProps = FC<DividerParams>;

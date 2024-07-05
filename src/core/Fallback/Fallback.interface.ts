@@ -1,3 +1,3 @@
-import type { Component } from "solid-js";
+import type { FC } from "react";
 
-export type FallbackProps = Component;
+export type FallbackProps = FC;

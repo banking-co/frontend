@@ -1,7 +1,7 @@
 import "./CurrencyExchangeRate.sass";
 
-import { createMemo } from "solid-js";
-import { useTranslation } from "hooks";
+import { useMemo } from "react";
+import { useTranslation } from "i18nano";
 
 import { formatCurrency } from "utils";
 
@@ -16,7 +16,7 @@ import { Currency, Mode } from "store/models";
 export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
   const t = useTranslation();
 
-  const items = createMemo((): CurrencyExchangeRateItem[] | undefined => {
+  const items = useMemo((): CurrencyExchangeRateItem[] | undefined => {
     const currency = [Currency.BYN, Currency.RUB, Currency.USD];
     return Array.from(Array(3), (_, i) => ({
       exchange: {
@@ -28,8 +28,8 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
   }, []);
 
   return (
-    <div class="CurrencyExchangeRate">
-      {items()?.map((item, index, array) => {
+    <div className="CurrencyExchangeRate">
+      {items?.map((item, index, array) => {
         return (
           <>
             <Position type="line" justifyContent="space-between">
@@ -58,7 +58,7 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
               </Position>
             </Position>
             {array.length - 1 !== index && (
-              <div class="CurrencyExchangeRate__divider" />
+              <div className="CurrencyExchangeRate__divider" />
             )}
           </>
         );

@@ -1,7 +1,7 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-export interface AvatarParams extends JSX.HTMLAttributes<HTMLImageElement> {
+export interface AvatarParams extends HTMLAttributes<HTMLImageElement> {
   src: string;
 }
 
-export type AvatarProps = Component<AvatarParams>;
+export type AvatarProps = FC<AvatarParams>;

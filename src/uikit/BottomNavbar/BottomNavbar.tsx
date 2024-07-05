@@ -1,15 +1,16 @@
 import "./BottomNavbar.sass";
 
-import { createSignal, onMount } from "solid-js";
-import { useLocation, useNavigate } from "@solidjs/router";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { throttle } from "lodash";
+import { useTranslation } from "i18nano";
+import classNames from "classnames";
 
 import { Position, Text } from "uikit";
 
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
-import { IconDots, IconHome } from "assets/icons";
-import { useTranslation } from "hooks";
+import { IconDots, IconHome } from "@tabler/icons-react";
 
 const items = [
   {
@@ -27,7 +28,7 @@ const items = [
 export const BottomNavbar: BottomNavbarProps = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeTab, setActiveTab] = createSignal("");
+  const [activeTab, setActiveTab] = useState("");
   const t = useTranslation();
 
   const setActiveTabFromUrl = () => {
@@ -43,22 +44,24 @@ export const BottomNavbar: BottomNavbarProps = () => {
     }
   };
 
-  onMount(setActiveTabFromUrl);
+  useEffect(() => {
+    setActiveTabFromUrl();
+  }, []);
 
   const throttledSwitch = throttle((value) => {
     navigate(value, { replace: true });
   }, 250);
 
   return (
-    <nav class="BottomNavbar">
-      <ul class="BottomNavbar__wrapper">
+    <nav className="BottomNavbar">
+      <ul className="BottomNavbar__wrapper">
         {items.map((item) => {
           return (
             <li
-              class="BottomNavbar__item"
-              classList={{
-                BottomNavbar__item_active: activeTab() === item.key,
-              }}
+              className={classNames({
+                BottomNavbar__item: true,
+                BottomNavbar__item_active: activeTab === item.key,
+              })}
               onClick={() => {
                 throttledSwitch(item.key);
                 setActiveTab(item.key);

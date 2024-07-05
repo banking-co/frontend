@@ -1,8 +1,8 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 import { Currency } from "store/models";
 
-interface FlagIconParams extends JSX.HTMLAttributes<HTMLImageElement> {
+interface FlagIconParams extends HTMLAttributes<HTMLImageElement> {
   currency: Currency;
 }
 
-export type FlagIconProps = Component<FlagIconParams>;
+export type FlagIconProps = FC<FlagIconParams>;

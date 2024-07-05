@@ -1,24 +1,23 @@
 import "./Text.sass";
 
-import { createMemo } from "solid-js";
+import { createElement, useMemo } from "react";
+import classNames from "classnames";
 
-import { Dynamic } from "solid-js/web";
+import { CurrencyIcon } from "uikit";
 
-import { IconChevronRight } from "assets/icons";
+import { IconChevronRight } from "@tabler/icons-react";
 
 import type { TextProps } from "./Text.interface";
-import { CurrencyIcon } from "../CurrencyIcon/CurrencyIcon";
 
 const Text: TextProps = (props) => {
-  const formattedText = createMemo(() => {
+  const formattedText = useMemo(() => {
     return props.text.replaceAll("=>", "→").replaceAll("$interpunct", "·");
-  });
+  }, [props.text]);
 
-  return (
-    <Dynamic
-      component={props.tag}
-      class="Text"
-      classList={{
+  return createElement(
+    props.tag,
+    {
+      className: classNames({
         Text: true,
         [`Text_tag--${props.tag}`]: true,
         [`Text--bold`]: props.isBold,
@@ -30,17 +29,18 @@ const Text: TextProps = (props) => {
         [`Text_reverse`]: props.reverse,
         [`Text__currency`]: props.isCurrency && !!props.currencyType,
         [`Text__link_accent-chevron`]: props.isAccentChevron,
-        ...props.classList,
-      }}
-      style={props.style}
-      onClick={props.onClick}
-    >
+        [`${props.className}`]: !!props.className,
+      }),
+      style: props.style,
+      onClick: props.onClick,
+    },
+    <>
       {props.isCurrency && props.currencyType && (
         <CurrencyIcon currencyType={props.currencyType} />
       )}
-      <span>{formattedText()}</span>
+      <span>{formattedText}</span>
       {props.isLink && (props.linkIcon || <IconChevronRight />)}
-    </Dynamic>
+    </>,
   );
 };
 

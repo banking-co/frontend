@@ -1,14 +1,12 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
 type ItemType = "salaries" | "tax" | "other";
 
-interface PercentageVisualizationParams
-  extends JSX.HTMLAttributes<HTMLElement> {
+interface PercentageVisualizationParams extends HTMLAttributes<HTMLElement> {
   items: Array<{
     type: ItemType;
     value: number;
   }>;
 }
 
-export type PercentageVisualizationProps =
-  Component<PercentageVisualizationParams>;
+export type PercentageVisualizationProps = FC<PercentageVisualizationParams>;

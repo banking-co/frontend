@@ -1,13 +1,13 @@
-import type { JSX, Component } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 import { Mode } from "store/models";
 
-export interface TagParams extends JSX.HTMLAttributes<HTMLElement> {
+export interface TagParams extends HTMLAttributes<HTMLElement> {
   mode?: Mode;
-  icon?: JSX.Element;
+  icon?: ReactNode;
   value: string;
 
   isCurrency?: boolean;
   isCenter?: boolean;
 }
 
-export type TagProps = Component<TagParams>;
+export type TagProps = FC<TagParams>;

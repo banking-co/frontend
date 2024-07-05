@@ -1,6 +1,6 @@
 import "./Profile.sass";
 
-import { useTranslation } from "hooks";
+import { useTranslation } from "i18nano";
 import { calculatingRating, formatCurrency } from "utils";
 
 import { Card, PercentageVisualization, Position, Tag, Text } from "uikit";
@@ -8,11 +8,11 @@ import { BalanceCard, CurrencyExchangeRate } from "components";
 
 import {
   IconArrowBigDown,
-  IconBonus,
-  IconExchangeRate,
+  IconGift,
+  IconArrowsExchange,
   IconReload,
   IconTrendingUp,
-} from "assets/icons/";
+} from "@tabler/icons-react";
 
 import { Mode } from "store/models";
 import type { ProfileProps } from "./Profile.interface";
@@ -40,7 +40,7 @@ export const Profile: ProfileProps = () => {
       />
       <Position type="line" gap={12}>
         <Card
-          classList={{ "Profile__bank-cards": true }}
+          className={"Profile__bank-cards"}
           title={t("app.bank.card.management.title")}
           titleWrap
           icon={<IconReload />}
@@ -65,7 +65,7 @@ export const Profile: ProfileProps = () => {
           />
         </Card>
         <Card
-          classList={{ "Profile__bank-cards": true }}
+          className={"Profile__bank-cards"}
           title={t("app.bank.card.upgrades.title")}
           titleWrap
           icon={<IconReload />}
@@ -74,7 +74,7 @@ export const Profile: ProfileProps = () => {
             <div
               style={{
                 display: "flex",
-                "flex-direction": "column",
+                flexDirection: "column",
                 gap: "8px",
               }}
             >
@@ -109,7 +109,7 @@ export const Profile: ProfileProps = () => {
       )}
       <Card
         disable={isDisable}
-        icon={<IconBonus />}
+        icon={<IconGift />}
         title={t("app.bonus.title")}
         propagation={"text"}
       >
@@ -117,7 +117,7 @@ export const Profile: ProfileProps = () => {
       </Card>
       <Card
         title={t("app.currency.title")}
-        icon={<IconExchangeRate />}
+        icon={<IconArrowsExchange />}
         propagation={"text"}
       >
         <CurrencyExchangeRate />

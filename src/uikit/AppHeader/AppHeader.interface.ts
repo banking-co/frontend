@@ -1,8 +1,8 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, ReactNode } from "react";
 
 interface AppHeaderParams {
   withBack?: boolean;
-  before?: JSX.Element;
+  before?: ReactNode;
 }
 
-export type AppHeaderProps = Component<AppHeaderParams>;
+export type AppHeaderProps = FC<AppHeaderParams>;

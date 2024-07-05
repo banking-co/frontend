@@ -1,17 +1,24 @@
 import "./AppContainer.sass";
 
+import classNames from "classnames";
+
+import { AppHeader, BottomNavbar } from "uikit";
+
 import type { AppContainerProps } from "./AppContainer.interface";
-import { AppHeader } from "../AppHeader/AppHeader";
-import { BottomNavbar } from "../BottomNavbar/BottomNavbar";
 
 export const AppContainer: AppContainerProps = (props) => {
   return (
-    <main class="AppContainer" classList={props.classList}>
+    <div
+      className={classNames({
+        AppContainer: true,
+        [`${props.className}`]: !!props.className,
+      })}
+    >
       <AppHeader withBack={false} />
-      <div class="AppContainer__container">
-        <div class="AppContainer__wrapper">{props.children}</div>
+      <div className="AppContainer__container">
+        <div className="AppContainer__wrapper">{props.children}</div>
       </div>
       <BottomNavbar />
-    </main>
+    </div>
   );
 };

@@ -1,11 +1,11 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, ReactNode } from "react";
 
 interface UnitNameParams {
   userId: number;
   isBold?: boolean;
   tagName?: "h1" | "h2" | "p" | "span";
-  after?: JSX.Element;
+  after?: ReactNode;
   visibleUserId?: boolean;
 }
 
-export type UnitNameProps = Component<UnitNameParams>;
+export type UnitNameProps = FC<UnitNameParams>;

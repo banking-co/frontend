@@ -8,7 +8,7 @@ export const UnitName: UnitNameProps = (props) => {
   const user = useUser(props.userId);
 
   return (
-    <span class="UnitName">
+    <span className="UnitName">
       {/*<Text*/}
       {/*  text={user.fullName}*/}
       {/*  tag={props.tagName || "h2"}*/}
@@ -16,7 +16,7 @@ export const UnitName: UnitNameProps = (props) => {
       {/*/>*/}
       {/*{props.visibleUserId && (*/}
       {/*  <Text*/}
-      {/*    class="UnitName__uid"*/}
+      {/*   className="UnitName__uid"*/}
       {/*    text={"@" + user.id.toString()}*/}
       {/*    tag={props.tagName || "h2"}*/}
       {/*    isBold={props.isBold}*/}

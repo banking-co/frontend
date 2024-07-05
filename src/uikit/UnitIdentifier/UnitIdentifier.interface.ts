@@ -1,7 +1,7 @@
-import type { Component } from "solid-js";
+import type { FC } from "react";
 
 interface UnitIdentifierParams {
   userId: number;
 }
 
-export type UnitIdentifierProps = Component<UnitIdentifierParams>;
+export type UnitIdentifierProps = FC<UnitIdentifierParams>;

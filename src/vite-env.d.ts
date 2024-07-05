@@ -130,7 +130,7 @@ declare module "*.gif" {
 }
 declare module "*.svg" {
   import type { Component, ComponentProps } from "solid-js";
-  const svg: Component<ComponentProps<"svg">>;
+  const svg: FC<ComponentProps<"svg">>;
   export default svg;
 }
 declare module "*.ico" {

@@ -1,8 +1,8 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-export interface IconWrapperParams extends JSX.HTMLAttributes<HTMLElement> {
+export interface IconWrapperParams extends HTMLAttributes<HTMLElement> {
   width: number;
   height: number;
 }
 
-export type IconWrapperProps = Component<IconWrapperParams>;
+export type IconWrapperProps = FC<IconWrapperParams>;

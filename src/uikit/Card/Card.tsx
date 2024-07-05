@@ -1,26 +1,28 @@
 import "./Card.sass";
 
+import classNames from "classnames";
+import { useTranslation } from "i18nano";
+
+import { Text } from "uikit";
+import { CardChildren } from "./CardChildren/CardChildren";
 import { CardHeader } from "./CardHeader/CardHeader";
 
 import type { CardProps } from "./Card.interface";
-import { CardChildren } from "./CardChildren/CardChildren";
-import { Text } from "../Text/Text";
-import { useTranslation } from "hooks";
 
 export const Card: CardProps = (props) => {
   const t = useTranslation();
 
   return (
     <div
-      class="Card"
-      classList={{
-        [`Card--shaped`]: !!props.isSquare,
-        [`Card--disabled`]: !!props.disable,
-        ...props.classList,
-      }}
+      className={classNames({
+        Card: true,
+        "Card--shaped": !!props.isSquare,
+        "Card--disabled": !!props.disable,
+        [`${props.className}`]: !!props.className,
+      })}
       style={props.style}
     >
-      <div class="Card__container">
+      <div className="Card__container">
         <CardHeader
           titleWrap={props.titleWrap}
           title={props.title}
@@ -39,7 +41,7 @@ export const Card: CardProps = (props) => {
           />
         )}
       </div>
-      {props.extra && <div class="Card__extra">{props.extra}</div>}
+      {props.extra && <div className="Card__extra">{props.extra}</div>}
     </div>
   );
 };

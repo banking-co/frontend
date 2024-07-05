@@ -1,12 +1,14 @@
 import { AppContainer } from "uikit";
 
-import type { AppProps } from "./App.interface";
 import { AppLoading } from "../AppLoading/AppLoading";
+import { Outlet } from "react-router-dom";
+
+import type { AppProps } from "./App.interface";
 
 export const App: AppProps = (props) => {
   return (
     <AppLoading>
-      <AppContainer children={props.children} />
+      <AppContainer children={<Outlet />} />
     </AppLoading>
   );
 };

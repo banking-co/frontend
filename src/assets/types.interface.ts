@@ -1,7 +1,3 @@
-import type { Component } from "solid-js";
+import type { FC } from "react";
 
-interface IconsParams {
-  class?: string;
-}
-
-export type IconsProps = Component<IconsParams>;
+export type IconsProps = FC<HTMLElement>;

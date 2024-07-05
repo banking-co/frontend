@@ -1,18 +1,18 @@
 import "./CardHeader.sass";
 
-import { createMemo } from "solid-js";
-import { useTranslation } from "hooks";
+import { useMemo } from "react";
+import { useTranslation } from "i18nano";
 
 import { IconWrapper, Position, Text } from "uikit";
 
-import { IconChevronRight } from "assets/icons";
+import { IconChevronRight } from "@tabler/icons-react";
 
 import { CardHeaderProps } from "./CardHeader.interface";
 
 export const CardHeader: CardHeaderProps = (props) => {
   const t = useTranslation();
 
-  const propagation = createMemo(() => {
+  const propagation = useMemo(() => {
     switch (props.propagation) {
       case "arrow":
         return <IconChevronRight />;
@@ -23,27 +23,29 @@ export const CardHeader: CardHeaderProps = (props) => {
       default:
         return null;
     }
-  });
+  }, [props.propagation]);
 
-  const showPropagation = createMemo(
+  const showPropagation = useMemo(
     () =>
-      propagation() && (
-        <div class="CardHeader__propagation">{propagation()}</div>
+      propagation && (
+        <div className="CardHeader__propagation">{propagation}</div>
       ),
+    [propagation],
   );
 
-  const showCardIcon = createMemo(
+  const showCardIcon = useMemo(
     () =>
       props.icon && (
         <IconWrapper height={28} width={28}>
           {props.icon}
         </IconWrapper>
       ),
+    [props.icon],
   );
 
   return (
     <Position
-      class="CardHeader"
+      className="CardHeader"
       type={props.titleWrap ? "column" : "line"}
       alignItems={props.titleWrap ? undefined : "center"}
       justifyContent="space-between"
@@ -57,18 +59,18 @@ export const CardHeader: CardHeaderProps = (props) => {
             justifyContent="space-between"
             style={{ width: "100%" }}
           >
-            {showCardIcon()}
-            {showPropagation()}
+            {showCardIcon}
+            {showPropagation}
           </Position>
           <Text text={props.title} tag="p" />
         </>
       ) : (
         <>
           <Position type="line" alignItems="center" gap={8}>
-            {showCardIcon()}
+            {showCardIcon}
             <Text text={props.title} tag="p" />
           </Position>
-          {showPropagation()}
+          {showPropagation}
         </>
       )}
     </Position>

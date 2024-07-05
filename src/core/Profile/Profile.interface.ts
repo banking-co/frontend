@@ -1,3 +1,3 @@
-import type { Component } from "solid-js";
+import type { FC } from "react";
 
-export type ProfileProps = Component;
+export type ProfileProps = FC;

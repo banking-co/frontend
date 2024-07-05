@@ -1,7 +1,8 @@
 import "./BalanceCard.sass";
 
-import { createMemo, createSignal } from "solid-js";
-import { useTranslation, useTimeAgo } from "hooks";
+import { useMemo, useState } from "react";
+import { useTranslation } from "i18nano";
+import { useTimeAgo } from "hooks";
 import { formatCurrency } from "utils";
 
 import { Position, Tag, Text } from "uikit";
@@ -9,12 +10,12 @@ import { Position, Tag, Text } from "uikit";
 import { BalanceCardProps } from "./BalanceCard.interface";
 import { TextCurrencyType } from "store/models";
 
-import { IconReload } from "assets/icons";
+import { IconReload } from "@tabler/icons-react";
 
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
   const timeAgo = useTimeAgo();
-  const [currentBalance, setCurrentBalance] = createSignal<0 | 1 | 2>(0);
+  const [currentBalance, setCurrentBalance] = useState<0 | 1 | 2>(0);
 
   const balances = {
     0: {
@@ -34,15 +35,16 @@ export const BalanceCard: BalanceCardProps = (props) => {
     },
   };
 
-  const formatReloadDate = createMemo(() =>
-    timeAgo(new Date(Date.now() - 12333412).getTime()),
+  const formatReloadDate = useMemo(
+    () => timeAgo(new Date(Date.now() - 12333412).getTime()),
+    [],
   );
 
   return (
-    <Position type="column" classList={{ BalanceCard: true }} gap={8}>
+    <Position type="column" className="BalanceCard" gap={8}>
       <Position type="line" gap={4}>
         <Text
-          text={balances[currentBalance()].text}
+          text={balances[currentBalance].text}
           tag={"span"}
           isAccent
           onClick={() =>
@@ -59,13 +61,13 @@ export const BalanceCard: BalanceCardProps = (props) => {
       </Position>
       <Position type="line" gap={8} alignItems={"center"}>
         <Text
-          text={formatCurrency(balances[currentBalance()].count)}
+          text={formatCurrency(balances[currentBalance].count)}
           isCurrency
-          currencyType={balances[currentBalance()].currencyType}
+          currencyType={balances[currentBalance].currencyType}
           tag={"h1"}
         />
         <Text
-          text={formatReloadDate()}
+          text={formatReloadDate}
           tag="span"
           linkIcon={<IconReload />}
           isLink

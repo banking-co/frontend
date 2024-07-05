@@ -1,35 +1,29 @@
 /* @refresh reload */
-import { render } from "solid-js/web";
-import { Route, HashRouter } from "@solidjs/router";
+import "./styles/main.scss";
 
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { dataset } from "utils";
 import bridge from "@vkontakte/vk-bridge";
 
-import { App, Fallback, Profile, Menu } from "core";
+import { TranslationProvider } from "i18nano";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import "./styles/main.scss";
-import { dataset } from "utils";
+import { ru } from "translations";
+import { routes } from "routes";
 
-const root = document.getElementById("root");
-const baseRoutePath = "/";
+const translations = {
+  ru: async () => ru,
+};
 
-// @ts-ignore
-if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
-  throw new Error(
-    "Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got misspelled?",
-  );
-}
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 
-render(
-  () => (
-    <HashRouter base={baseRoutePath} root={App}>
-      <Route path="/">
-        <Route path="/" component={Profile} />
-        <Route path="/menu" component={Menu} />
-      </Route>
-      <Route path="*404" component={Fallback} />
-    </HashRouter>
-  ),
-  root!,
+root.render(
+  <React.StrictMode>
+    <TranslationProvider translations={translations} language="ru">
+      <RouterProvider router={createBrowserRouter(routes)} />
+    </TranslationProvider>
+  </React.StrictMode>,
 );
 
 bridge.send("VKWebAppInit");

@@ -1,16 +1,17 @@
 import "./AppLoading.sass";
 
-import { createSignal, onMount, Show } from "solid-js";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 import { Placeholder, Spinner } from "uikit";
 
 import { AppLoadingProps } from "./AppLoading.interface";
 
 export const AppLoading: AppLoadingProps = (props) => {
-  const [isLoading, setLoading] = createSignal(true);
-  const [isClose, setClose] = createSignal(false);
+  const [isLoading, setLoading] = useState(true);
+  const [isClose, setClose] = useState(false);
 
-  onMount(() => {
+  useEffect(() => {
     setTimeout(() => {
       setClose(true);
 
@@ -18,23 +19,19 @@ export const AppLoading: AppLoadingProps = (props) => {
         setLoading(false);
       }, 700);
     }, 3000);
-  });
+  }, []);
 
-  return (
-    <Show
-      when={!isLoading()}
-      fallback={
-        <Placeholder
-          isFullScreen
-          classList={{
-            [`AppLoading_animation-fade_out`]: isClose(),
-          }}
-        >
-          <Spinner />
-        </Placeholder>
-      }
-    >
-      {props.children}
-    </Show>
-  );
+  if (isLoading)
+    return (
+      <Placeholder
+        isFullScreen
+        className={classNames({
+          "AppLoading_animation-fade_out": isClose,
+        })}
+      >
+        <Spinner />
+      </Placeholder>
+    );
+
+  return <>{props.children}</>;
 };

@@ -1,10 +1,10 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 
-export interface CardHeaderParams extends JSX.HTMLAttributes<HTMLElement> {
-  icon?: JSX.Element;
+export interface CardHeaderParams extends HTMLAttributes<HTMLElement> {
+  icon?: ReactNode;
   title: string;
   propagation?: "text" | "arrow";
   titleWrap?: boolean;
 }
 
-export type CardHeaderProps = Component<CardHeaderParams>;
+export type CardHeaderProps = FC<CardHeaderParams>;

@@ -1,22 +1,24 @@
 import "./UserCard.sass";
 
+import classNames from "classnames";
+
 import { Text, UnitName } from "uikit";
-import { UserAvatar } from "../UserAvatar/UserAvatar";
+import { UserAvatar } from "components";
 
 import type { UserCardProps } from "./UserCard.interface";
 
 export const UserCard: UserCardProps = (props) => {
   return (
     <div
-      class="UserCard"
+      className="UserCard"
       onClick={() => props.onClick && props.onClick(props.userId)}
     >
       <UserAvatar size={60} userId={props.userId} />
       <div
-        class="UserCard__info"
-        classList={{
+        className={classNames({
+          UserCard__info: true,
           "UserCard__info--default": true,
-        }}
+        })}
       >
         <UnitName userId={props.userId} isBold visibleUserId />
         <Text

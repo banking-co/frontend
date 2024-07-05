@@ -4,7 +4,7 @@ html {
   quotes: "“" "”" !important;
 }
 
-body {
+body, #root {
   height: -webkit-fill-available;
   height: 100%;
   background-color: var(--background) !important;
@@ -31,8 +31,4 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-svg {
-  height: 100%;
 }

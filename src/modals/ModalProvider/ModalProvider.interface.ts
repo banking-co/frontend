@@ -1,5 +1,5 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface ModalProviderParams extends JSX.HTMLAttributes<HTMLElement> {}
+interface ModalProviderParams extends HTMLAttributes<HTMLElement> {}
 
-export type ModalProviderProps = Component<ModalProviderParams>;
+export type ModalProviderProps = FC<ModalProviderParams>;

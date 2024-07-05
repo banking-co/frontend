@@ -1,16 +1,14 @@
-import { Component } from "solid-js";
+import type { FC } from "react";
 
 import {
   IconCurrencyBitcoin,
   IconCurrencyDollar,
   IconDiamond,
-} from "assets/icons";
+} from "@tabler/icons-react";
 
 import { TextCurrencyType } from "store/models";
 
-export const CurrencyIcon: Component<{ currencyType: TextCurrencyType }> = (
-  props,
-) => {
+export const CurrencyIcon: FC<{ currencyType: TextCurrencyType }> = (props) => {
   const currencyIcon = {
     [TextCurrencyType.Dollar]: <IconCurrencyDollar />,
     [TextCurrencyType.Bitcoin]: <IconCurrencyBitcoin />,
@@ -18,7 +16,7 @@ export const CurrencyIcon: Component<{ currencyType: TextCurrencyType }> = (
   };
 
   return (
-    <div class="Text__currency-icon">
+    <div className="Text__currency-icon">
       {currencyIcon[props.currencyType || TextCurrencyType.Dollar]}
     </div>
   );

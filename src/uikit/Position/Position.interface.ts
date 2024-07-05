@@ -1,6 +1,6 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface PositionParams extends JSX.HTMLAttributes<HTMLElement> {
+interface PositionParams extends HTMLAttributes<HTMLElement> {
   type: "line" | "column";
 
   justifyContent?: "space-between" | "flex-start";
@@ -10,4 +10,4 @@ interface PositionParams extends JSX.HTMLAttributes<HTMLElement> {
   disableWrap?: boolean;
 }
 
-export type PositionProps = Component<PositionParams>;
+export type PositionProps = FC<PositionParams>;

@@ -1,15 +1,15 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 
-interface CardParams extends JSX.HTMLAttributes<HTMLElement> {
+interface CardParams extends HTMLAttributes<HTMLElement> {
   propagation?: "arrow" | "text";
-  icon?: JSX.Element;
+  icon?: ReactNode;
   title: string;
 
   disable?: boolean;
-  extra?: JSX.Element;
+  extra?: ReactNode;
 
   isSquare?: boolean;
   titleWrap?: boolean;
 }
 
-export type CardProps = Component<CardParams>;
+export type CardProps = FC<CardParams>;

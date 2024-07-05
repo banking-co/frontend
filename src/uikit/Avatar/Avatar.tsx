@@ -1,7 +1,9 @@
 import "./Avatar.sass";
 
+import { useState } from "react";
+import classNames from "classnames";
+
 import type { AvatarProps } from "./Avatar.interface";
-import { createSignal } from "solid-js";
 
 // const images = new Map<string, string>();
 
@@ -32,7 +34,7 @@ import { createSignal } from "solid-js";
 // };
 
 export const Avatar: AvatarProps = (props) => {
-  const [loadingStatus, setLoadingStatus] = createSignal<
+  const [loadingStatus, setLoadingStatus] = useState<
     "loading" | "error" | undefined
   >("loading");
   // const image = useImage(props.src || "");
@@ -42,13 +44,19 @@ export const Avatar: AvatarProps = (props) => {
   // }, [props.src]);
 
   return (
-    <div class="Avatar" classList={props.classList} style={props.style}>
+    <div
+      className={classNames({
+        Avatar: true,
+        [`${props.className}`]: !!props.className,
+      })}
+      style={props.style}
+    >
       <img
-        class="Avatar__image"
-        classList={{
-          "Avatar__image--error": loadingStatus() === "error",
-          "Avatar__image--loading": loadingStatus() === "loading",
-        }}
+        className={classNames({
+          Avatar__image: true,
+          "Avatar__image--error": loadingStatus === "error",
+          "Avatar__image--loading": loadingStatus === "loading",
+        })}
         alt=""
         loading={"eager"}
         src={props.src}

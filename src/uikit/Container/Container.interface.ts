@@ -1,7 +1,7 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface ContainerParams extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ContainerParams extends HTMLAttributes<HTMLDivElement> {
   isDefault?: boolean;
 }
 
-export type ContainerProps = Component<ContainerParams>;
+export type ContainerProps = FC<ContainerParams>;

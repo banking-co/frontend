@@ -1,4 +1,4 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 import { Currency } from "store/models";
 
 export interface CurrencyExchangeRateItem {
@@ -9,6 +9,6 @@ export interface CurrencyExchangeRateItem {
   };
 }
 
-interface CurrencyExchangeRateParams extends JSX.HTMLAttributes<HTMLElement> {}
+interface CurrencyExchangeRateParams extends HTMLAttributes<HTMLElement> {}
 
-export type CurrencyExchangeRateProps = Component<CurrencyExchangeRateParams>;
+export type CurrencyExchangeRateProps = FC<CurrencyExchangeRateParams>;

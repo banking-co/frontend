@@ -1,8 +1,8 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface SpinnerParams extends JSX.HTMLAttributes<HTMLElement> {
+interface SpinnerParams extends HTMLAttributes<HTMLElement> {
   size?: "small" | "regular" | "large" | "medium" | "auto" | "inherit";
   color?: "secondary" | "lightSecondary" | "white";
 }
 
-export type SpinnerProps = Component<SpinnerParams>;
+export type SpinnerProps = FC<SpinnerParams>;

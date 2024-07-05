@@ -1,14 +1,14 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 
 export interface ListItemModel {
   title: string;
-  icon?: JSX.Element;
+  icon?: ReactNode;
   to: string;
   disablePropagation?: boolean;
 }
 
-interface ListParams extends JSX.HTMLAttributes<HTMLElement> {
+interface ListParams extends HTMLAttributes<HTMLElement> {
   items: ListItemModel[];
 }
 
-export type ListProps = Component<ListParams>;
+export type ListProps = FC<ListParams>;

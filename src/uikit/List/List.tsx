@@ -1,6 +1,6 @@
 import "./List.sass";
 
-import { useNavigate } from "@solidjs/router";
+import { useNavigate } from "react-router-dom";
 import { throttle } from "lodash";
 
 import { ListItem } from "uikit";
@@ -17,7 +17,7 @@ const List: ListProps = (props) => {
   );
 
   return (
-    <div class="List">
+    <div className="List">
       {props.items.map((item) => {
         return (
           <ListItem

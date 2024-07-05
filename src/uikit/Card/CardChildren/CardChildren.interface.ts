@@ -1,5 +1,5 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-interface CardChildrenParams extends JSX.HTMLAttributes<HTMLElement> {}
+interface CardChildrenParams extends HTMLAttributes<HTMLElement> {}
 
-export type CardChildrenProps = Component<CardChildrenParams>;
+export type CardChildrenProps = FC<CardChildrenParams>;

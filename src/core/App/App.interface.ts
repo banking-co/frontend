@@ -1,3 +1,3 @@
-import type { Component, JSX } from "solid-js";
+import type { FC, HTMLAttributes } from "react";
 
-export type AppProps = Component<JSX.HTMLAttributes<HTMLElement>>;
+export type AppProps = FC<HTMLAttributes<HTMLElement>>;

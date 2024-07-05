@@ -1,6 +1,6 @@
 import "./Fallback.sass";
 
-import { useTranslation } from "hooks";
+import { useTranslation } from "i18nano";
 
 import type { FallbackProps } from "./Fallback.interface";
 import { Placeholder, Text } from "uikit";
