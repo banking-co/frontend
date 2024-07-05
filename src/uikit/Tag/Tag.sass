@@ -7,10 +7,13 @@
   align-items: center
 
   &__icons
-    $svg-size: 18px
-    width: $svg-size
-    height: $svg-size
-    color: inherit !important
+    display: flex
+    align-items: center
+    & > *
+      $svg-size: 18px
+      width: $svg-size
+      height: $svg-size
+      color: inherit !important
 
   &_center
     justify-content: center
