@@ -80,3 +80,7 @@ export enum Platform {
   iOS = "ios",
   Android = "android",
 }
+
+export enum SocketEvent {
+  StartApp = "start_app",
+}

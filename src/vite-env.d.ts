@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 type CSSModuleClasses = { readonly [key: string]: string };
 
 type MouseClickEvent = MouseEvent & {

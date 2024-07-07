@@ -2,11 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "store/rootReducer";
 import type { AppState } from "./interface";
 
-import { Views, Panels } from "store/models";
-
 const initialState: AppState = {
-  activeView: Views.Home,
-  activePanel: Panels.Default,
   activeModal: null,
   offline: false,
   theme: null,
