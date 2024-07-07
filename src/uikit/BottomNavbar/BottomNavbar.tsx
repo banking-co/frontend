@@ -72,6 +72,8 @@ export const BottomNavbar: BottomNavbarProps = () => {
                 <Text
                   text={t(`app.navigation.${item.title}` as any) || ""}
                   tag={"span"}
+                  isAccent={activeTab === item.key}
+                  isMuted={!(activeTab === item.key)}
                 />
               </Position>
             </li>
