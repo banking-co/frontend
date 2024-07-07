@@ -15,7 +15,14 @@ export const CardHeader: CardHeaderProps = (props) => {
   const propagation = useMemo(() => {
     switch (props.propagation) {
       case "arrow":
-        return <IconChevronRight />;
+        return (
+          <IconChevronRight
+            width={14}
+            height={14}
+            strokeWidth={4}
+            color="var(--accent)"
+          />
+        );
       case "text":
         return (
           <Text text={t("app.card.propagation.text")} tag={"span"} isAccent />
