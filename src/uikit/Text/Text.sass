@@ -7,17 +7,12 @@ $font-family: $default-font-family
     size: $size
   line-height: $height
 
-@mixin currency-size($height)
-  .Text__currency-icon
-    height: $height
-
 @mixin get-width-and-height($height, $width)
   height: $height
   width: $width
 
 @mixin get-size-text($size)
-  @include get-font-size($size, $size + 4)
-  @include currency-size($size + 0)
+  @include get-font-size($size, $size)
 
 .Text
   color: var(--text-primary)

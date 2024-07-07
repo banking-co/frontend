@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes, ReactNode } from "react";
 
-import { Mode, TextCurrencyType } from "store/models";
+import { Mode } from "store/models";
 
 type TextTags = "h1" | "h2" | "h3" | "p" | "span";
 
@@ -12,7 +12,6 @@ interface TextParams extends HTMLAttributes<HTMLElement> {
   mode?: Mode;
   linkIcon?: ReactNode;
   reverse?: boolean;
-  currencyType?: TextCurrencyType;
 
   isBold?: boolean;
   isSecondary?: boolean;
@@ -20,7 +19,6 @@ interface TextParams extends HTMLAttributes<HTMLElement> {
   isAccent?: boolean;
   isAccentChevron?: boolean;
   isLink?: boolean;
-  isCurrency?: boolean;
 }
 
 export type TextProps = FC<TextParams>;

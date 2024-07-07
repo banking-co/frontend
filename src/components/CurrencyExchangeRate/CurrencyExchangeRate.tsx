@@ -12,6 +12,7 @@ import {
   CurrencyExchangeRateItem,
 } from "./CurrencyExchangeRate.interface";
 import { Currency, Mode } from "store/models";
+import { IconCurrencyDollar } from "@tabler/icons-react";
 
 export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
   const t = useTranslation();
@@ -46,12 +47,12 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
               </Position>
               <Position type="line" gap={24}>
                 <Tag
-                  isCurrency
+                  icon={<IconCurrencyDollar />}
                   value={formatCurrency(item.exchange.sell)}
                   mode={Mode.Destroy}
                 />
                 <Tag
-                  isCurrency
+                  icon={<IconCurrencyDollar />}
                   value={formatCurrency(item.exchange.buy)}
                   mode={Mode.Progress}
                 />

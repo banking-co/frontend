@@ -10,7 +10,13 @@ import { Position, Tag, Text } from "uikit";
 import { BalanceCardProps } from "./BalanceCard.interface";
 import { TextCurrencyType } from "store/models";
 
-import { IconReload } from "@tabler/icons-react";
+import {
+  IconCurrencyDollar,
+  IconCurrencyBitcoin,
+  IconDiamond,
+  IconReload,
+} from "@tabler/icons-react";
+import classNames from "classnames";
 
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
@@ -40,6 +46,17 @@ export const BalanceCard: BalanceCardProps = (props) => {
     [],
   );
 
+  const iconCurrency = useMemo(() => {
+    switch (balances[currentBalance].currencyType) {
+      case TextCurrencyType.Dollar:
+        return <IconCurrencyDollar size={28} />;
+      case TextCurrencyType.Bitcoin:
+        return <IconCurrencyBitcoin size={28} />;
+      case TextCurrencyType.Donate:
+        return <IconDiamond size={28} />;
+    }
+  }, [balances, currentBalance]);
+
   return (
     <Position type="column" className="BalanceCard" gap={8}>
       <Position type="line" gap={4}>
@@ -60,12 +77,19 @@ export const BalanceCard: BalanceCardProps = (props) => {
         <Text text={t("app.balances.name")} tag={"span"} isMuted />
       </Position>
       <Position type="line" gap={8} alignItems={"center"}>
-        <Text
-          text={formatCurrency(balances[currentBalance].count)}
-          isCurrency
-          currencyType={balances[currentBalance].currencyType}
-          tag={"h1"}
-        />
+        <div
+          className={classNames({
+            BalanceCard__currency: true,
+            "BalanceCard__currency-diamond":
+              balances[currentBalance].currencyType === TextCurrencyType.Donate,
+          })}
+        >
+          {iconCurrency}
+          <Text
+            text={formatCurrency(balances[currentBalance].count)}
+            tag={"h1"}
+          />
+        </div>
         <Text
           text={formatReloadDate}
           tag="span"
@@ -80,7 +104,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
           return <Tag icon={item.icon} value={item.text} mode={item.mode} />;
         })}
         <Text
-          text={t("about.title", { "type": t("about.balance") })}
+          text={t("about.title", { type: t("about.balance") })}
           tag={"span"}
           onClick={() => console.log("click")}
           isMuted
