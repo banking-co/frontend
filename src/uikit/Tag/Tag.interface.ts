@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes } from "react";
+import type { FC, HTMLAttributes, ReactNode } from "react";
 import { Mode } from "store/models";
 
 export interface TagParams extends HTMLAttributes<HTMLElement> {

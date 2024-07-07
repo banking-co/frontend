@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes } from "react";
+import type { FC, ReactNode } from "react";
 
 export type BottomNavbarItemsModel = Array<{ key: string; icon: ReactNode }>;
 

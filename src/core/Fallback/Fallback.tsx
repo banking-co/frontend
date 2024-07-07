@@ -3,7 +3,7 @@ import "./Fallback.sass";
 import { useTranslation } from "i18nano";
 
 import type { FallbackProps } from "./Fallback.interface";
-import { Placeholder, Text } from "uikit";
+import { Placeholder } from "uikit";
 
 export const Fallback: FallbackProps = () => {
   const t = useTranslation();
