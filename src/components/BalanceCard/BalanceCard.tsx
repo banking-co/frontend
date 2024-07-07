@@ -80,7 +80,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
           return <Tag icon={item.icon} value={item.text} mode={item.mode} />;
         })}
         <Text
-          text={t("about.title", { type: t("about.balance") })}
+          text={t("about.title", { "type": t("about.balance") })}
           tag={"span"}
           onClick={() => console.log("click")}
           isMuted

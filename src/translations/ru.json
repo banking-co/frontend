@@ -84,26 +84,26 @@
       "seconds": ["секунду", "секунды", "секунд"],
       "minutes": ["минуту", "минуты", "минут"],
       "hours": {
-        "accurate": "сегодня в {{ hours }}",
+        "accurate": "сегодня в {{hours}}",
         "one": "час",
         "two": "два часа",
         "three": "три часа"
       },
       "days": {
-        "accurate": "{{ day }} в {{ hour }}",
-        "one": "вчера {{ time }}",
+        "accurate": "{{day}} в {{hour}}",
+        "one": "вчера {{time}}",
         "two": "два дня",
         "three": "три дня"
       },
       "years": {
-        "accurate": "{{ day }} {{ year }}г."
+        "accurate": "{{day}} {{year}}г."
       },
       "back": "назад",
       "soon": "скоро"
     }
   },
   "about": {
-    "title": "О {{ type }}",
+    "title": "О {{type}}",
     "balance": "счетах",
     "rating": "рейтинге"
   }
