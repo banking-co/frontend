@@ -12,6 +12,7 @@ import {
   IconArrowsExchange,
   IconReload,
   IconTrendingUp,
+  IconCurrencyDollar,
 } from "@tabler/icons-react";
 
 import { Mode } from "store/models";
@@ -45,9 +46,17 @@ export const Profile: ProfileProps = () => {
           titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
+          onClick={() => {}}
           extra={
             <Position type="column" gap={12}>
-              <Text text={formatCurrency(10532214)} tag="p" isCurrency />
+              <Position
+                className={"Profile__bank-icons"}
+                type="line"
+                alignItems={"center"}
+              >
+                <IconCurrencyDollar size={20} />
+                <Text text={formatCurrency(10532214)} tag="p" />
+              </Position>
               <PercentageVisualization
                 items={[
                   { type: "salaries", value: 1242 },
@@ -70,6 +79,7 @@ export const Profile: ProfileProps = () => {
           titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
+          onClick={() => {}}
           extra={
             <div
               style={{
@@ -112,6 +122,7 @@ export const Profile: ProfileProps = () => {
         icon={<IconGift />}
         title={t("app.bonus.title")}
         propagation={"text"}
+        onClick={() => {}}
       >
         <Text text={t("app.bonus.info.available")} tag={"span"} isMuted />
       </Card>
@@ -119,6 +130,7 @@ export const Profile: ProfileProps = () => {
         title={t("app.currency.title")}
         icon={<IconArrowsExchange />}
         propagation={"text"}
+        onClick={() => {}}
       >
         <CurrencyExchangeRate />
       </Card>

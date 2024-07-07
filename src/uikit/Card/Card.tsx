@@ -18,6 +18,7 @@ export const Card: CardProps = (props) => {
         Card: true,
         "Card--shaped": !!props.isSquare,
         "Card--disabled": !!props.disable,
+        "Card--clickable": !!props.onClick,
         [`${props.className}`]: !!props.className,
       })}
       style={props.style}
