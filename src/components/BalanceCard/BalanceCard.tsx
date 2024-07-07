@@ -2,8 +2,9 @@ import "./BalanceCard.sass";
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "i18nano";
-import { useTimeAgo } from "hooks";
 import { formatCurrency } from "utils";
+import { useTimeAgo } from "hooks";
+import classNames from "classnames";
 
 import { Position, Tag, Text } from "uikit";
 
@@ -16,7 +17,6 @@ import {
   IconDiamond,
   IconReload,
 } from "@tabler/icons-react";
-import classNames from "classnames";
 
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
