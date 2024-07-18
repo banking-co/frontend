@@ -10,14 +10,8 @@ import { SocketEvent } from "../models";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
-    socket.onopen = () => {
-      console.log("WebSocket connection opened");
-      emitter({ event: SocketEvent.ConnWebSocket });
-    };
-    socket.onmessage = (data) => {
-      console.log(data);
-      emitter(data);
-    };
+    socket.onopen = () => emitter({ event: SocketEvent.ConnWebSocket });
+    socket.onmessage = ({ data: { event, data } }) => emitter({ event, data });
     socket.onclose = () => emitter(END);
     socket.onerror = () => emitter(END);
     return () => socket.close();
@@ -29,7 +23,8 @@ function* connectSocketWorker(): any {
     const serviceWebSocket = new WebSocket(apiUrl);
     const socket = yield call(createWebSocketListener, serviceWebSocket);
 
-    yield fork(sendMessageSocketWorker, socket);
+    yield fork(sendMessageSocketWorker, serviceWebSocket);
+    yield fork(disconnectSocketWorker, serviceWebSocket);
 
     while (true) {
       const payload: object | string = yield take(socket);
@@ -48,6 +43,8 @@ function* listenSocketMessageWorker(
   action: PayloadAction<undefined | WebSocketListenerPayload>,
 ) {
   const msg = action.payload;
+
+  console.log(msg);
 
   try {
     if (msg?.event) {
@@ -71,30 +68,32 @@ function* listenSocketMessageWorker(
   }
 }
 
-function* sendMessageSocketWorker(
-  action: PayloadAction<SendMessagePayload>,
-): any {
-  try {
-    console.log(action.payload);
-  } catch (e) {
-    console.error("WebSocket sending error:", e);
-  }
+function* sendMessageSocketWorker(socket: any): any {
+  yield takeLatest(
+    realtimeActions.sendMessage,
+    function* (action: PayloadAction<SendMessagePayload>) {
+      try {
+        socket.send(JSON.stringify(action.payload));
+      } catch (e) {
+        console.error("WebSocket sending error:", e);
+      }
+    },
+  );
 }
 
-function* disconnectSocketWorker() {
-  try {
-    // socket.close(401);
-    yield put(realtimeActions.setConnectionStatus(false));
-  } catch (e) {
-    console.error("WebSocket disconnect error:", e);
-  }
+function* disconnectSocketWorker(socket: WebSocket) {
+  yield takeLatest(realtimeActions.disconnect, function* () {
+    try {
+      socket.close(401);
+    } catch (e) {
+      console.error("WebSocket disconnect error:", e);
+    }
+  });
 }
 
 export function* realtimeSaga() {
   yield all([
     takeLatest(realtimeActions.connection, connectSocketWorker),
     takeLatest(realtimeActions.listenMessage, listenSocketMessageWorker),
-    takeLatest(realtimeActions.sendMessage, sendMessageSocketWorker),
-    takeLatest(realtimeActions.disconnect, disconnectSocketWorker),
   ]);
 }
