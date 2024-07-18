@@ -14,7 +14,19 @@ export const AppLoading: AppLoadingProps = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [isClose, setClose] = useState(false);
 
-  if (!isConnected)
+  useEffect(() => {
+    if (isConnected) {
+      setTimeout(() => {
+        setClose(true);
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 700);
+      }, 3000);
+    }
+  }, [isConnected]);
+
+  if (isLoading)
     return (
       <Placeholder
         isFullScreen
