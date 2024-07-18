@@ -5,12 +5,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { dataset } from "utils";
 import bridge from "@vkontakte/vk-bridge";
+import { Provider } from "react-redux";
 
 import { TranslationProvider } from "i18nano";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ru } from "translations";
 import { routes } from "routes";
+import { store } from "store/store";
 
 const translations = {
   ru: async () => ru,
@@ -21,7 +23,9 @@ const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <React.StrictMode>
     <TranslationProvider translations={translations} language="ru">
-      <RouterProvider router={createBrowserRouter(routes)} />
+      <Provider store={store}>
+        <RouterProvider router={createBrowserRouter(routes)} />
+      </Provider>
     </TranslationProvider>
   </React.StrictMode>,
 );

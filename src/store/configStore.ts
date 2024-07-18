@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { enableBatching } from "./index";
 import createSagaMiddleware from "redux-saga";
 
@@ -8,10 +8,8 @@ export const configStore = (saga: any, reducer: any) => {
   const store = configureStore({
     reducer: enableBatching(reducer),
     devTools: true,
-    middleware: [
-      ...getDefaultMiddleware({ thunk: false, serializableCheck: false }),
-      sagaMiddleware,
-    ],
+    middleware: (gDM) =>
+      gDM({ thunk: false, serializableCheck: false }).concat(sagaMiddleware),
   });
 
   sagaMiddleware.run(saga);

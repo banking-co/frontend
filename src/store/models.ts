@@ -82,5 +82,6 @@ export enum Platform {
 }
 
 export enum SocketEvent {
+  ConnWebSocket = "conn_websocket",
   StartApp = "start_app",
 }
