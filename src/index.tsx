@@ -13,6 +13,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ru } from "translations";
 import { routes } from "routes";
 import { store } from "store/store";
+import { Suspense } from "./core/Suspense/Suspense";
 
 const translations = {
   ru: async () => ru,
@@ -24,7 +25,9 @@ root.render(
   <React.StrictMode>
     <TranslationProvider translations={translations} language="ru">
       <Provider store={store}>
-        <RouterProvider router={createBrowserRouter(routes)} />
+        <Suspense>
+          <RouterProvider router={createBrowserRouter(routes)} />
+        </Suspense>
       </Provider>
     </TranslationProvider>
   </React.StrictMode>,
