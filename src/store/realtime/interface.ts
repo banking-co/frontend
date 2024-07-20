@@ -3,6 +3,7 @@ import { SocketEvent } from "store/models";
 
 export interface RealtimeState {
   isConnected: boolean;
+  isLoggedIn: boolean;
 }
 
 export interface SendMessagePayload {

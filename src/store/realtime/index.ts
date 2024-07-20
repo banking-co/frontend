@@ -8,6 +8,7 @@ import {
 
 export const initialState: RealtimeState = {
   isConnected: false,
+  isLoggedIn: false,
 };
 
 export const { reducer, actions } = createSlice({
@@ -26,6 +27,9 @@ export const { reducer, actions } = createSlice({
     },
 
     setConnectionStatus(_st, _ac: SetConnectionStatusPayload) {},
+    setLoggedIn(st, ac) {
+      st.isLoggedIn = ac.payload;
+    },
   },
 });
 

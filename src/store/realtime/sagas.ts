@@ -42,13 +42,13 @@ function* connectSocketWorker(): any {
 function* listenSocketMessageWorker(
   action: PayloadAction<undefined | WebSocketListenerPayload>,
 ) {
-  const msg = action.payload;
-
-  console.log(msg);
+  const { event, data } = action.payload
+    ? action.payload
+    : { event: undefined, data: undefined };
 
   try {
-    if (msg?.event) {
-      switch (msg.event) {
+    if (event) {
+      switch (event) {
         case SocketEvent.ConnWebSocket:
           yield put(
             realtimeActions.sendMessage({
@@ -59,7 +59,7 @@ function* listenSocketMessageWorker(
           break;
         case SocketEvent.StartApp:
           yield put(realtimeActions.setConnectionStatus(true));
-          console.log("start_app");
+          console.log("start_app", data);
           break;
       }
     }
