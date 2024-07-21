@@ -11,7 +11,9 @@ import { SocketEvent } from "../models";
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
     socket.onopen = () => emitter({ event: SocketEvent.ConnWebSocket });
-    socket.onmessage = ({ data: { event, data } }) => emitter({ event, data });
+    socket.onmessage = ({ data }) => {
+      emitter(data);
+    };
     socket.onclose = () => emitter(END);
     socket.onerror = () => emitter(END);
     return () => socket.close();
@@ -42,9 +44,9 @@ function* connectSocketWorker(): any {
 function* listenSocketMessageWorker(
   action: PayloadAction<undefined | WebSocketListenerPayload>,
 ) {
-  const { event, data } = action.payload
-    ? action.payload
-    : { event: undefined, data: undefined };
+  if (!action.payload) return;
+
+  const { event, data } = action.payload;
 
   try {
     if (event) {
@@ -56,10 +58,10 @@ function* listenSocketMessageWorker(
               data: null,
             }),
           );
+          yield put(realtimeActions.setConnectionStatus(true));
           break;
         case SocketEvent.StartApp:
-          yield put(realtimeActions.setConnectionStatus(true));
-          console.log("start_app", data);
+          yield put(realtimeActions.setLoggedIn(data.isLogged));
           break;
       }
     }

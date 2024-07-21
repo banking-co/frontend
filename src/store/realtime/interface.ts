@@ -11,9 +11,19 @@ export interface SendMessagePayload {
   data: unknown;
 }
 
-export interface WebSocketListenerPayload {
-  event: SocketEvent;
-  data?: unknown;
+export interface ConnWebSocketEvent {
+  event: SocketEvent.ConnWebSocket;
+  data: null | undefined
 }
+
+export interface StartAppEvent {
+  event: SocketEvent.StartApp;
+  data: {
+    isLogged: boolean
+    user: unknown;
+  }
+}
+
+export type WebSocketListenerPayload = ConnWebSocketEvent | StartAppEvent
 
 export type SetConnectionStatusPayload = PayloadAction<boolean>;

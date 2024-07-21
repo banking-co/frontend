@@ -26,7 +26,9 @@ export const { reducer, actions } = createSlice({
       st.isConnected = false;
     },
 
-    setConnectionStatus(_st, _ac: SetConnectionStatusPayload) {},
+    setConnectionStatus(st, ac: SetConnectionStatusPayload) {
+      st.isConnected = ac.payload
+    },
     setLoggedIn(st, ac) {
       st.isLoggedIn = ac.payload;
     },

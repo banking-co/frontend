@@ -32,3 +32,7 @@ img {
   -ms-user-select: none;
   user-select: none;
 }
+
+div > * {
+  overflow-wrap: break-word;
+}
