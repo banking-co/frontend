@@ -6,7 +6,7 @@ import { useTranslation } from "i18nano";
 import { queueExecute } from "utils";
 import classNames from "classnames";
 
-import { Placeholder, Spinner, StepByStep } from "uikit";
+import { Placeholder, StepByStep } from "uikit";
 
 import { realtimeSelector } from "store/realtime";
 
