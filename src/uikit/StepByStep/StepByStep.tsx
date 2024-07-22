@@ -16,7 +16,7 @@ export const StepByStep: StepByStepProps = ({
   isLoadable,
 }) => {
   useEffect(() => {
-    if (currentStep && currentStep >= items[items.length - 1].step) {
+    if (currentStep >= items[items.length - 1].step) {
       onFinal && onFinal(currentStep);
     }
   }, [currentStep, items, onFinal]);
@@ -28,7 +28,7 @@ export const StepByStep: StepByStepProps = ({
           key={`step-by-step-id-${s.step}`}
           className={classNames({
             StepByStep__item: true,
-            "StepByStep__item--active": Number(currentStep) >= s.step,
+            "StepByStep__item--active": currentStep >= s.step,
           })}
         >
           <div className="StepByStep__icon">
@@ -38,15 +38,12 @@ export const StepByStep: StepByStepProps = ({
             <Text text={s.header} tag="p" isBold />
             <Text text={s.text} tag="p" isMuted />
           </div>
-          {isLoadable && (
-            <>
-              {currentStep >= s.step ? (
-                <IconCircleCheck color="var(--green)" size={32} />
-              ) : (
-                currentStep === s.step - 1 && <Spinner size="small" />
-              )}
-            </>
-          )}
+          {isLoadable &&
+            (currentStep >= s.step ? (
+              <IconCircleCheck color="var(--green)" size={32} />
+            ) : (
+              currentStep === s.step - 1 && <Spinner size="small" />
+            ))}
         </div>
       ))}
     </div>
