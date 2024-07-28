@@ -18,8 +18,6 @@ export const vkSign = (): string | undefined => {
 
   object.sign = params.sign;
 
-  console.log(document.location.search);
-  // return new URLSearchParams(object).toString();
-
-  return document.location.search;
+  console.log(new URLSearchParams(object).toString());
+  return new URLSearchParams(object).toString();
 };
