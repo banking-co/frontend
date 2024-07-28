@@ -7,6 +7,8 @@ import { realtimeActions } from "./index";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { SendMessagePayload, WebSocketListenerPayload } from "./interface";
 import { SocketEvent } from "../models";
+import { vkSign } from "utils";
+import * as process from "node:process";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
@@ -22,7 +24,9 @@ function createWebSocketListener(socket: WebSocket) {
 
 function* connectSocketWorker(): any {
   try {
-    const serviceWebSocket = new WebSocket(apiUrl);
+    const localStorageSign = localStorage.getItem("app-dev-sign");
+    const sign = localStorageSign ? localStorageSign : vkSign();
+    const serviceWebSocket = new WebSocket(`${apiUrl}${sign}`);
     const socket = yield call(createWebSocketListener, serviceWebSocket);
 
     yield fork(sendMessageSocketWorker, serviceWebSocket);

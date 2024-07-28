@@ -17,7 +17,6 @@ import {
 
 import { Mode } from "store/models";
 import type { ProfileProps } from "./Profile.interface";
-import * as process from "node:process";
 
 export const Profile: ProfileProps = () => {
   const t = useTranslation();
@@ -99,24 +98,6 @@ export const Profile: ProfileProps = () => {
           />
         </Card>
       </Position>
-      {process.env?.IS_MVP === "0" && (
-        <>
-          <Card
-            disable={isDisable}
-            title={t("app.bank.staking.card.title")}
-            propagation={"text"}
-          >
-            <Text text={t("app.bank.staking.card.text")} tag={"span"} isMuted />
-          </Card>
-          <Card
-            disable={isDisable}
-            title={t("app.farms.title")}
-            propagation={"text"}
-          >
-            <Text text={t("app.farms.card.info")} tag={"span"} isMuted />
-          </Card>
-        </>
-      )}
       <Card
         disable={isDisable}
         icon={<IconGift />}

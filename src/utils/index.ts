@@ -8,3 +8,4 @@ export * from "./calculatingRating";
 export * from "./getDevice";
 export * from "./dataset";
 export * from "./queueExecute";
+export * from "./vkSign";

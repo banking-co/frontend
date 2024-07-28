@@ -1,18 +1,23 @@
-import path from "node:path";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
 
+import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 
-import { version } from "./package.json";
 import { compilerOptions } from "./tsconfig.json";
 
 export default defineConfig({
   publicDir: "public",
   build: {
-    outDir: path.join(compilerOptions.outDir, "web", version || "0.0.0"),
+    cssCodeSplit: true,
+    outDir: compilerOptions.outDir,
     minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_debugger: true,
+        drop_console: true,
+      },
+    },
     rollupOptions: {
       output: {
         chunkFileNames: "js/[hash].js",
