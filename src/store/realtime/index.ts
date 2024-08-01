@@ -4,7 +4,7 @@ import {
   RealtimeState,
   SendMessagePayload,
   SetConnectionStatusPayload,
-} from "./interface";
+} from "./realtime.interface";
 
 export const initialState: RealtimeState = {
   isConnected: false,
@@ -27,7 +27,7 @@ export const { reducer, actions } = createSlice({
     },
 
     setConnectionStatus(st, ac: SetConnectionStatusPayload) {
-      st.isConnected = ac.payload
+      st.isConnected = ac.payload;
     },
     setLoggedIn(st, ac) {
       st.isLoggedIn = ac.payload;

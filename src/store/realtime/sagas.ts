@@ -1,11 +1,12 @@
 import { all, call, fork, put, take, takeLatest } from "redux-saga/effects";
-import { END, eventChannel } from "redux-saga";
+import { eventChannel } from "redux-saga";
 import { apiUrl } from "api";
 
 import { realtimeActions } from "./index";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { SendMessagePayload, WebSocketListenerPayload } from "./interface";
+import { SendMessagePayload } from "./realtime.interface";
+import { WebSocketListenerPayload } from "./websocket.interface";
 import { SocketEvent } from "../models";
 import { vkSign } from "utils";
 
@@ -15,14 +16,15 @@ function createWebSocketListener(socket: WebSocket) {
     socket.onmessage = ({ data }) => {
       emitter(data);
     };
-    socket.onclose = () => emitter(END);
-    socket.onerror = () => emitter(END);
+    socket.onclose = () => emitter({ event: SocketEvent.DiscWebSocket });
+    socket.onerror = (e) =>
+      emitter({ event: SocketEvent.DiscWebSocket, data: e });
+
     return () => socket.close();
   });
 }
 
 function* connectSocketWorker(): any {
-  console.log("test");
   try {
     const localStorageSign = localStorage.getItem("app-dev-sign");
     const sign = localStorageSign ? localStorageSign : vkSign();
@@ -66,6 +68,11 @@ function* listenSocketMessageWorker(
           break;
         case SocketEvent.StartApp:
           yield put(realtimeActions.setLoggedIn(data.isLogged));
+          break;
+        case SocketEvent.DiscWebSocket:
+        default:
+          yield put(realtimeActions.setConnectionStatus(false));
+          yield put(realtimeActions.setLoggedIn(false));
           break;
       }
     }
