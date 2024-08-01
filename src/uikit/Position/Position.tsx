@@ -3,9 +3,21 @@ import "./Position.sass";
 import { useMemo } from "react";
 import classNames from "classnames";
 
-import { getDefaultStyles } from "./Position.constants";
-
 import { PositionProps } from "./Position.interface";
+
+const getDefaultStyles = ({
+  justifyContent,
+  alignItems,
+  gap,
+}: {
+  justifyContent?: string;
+  alignItems?: string;
+  gap?: number | string;
+}) => ({
+  justifyContent: justifyContent || "flex-start",
+  alignItems: alignItems || "flex-start",
+  gap: `${gap || 0}px`,
+});
 
 export const Position: PositionProps = (props) => {
   if (props.disableWrap) {

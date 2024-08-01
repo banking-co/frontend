@@ -48,12 +48,12 @@ export const BalanceCard: BalanceCardProps = (props) => {
 
   const iconCurrency = useMemo(() => {
     switch (balances[currentBalance].currencyType) {
-      case TextCurrencyType.Dollar:
-        return <IconCurrencyDollar size={28} />;
       case TextCurrencyType.Bitcoin:
         return <IconCurrencyBitcoin size={28} />;
       case TextCurrencyType.Donate:
         return <IconDiamond size={28} />;
+      default:
+        return <IconCurrencyDollar size={28} />;
     }
   }, [balances, currentBalance]);
 
@@ -78,8 +78,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
       </Position>
       <Position type="line" gap={8} alignItems={"center"}>
         <div
-          className={classNames({
-            BalanceCard__currency: true,
+          className={classNames("BalanceCard__currency", {
             "BalanceCard__currency-diamond":
               balances[currentBalance].currencyType === TextCurrencyType.Donate,
           })}
@@ -100,9 +99,14 @@ export const BalanceCard: BalanceCardProps = (props) => {
         />
       </Position>
       <Position type="line" gap={12}>
-        {props.tags?.map((item) => {
-          return <Tag icon={item.icon} value={item.text} mode={item.mode} />;
-        })}
+        {props.tags?.map((item) => (
+          <Tag
+            key={`tag-${item.mode}-${item.text}`}
+            icon={item.icon}
+            value={item.text}
+            mode={item.mode}
+          />
+        ))}
         <Text
           text={t("about.title", { type: t("about.balance") })}
           tag={"span"}

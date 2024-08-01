@@ -21,8 +21,8 @@ export const PercentageVisualization: PercentageVisualizationProps = (
       {percentages.map((item) => {
         return (
           <div
-            className={classNames({
-              PercentageVisualization__item: true,
+            key={`${item.type}-${item.percent}-percentage`}
+            className={classNames("PercentageVisualization__item", {
               [`PercentageVisualization__item_color--${item.type}`]: true,
             })}
             style={{ width: `${item.percent}%` }}

@@ -26,8 +26,7 @@ export const StepByStep: StepByStepProps = ({
       {items.map((s) => (
         <div
           key={`step-by-step-id-${s.step}`}
-          className={classNames({
-            StepByStep__item: true,
+          className={classNames("StepByStep__item", {
             "StepByStep__item--active": currentStep >= s.step,
           })}
         >

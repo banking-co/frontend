@@ -58,8 +58,8 @@ export const BottomNavbar: BottomNavbarProps = () => {
         {items.map((item) => {
           return (
             <li
-              className={classNames({
-                BottomNavbar__item: true,
+              key={`bottom-navbar-item-${item.key}-${item.title}`}
+              className={classNames("BottomNavbar__item", {
                 BottomNavbar__item_active: activeTab === item.key,
               })}
               onClick={() => {
@@ -70,7 +70,7 @@ export const BottomNavbar: BottomNavbarProps = () => {
               <Position type={"column"} gap={2} alignItems={"center"}>
                 {item.icon}
                 <Text
-                  text={t(`app.navigation.${item.title}` as any) || ""}
+                  text={t(`app.navigation.${item.title}`) || ""}
                   tag={"span"}
                   isAccent={activeTab === item.key}
                   isMuted={!(activeTab === item.key)}
