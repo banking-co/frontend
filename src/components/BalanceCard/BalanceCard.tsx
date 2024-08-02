@@ -27,17 +27,17 @@ export const BalanceCard: BalanceCardProps = (props) => {
     0: {
       count: 123,
       currencyType: TextCurrencyType.Dollar,
-      text: t("app.balances.primary"),
+      text: t("balances.primary"),
     },
     1: {
       count: 213412412,
       currencyType: TextCurrencyType.Bitcoin,
-      text: t("app.balances.secondary"),
+      text: t("balances.secondary"),
     },
     2: {
       count: 23424,
       currencyType: TextCurrencyType.Donate,
-      text: t("app.balances.tertiary"),
+      text: t("balances.tertiary"),
     },
   };
 
@@ -74,7 +74,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
             })
           }
         />
-        <Text text={t("app.balances.name")} tag={"span"} isMuted />
+        <Text text={t("balances.name")} tag={"span"} isMuted />
       </Position>
       <Position type="line" gap={8} alignItems={"center"}>
         <div

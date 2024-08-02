@@ -1,6 +1,7 @@
 import "./Profile.sass";
 
 import { useTranslation } from "i18nano";
+import { useNavigate } from "react-router-dom";
 import { calculatingRating, formatCurrency } from "utils";
 
 import { Card, PercentageVisualization, Position, Tag, Text } from "uikit";
@@ -20,6 +21,7 @@ import type { ProfileProps } from "./Profile.interface";
 
 export const Profile: ProfileProps = () => {
   const t = useTranslation();
+  const n = useNavigate();
   const isDisable = false;
 
   return (
@@ -41,11 +43,11 @@ export const Profile: ProfileProps = () => {
       <Position type="line" gap={12}>
         <Card
           className={"Profile__bank-cards"}
-          title={t("app.bank.card.management.title")}
+          title={t("bank.card.management.title")}
           titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
-          onClick={() => {}}
+          onClick={() => n("management")}
           extra={
             <Position type="column" gap={12}>
               <Position
@@ -66,15 +68,11 @@ export const Profile: ProfileProps = () => {
             </Position>
           }
         >
-          <Text
-            text={t("app.bank.card.management.subtitle")}
-            tag="span"
-            isMuted
-          />
+          <Text text={t("bank.card.management.subtitle")} tag="span" isMuted />
         </Card>
         <Card
           className={"Profile__bank-cards"}
-          title={t("app.bank.card.upgrades.title")}
+          title={t("bank.card.upgrades.title")}
           titleWrap
           icon={<IconReload />}
           propagation={"arrow"}
@@ -91,24 +89,20 @@ export const Profile: ProfileProps = () => {
             </div>
           }
         >
-          <Text
-            text={t("app.bank.card.upgrades.subtitle")}
-            tag="span"
-            isMuted
-          />
+          <Text text={t("bank.card.upgrades.subtitle")} tag="span" isMuted />
         </Card>
       </Position>
       <Card
         disable={isDisable}
         icon={<IconGift />}
-        title={t("app.bonus.title")}
+        title={t("bonus.title")}
         propagation={"text"}
         onClick={() => {}}
       >
-        <Text text={t("app.bonus.info.available")} tag={"span"} isMuted />
+        <Text text={t("bonus.info.available")} tag={"span"} isMuted />
       </Card>
       <Card
-        title={t("app.currency.title")}
+        title={t("currency.title")}
         icon={<IconArrowsExchange />}
         propagation={"text"}
         onClick={() => {}}

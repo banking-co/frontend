@@ -7,7 +7,7 @@ import { AppLoading } from "../AppLoading/AppLoading";
 
 import { realtimeActions } from "store/realtime";
 
-import type { AppProps } from "./App.interface";
+import type { AppProps } from "./interface";
 
 export const App: AppProps = (props) => {
   const dispatch = useDispatch();

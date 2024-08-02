@@ -1,75 +1,53 @@
 {
-  "app": {
-    "loading": {
-      "steps": {
-        "connect": {
-          "header": "Подключено",
-          "text": "Есть связь с сервером"
-        },
-        "logged": {
-          "header": "Успешная авторизация",
-          "text": "Проверка данных"
-        },
-        "final": {
-          "header": "Финишная прямая",
-          "text": "Загружаем интерфейс!"
-        }
-      }
-    },
-    "name": "Rabotyaga",
-    "navigation": {
-      "home": "Главная",
-      "menu": "Меню"
-    },
-    "balances": {
-      "primary": "Валютный",
-      "secondary": "Криптовалютный",
-      "tertiary": "Донатный",
-      "name": "счет"
-    },
-    "farms": {
-      "title": "Майнинг",
-      "card": {
-        "info": "Майнинг фермы"
-      }
-    },
-    "currency": {
-      "title": "Курс валют"
-    },
-    "bonus": {
-      "title": "Бонус",
-      "info": {
-        "available": "Получите ежедневный бонус",
-        "unavailable": "Временно недоступно",
-        "rollback": "Доступно через {{hh}}:{{mm}}:{{sec}}"
-      }
-    },
-    "card": {
-      "propagation": {
-        "text": "Открыть"
+  "loading": {
+    "steps": {
+      "connect": {
+        "header": "Подключено",
+        "text": "Есть связь с сервером"
       },
-      "disabled": "Временно недоступно"
-    },
-    "bank": {
-      "staking": {
-        "card": {
-          "title": "Стейкинг",
-          "text": "Вложение средств под хороший процент!"
-        }
+      "logged": {
+        "header": "Успешная авторизация",
+        "text": "Проверка данных"
       },
-      "card": {
-        "management": {
-          "title": "Управление",
-          "subtitle": "Почти как офис"
-        },
-        "upgrades": {
-          "title": "Улучшения",
-          "subtitle": "Прокачка банка"
-        }
+      "final": {
+        "header": "Финишная прямая",
+        "text": "Загружаем интерфейс!"
       }
     }
   },
+  "name": "Rabotyaga",
+  "navigation": {
+    "home": "Главная",
+    "menu": "Меню"
+  },
+  "balances": {
+    "primary": "Валютный",
+    "secondary": "Криптовалютный",
+    "tertiary": "Донатный",
+    "name": "счет"
+  },
+  "farms": {
+    "title": "Майнинг",
+    "card": {
+      "info": "Майнинг фермы"
+    }
+  },
+  "bonus": {
+    "title": "Бонус",
+    "info": {
+      "available": "Получите ежедневный бонус",
+      "unavailable": "Временно недоступно",
+      "rollback": "Доступно через {{hh}}:{{mm}}:{{sec}}"
+    }
+  },
+  "card": {
+    "propagation": {
+      "text": "Открыть"
+    },
+    "disabled": "Временно недоступно"
+  },
   "currency": {
+    "title": "Курс валют",
     "rub": {
       "title": "RUB",
       "text": "Российский рубль"
@@ -143,6 +121,65 @@
       "language": "Язык",
       "theme": "Тема",
       "more": "Дополнительно"
+    }
+  },
+  "bank": {
+    "staking": {
+      "card": {
+        "title": "Стейкинг",
+        "text": "Вложение средств под хороший процент!"
+      }
+    },
+    "card": {
+      "management": {
+        "title": "Управление",
+        "subtitle": "Почти как офис"
+      },
+      "upgrades": {
+        "title": "Улучшения",
+        "subtitle": "Прокачка банка"
+      }
+    }
+  },
+  "management": {
+    "bank": {
+      "title": "Банк",
+      "description": "",
+      "info": "Информация",
+      "rating": "Рейтинг",
+      "transactions": "Транзакции",
+      "more": "Еще"
+    },
+    "contracts": {
+      "title": "Контракты",
+      "description": "",
+      "take_contract": "Взять контракт",
+      "close_contract": "Сдать контракт"
+    },
+    "employment": {
+      "title": "Сотрудники",
+      "description": "Тут можно нанять рабочих! Главное помнить, что количество мест ограничено!",
+      "recruit": "Поиск",
+      "salary": "Зарплаты",
+      "dismiss": "Уволить"
+    },
+    "boost": {
+      "title": "Улучшить",
+      "description": "",
+      "boost_bank": "Улучшить банк"
+    },
+    "tax": {
+      "title": "Налоговая",
+      "description": "",
+      "pay_tax": "Оплатить налог",
+      "benefits": "Налоговые льготы",
+      "reduce_tax": "Уменьшить налог"
+    },
+    "wiki": {
+      "title": "FAQ",
+      "description": "Всегда поможем, нажимай и изучай!",
+      "how_start": "Как управлять банком?",
+      "how_start_make_money": "Как заработать деньги?"
     }
   }
 }

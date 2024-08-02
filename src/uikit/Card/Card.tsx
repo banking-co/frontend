@@ -21,6 +21,7 @@ export const Card: CardProps = (props) => {
         "Card--clickable": !!props.onClick,
         [`${props.className}`]: !!props.className,
       })}
+      onClick={props.onClick}
       style={props.style}
     >
       <div className="Card__container">
@@ -34,7 +35,7 @@ export const Card: CardProps = (props) => {
           <CardChildren
             children={
               props.disable ? (
-                <Text text={t("app.card.disabled")} tag={"span"} isMuted />
+                <Text text={t("card.disabled")} tag={"span"} isMuted />
               ) : (
                 props.children
               )

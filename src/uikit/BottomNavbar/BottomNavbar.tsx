@@ -70,7 +70,7 @@ export const BottomNavbar: BottomNavbarProps = () => {
               <Position type={"column"} gap={2} alignItems={"center"}>
                 {item.icon}
                 <Text
-                  text={t(`app.navigation.${item.title}`) || ""}
+                  text={t(`navigation.${item.title}`) || ""}
                   tag={"span"}
                   isAccent={activeTab === item.key}
                   isMuted={!(activeTab === item.key)}

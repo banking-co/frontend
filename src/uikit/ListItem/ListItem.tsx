@@ -18,7 +18,7 @@ export const ListItem: ListItemProps = (props) => {
           width={14}
           height={14}
           strokeWidth={4}
-          color="var(--accent)"
+          color="var(--gray)"
         />
       )}
     </div>

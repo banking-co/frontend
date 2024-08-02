@@ -24,9 +24,7 @@ export const CardHeader: CardHeaderProps = (props) => {
           />
         );
       case "text":
-        return (
-          <Text text={t("app.card.propagation.text")} tag={"span"} isAccent />
-        );
+        return <Text text={t("card.propagation.text")} tag={"span"} isAccent />;
       default:
         return null;
     }

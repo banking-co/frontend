@@ -52,18 +52,18 @@ export const AppLoading: AppLoadingProps = (props) => {
           items={[
             {
               step: 1,
-              header: t("app.loading.steps.connect.header"),
-              text: t("app.loading.steps.connect.text"),
+              header: t("loading.steps.connect.header"),
+              text: t("loading.steps.connect.text"),
             },
             {
               step: 2,
-              header: t("app.loading.steps.logged.header"),
-              text: t("app.loading.steps.logged.text"),
+              header: t("loading.steps.logged.header"),
+              text: t("loading.steps.logged.text"),
             },
             {
               step: 3,
-              header: t("app.loading.steps.final.header"),
-              text: t("app.loading.steps.final.text"),
+              header: t("loading.steps.final.header"),
+              text: t("loading.steps.final.text"),
               isFinal: true,
             },
           ]}
