@@ -27,7 +27,10 @@ function createWebSocketListener(socket: WebSocket) {
 function* connectSocketWorker(): any {
   try {
     const localStorageSign = localStorage.getItem("app-dev-sign");
-    const sign = localStorageSign ? localStorageSign : vkSign();
+    const sign = localStorageSign || vkSign();
+
+    if (!sign || sign?.includes("sign=undefined")) return;
+
     const serviceWebSocket = new WebSocket(`${apiUrl}?${sign}`);
     const socket = yield call(createWebSocketListener, serviceWebSocket);
 
