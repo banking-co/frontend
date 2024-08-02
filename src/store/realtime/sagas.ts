@@ -24,7 +24,7 @@ function createWebSocketListener(socket: WebSocket) {
   });
 }
 
-function* connectSocketWorker(): any {
+function* connectSocketWorker(): unknown {
   try {
     const localStorageSign = localStorage.getItem("app-dev-sign");
     const sign = localStorageSign || vkSign();
@@ -84,7 +84,7 @@ function* listenSocketMessageWorker(
   }
 }
 
-function* sendMessageSocketWorker(socket: any): any {
+function* sendMessageSocketWorker(socket: WebSocket): unknown {
   yield takeLatest(
     realtimeActions.sendMessage,
     function* (action: PayloadAction<SendMessagePayload>) {

@@ -1,6 +1,6 @@
 import "./CurrencyExchangeRate.sass";
 
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { useTranslation } from "i18nano";
 
 import { formatCurrency } from "utils";
@@ -32,7 +32,7 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
     <div className="CurrencyExchangeRate">
       {items?.map((item, index, array) => {
         return (
-          <>
+          <Fragment key={`CurrencyExchangeRate--${item.type}--${index}`}>
             <Position type="line" justifyContent="space-between">
               <Position type="column" gap={4}>
                 <Position type="line" gap={8}>
@@ -61,7 +61,7 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
             {array.length - 1 !== index && (
               <div className="CurrencyExchangeRate__divider" />
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>
