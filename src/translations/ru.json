@@ -122,5 +122,27 @@
     "title": "О {{type}}",
     "balance": "счетах",
     "rating": "рейтинге"
+  },
+  "menu" : {
+    "wiki": {
+      "title": "FAQ",
+      "description": "Не знаешь что делать? Мы тебе поможет!",
+      "how_start": "Как начать играть?"
+    },
+    "entertainments": {
+      "title": "Развлечения",
+      "description": "Здесь начинается настоящее веселье!",
+      "quests": "Квесты",
+      "coin": "Монетка",
+      "clicker": "Копилка",
+      "bag": "Кот в мешке"
+    },
+    "settings": {
+      "title": "Настройки",
+      "description": "",
+      "language": "Язык",
+      "theme": "Тема",
+      "more": "Дополнительно"
+    }
   }
 }

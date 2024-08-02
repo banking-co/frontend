@@ -1,55 +1,31 @@
-import { Grid, List, Position } from "uikit";
-import { Icon2fa } from "@tabler/icons-react";
+import { useTranslation } from "i18nano";
 
-export const Menu = () => {
+import { Grid, List, Position } from "uikit";
+
+import { itemsIds, itemsIcons } from "./Menu.constants";
+
+import type { MenuProps } from "./Menu.interface";
+
+export const Menu: MenuProps = () => {
+  const t = useTranslation();
+
   return (
     <Position type="column" gap={24}>
-      <Grid title="Развлечения" description="Осторожно, можно все и проиграть!">
-        <List
-          items={[
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-              disablePropagation: true,
-            },
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-              disablePropagation: true,
-            },
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-              disablePropagation: true,
-            },
-          ]}
-        />
-      </Grid>
-      <Grid title="Развлечения" description="Осторожно, можно все и проиграть!">
-        <List
-          items={[
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-            },
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-            },
-            {
-              icon: <Icon2fa />,
-              title: "Test",
-              to: "/",
-              disablePropagation: true,
-            },
-          ]}
-        />
-      </Grid>
+      {Object.keys(itemsIds).map((key) => (
+        <Grid
+          key={key}
+          title={t(`menu.${key}.title`)}
+          description={t(`menu.${key}.description`)}
+        >
+          <List
+            items={itemsIds[key].map((subKey) => ({
+              icon: itemsIcons[subKey],
+              title: t(`menu.${key}.${subKey}`),
+              to: `/${subKey}`,
+            }))}
+          />
+        </Grid>
+      ))}
     </Position>
   );
 };
