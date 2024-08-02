@@ -12,47 +12,12 @@ export const { reducer, actions } = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setNavigation(state, action) {
-      for (let param in action.payload) {
-        // @ts-ignore
-        if (state[param] !== action.payload[param]) {
-          // @ts-ignore
-          state[param] = action.payload[param];
-        }
-      }
-    },
-
-    setView(state, action) {
-      console.log(action.payload);
-      if (action.payload) {
-        state.activeView = action.payload;
-        state.activePanel = initialState.activePanel;
-      }
-    },
-    setPanel(state, action) {
-      console.log(action.payload);
-      if (action.payload) {
-        state.activePanel = action.payload;
-      }
-    },
-    setModal(state, action) {
-      console.log(action.payload);
+    openModal(state, action) {
       if (action.payload) {
         state.activeModal = action.payload;
       }
     },
-
-    setTheme(state, action) {
-      state.theme = action.payload;
-    },
-
-    clearView(state) {
-      state.activeView = initialState.activeView;
-    },
-    clearPanel(state) {
-      state.activePanel = initialState.activePanel;
-    },
-    clearModal(state) {
+    closeModal(state) {
       state.activeModal = initialState.activeModal;
     },
   },
