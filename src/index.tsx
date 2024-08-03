@@ -1,5 +1,5 @@
 /* @refresh reload */
-import "./styles/main.scss";
+import "./styles/main.sass";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
