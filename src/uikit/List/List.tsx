@@ -5,7 +5,7 @@ import { throttle } from "lodash";
 
 import { ListItem } from "uikit";
 
-import type { ListProps, ListItemModel } from "./List.interface";
+import type { ListProps, ListItemsType } from "./List.interface";
 
 const List: ListProps = (props) => {
   const navigation = useNavigate();
@@ -19,20 +19,27 @@ const List: ListProps = (props) => {
   return (
     <div className="List">
       {props.items.map((item) => {
-        return (
-          <ListItem
-            key={`list-item-${item.to}`}
-            icon={item.icon}
-            title={item.title}
-            disablePropagation={item.disablePropagation}
-            onClick={() =>
-              throttledNextPage(!item.disablePropagation && item.to)
-            }
-          />
-        );
+        switch (item.type) {
+          case "pagination":
+            return (
+              <ListItem.Pagination
+                key={`list-item-${item.to}`}
+                icon={item.icon}
+                title={item.title}
+                disablePropagation={item.disablePropagation}
+                onClick={() =>
+                  throttledNextPage(!item.disablePropagation && item.to)
+                }
+              />
+            );
+          case "switch":
+            return <ListItem.Switch icon={item.icon} title={item.title} />;
+          default:
+            return;
+        }
       })}
     </div>
   );
 };
 
-export { List, ListItemModel };
+export { List, ListItemsType };

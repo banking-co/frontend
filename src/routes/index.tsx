@@ -1,4 +1,4 @@
-import { App, Fallback, Profile, Menu, Management } from "core";
+import { App, Fallback, Profile, Settings, Menu, Management } from "core";
 import { RouteObject } from "react-router-dom";
 
 const routes: RouteObject[] = [
@@ -21,6 +21,10 @@ const routes: RouteObject[] = [
       {
         path: "/management",
         element: <Management />,
+      },
+      {
+        path: "/menu/settings/more",
+        element: <Settings />,
       },
     ],
   },

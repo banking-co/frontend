@@ -19,9 +19,10 @@ export const Menu: MenuProps = () => {
         >
           <List
             items={itemsIds[key].map((subKey) => ({
+              type: "pagination",
               icon: itemsIcons[subKey],
               title: t(`menu.${key}.${subKey}`),
-              to: `/${subKey}`,
+              to: `/menu/${key}/${subKey}`,
             }))}
           />
         </Grid>

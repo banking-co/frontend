@@ -36,3 +36,11 @@ img {
 div > * {
   overflow-wrap: break-word;
 }
+
+//input, div, button, label {
+//  &:focus, &:active {
+//    outline: none;
+//    box-shadow: none;
+//    background-color: transparent;
+//  }
+//}

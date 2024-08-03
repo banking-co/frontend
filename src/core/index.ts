@@ -6,3 +6,5 @@ export * from "./Profile/Profile";
 export * from "./Menu/Menu";
 
 export * from "./Management/Management";
+
+export * from "./Settings/Settings";

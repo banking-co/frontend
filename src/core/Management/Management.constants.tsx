@@ -15,7 +15,6 @@ import {
   IconWalk,
   IconMoneybag,
   IconChecklist,
-  IconScript,
   IconFileSearch,
 } from "@tabler/icons-react";
 

@@ -19,6 +19,7 @@ export const Management: ManagementProps = () => {
         >
           <List
             items={itemsIds[key].map((subKey) => ({
+              type: "pagination",
               icon: itemsIcons[subKey],
               title: t(`management.${key}.${subKey}`),
               to: `/${subKey}`,
