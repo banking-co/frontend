@@ -13,8 +13,8 @@ export interface DiscWebSocketEvent {
 export interface StartAppEvent {
   event: SocketEvent.StartApp;
   data: {
-    isLogged: boolean;
-    user: unknown;
+    bans?: Array<unknown>;
+    user?: unknown;
   };
 }
 

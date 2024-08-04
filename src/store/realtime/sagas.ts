@@ -70,7 +70,8 @@ function* listenSocketMessageWorker(
           yield put(realtimeActions.setConnectionStatus(true));
           break;
         case SocketEvent.StartApp:
-          yield put(realtimeActions.setLoggedIn(data.isLogged));
+          if (data.bans && data.bans.length >= 1) return;
+          yield put(realtimeActions.setLoggedIn(true));
           break;
         case SocketEvent.DiscWebSocket:
         default:
