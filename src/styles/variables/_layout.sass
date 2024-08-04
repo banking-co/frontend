@@ -1,0 +1,10 @@
+body
+  --header-height: 56px
+  --tabbar-height: 64px
+
+  &[data-platform="iOS"]
+    --header-height: 56px
+    --tabbar-height: 64px
+
+  --header-height-safe-area: calc(var(--header-height) + var(--safe_area_inset_top))
+  --tabbar-height-safe-area: calc(var(--tabbar-height) + var(--safe_area_inset_bottom))
