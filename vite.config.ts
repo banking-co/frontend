@@ -7,12 +7,16 @@ import svgr from "vite-plugin-svgr";
 import { compilerOptions } from "./tsconfig.json";
 
 export default defineConfig({
+  appType: "spa",
   publicDir: "public",
   build: {
+    sourcemap: false,
     cssCodeSplit: true,
+    cssMinify: "lightningcss",
     outDir: compilerOptions.outDir,
     minify: "terser",
     terserOptions: {
+      maxWorkers: 2,
       compress: {
         drop_debugger: true,
         drop_console: true,
@@ -31,6 +35,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    strictPort: true,
   },
   plugins: [tsconfigPaths(), react(), svgr()],
 });
