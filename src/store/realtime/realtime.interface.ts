@@ -8,7 +8,7 @@ export interface RealtimeState {
 
 export interface SendMessagePayload {
   event: SocketEvent;
-  data: unknown;
+  data?: unknown;
 }
 
 export type SetConnectionStatusPayload = PayloadAction<boolean>;

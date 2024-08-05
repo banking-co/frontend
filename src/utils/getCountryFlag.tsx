@@ -6,10 +6,10 @@ import Europe from "assets/flags/4x3/eu.svg";
 import American from "assets/flags/4x3/us.svg";
 
 const flags = {
-  [Currency.RUB]: Russia,
-  [Currency.USD]: American,
-  [Currency.BYN]: Belarus,
-  [Currency.EUR]: Europe,
+  [Currency.Rub]: Russia,
+  [Currency.Usd]: American,
+  [Currency.Byn]: Belarus,
+  [Currency.Eur]: Europe,
 };
 
 export const getCountryFlag = (currency: Currency) => flags[currency];

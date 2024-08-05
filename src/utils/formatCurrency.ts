@@ -4,7 +4,7 @@ interface Options {
 
 export const formatCurrency = (cents: number, options?: Options): string => {
   if (cents < 1) {
-    cents = 1;
+    cents = 0;
   }
 
   if (cents >= Number.MAX_SAFE_INTEGER) {

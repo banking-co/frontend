@@ -28,7 +28,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
     "@tabler/icons-react": "^3.6.0",
-    "@vkontakte/vk-bridge": "^2.14.2",
+    "@vkontakte/vk-bridge": "^2.15.0",
     "classnames": "^2.5.1",
     "date-fns": "^3.6.0",
     "elum-router": "^0.0.20",

@@ -9,6 +9,8 @@ import { SendMessagePayload } from "./realtime.interface";
 import { WebSocketListenerPayload } from "./websocket.interface";
 import { SocketEvent } from "../models";
 import { vkSign } from "utils";
+import { usersActions } from "../users";
+import { balancesActions } from "../balances";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
@@ -72,6 +74,9 @@ function* listenSocketMessageWorker(
         case SocketEvent.StartApp:
           if (data.bans && data.bans.length >= 1) return;
           yield put(realtimeActions.setLoggedIn(true));
+          yield put(usersActions.setUser(data.user));
+          yield put(usersActions.setPrimaryUser(data.user));
+          yield put(balancesActions.setBalances(data.balances));
           break;
         case SocketEvent.DiscWebSocket:
         default:

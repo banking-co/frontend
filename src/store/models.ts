@@ -12,12 +12,21 @@ export interface ExpModel {
 }
 
 export interface UserModel {
-  fullName: string;
-  firstName: string;
-  lastName: string;
-  id: number | string;
-  photo: string;
-  exp: ExpModel;
+  id: number;
+  username: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
+}
+
+export interface BalanceModel {
+  id: number;
+  importance: number;
+  userId: number;
+  amount: number;
+  currency: Currency;
+  createdAt: "2024-08-04T23:34:37.117+05:00";
+  updateAt: "2024-08-04T23:34:37.117+05:00";
 }
 
 export interface UserLevelModel {
@@ -58,15 +67,17 @@ export enum Mode {
 }
 
 export enum Currency {
-  RUB = "rub",
-  EUR = "eur",
-  BYN = "byn",
-  USD = "usd",
+  Rub = "rub",
+  Eur = "eur",
+  Byn = "byn",
+  Usd = "usd",
+  Btc = "btc",
+  Donate = "donate",
 }
 
 export enum TextCurrencyType {
-  Dollar = "dollar",
-  Bitcoin = "bitcoin",
+  Dollar = "usd",
+  Bitcoin = "btc",
   Donate = "donate",
 }
 

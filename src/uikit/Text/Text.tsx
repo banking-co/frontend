@@ -1,7 +1,8 @@
 import "./Text.sass";
 
-import { createElement, useMemo } from "react";
 import classNames from "classnames";
+import { createElement, useMemo } from "react";
+import { debounce } from "lodash";
 
 import { IconChevronRight } from "@tabler/icons-react";
 
@@ -31,7 +32,10 @@ const Text: TextProps = (props) => {
             [`${props.className}`]: !!props.className,
           }),
           style: props.style,
-          onClick: props.onClick,
+          onClick: debounce(
+            (e) => (props.onClick ? props.onClick(e) : undefined),
+            200,
+          ),
         },
         <>
           {formattedText}

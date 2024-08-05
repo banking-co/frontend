@@ -2,7 +2,7 @@ import "./BottomNavbar.sass";
 
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { throttle } from "lodash";
+import { debounce } from "lodash";
 import { useTranslation } from "i18nano";
 import classNames from "classnames";
 
@@ -48,10 +48,6 @@ export const BottomNavbar: BottomNavbarProps = () => {
     setActiveTabFromUrl();
   }, []);
 
-  const throttledSwitch = throttle((value) => {
-    navigate(value, { replace: true });
-  }, 250);
-
   return (
     <nav className="BottomNavbar">
       <ul className="BottomNavbar__wrapper">
@@ -63,7 +59,7 @@ export const BottomNavbar: BottomNavbarProps = () => {
                 BottomNavbar__item_active: activeTab === item.key,
               })}
               onClick={() => {
-                throttledSwitch(item.key);
+                navigate(item.key, { replace: true });
                 setActiveTab(item.key);
               }}
             >

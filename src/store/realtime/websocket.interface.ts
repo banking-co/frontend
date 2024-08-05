@@ -1,4 +1,4 @@
-import { SocketEvent } from "store/models";
+import type { BalanceModel, SocketEvent, UserModel } from "store/models";
 
 export interface ConnWebSocketEvent {
   event: SocketEvent.ConnWebSocket;
@@ -14,7 +14,8 @@ export interface StartAppEvent {
   event: SocketEvent.StartApp;
   data: {
     bans?: Array<unknown>;
-    user?: unknown;
+    user?: UserModel;
+    balances?: Array<BalanceModel>;
   };
 }
 

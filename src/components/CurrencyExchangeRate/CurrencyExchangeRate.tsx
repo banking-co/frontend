@@ -18,7 +18,7 @@ export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {
   const t = useTranslation();
 
   const items = useMemo((): CurrencyExchangeRateItem[] | undefined => {
-    const currency = [Currency.BYN, Currency.RUB, Currency.USD];
+    const currency = [Currency.Byn, Currency.Rub, Currency.Usd];
     return Array.from(Array(3), (_, i) => ({
       exchange: {
         buy: Math.random() * 1000,

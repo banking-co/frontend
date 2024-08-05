@@ -3,42 +3,42 @@ import "./BalanceCard.sass";
 import { useMemo, useState } from "react";
 import { useTranslation } from "i18nano";
 import { formatCurrency } from "utils";
-import { useTimeAgo } from "hooks";
+import { useTimeAgo, useUser } from "hooks";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import { Position, Tag, Text } from "uikit";
 
-import { BalanceCardProps } from "./BalanceCard.interface";
-import { TextCurrencyType } from "store/models";
+import { Currency, SocketEvent } from "store/models";
+import { realtimeActions } from "store/realtime";
+import { balancesSelector } from "store/balances";
 
 import {
-  IconCurrencyDollar,
   IconCurrencyBitcoin,
+  IconCurrencyDollar,
   IconDiamond,
   IconReload,
 } from "@tabler/icons-react";
 
+import type { BalanceCardProps } from "./BalanceCard.interface";
+
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
+  const dispatch = useDispatch();
   const timeAgo = useTimeAgo();
+  const user = useUser();
   const [currentBalance, setCurrentBalance] = useState<0 | 1 | 2>(0);
+  const { balances } = useSelector(balancesSelector);
 
-  const balances = {
-    0: {
-      count: 123,
-      currencyType: TextCurrencyType.Dollar,
-      text: t("balances.primary"),
-    },
-    1: {
-      count: 213412412,
-      currencyType: TextCurrencyType.Bitcoin,
-      text: t("balances.secondary"),
-    },
-    2: {
-      count: 23424,
-      currencyType: TextCurrencyType.Donate,
-      text: t("balances.tertiary"),
-    },
+  const userBalances = useMemo(
+    () => (user?.id ? balances[user.id] : []),
+    [balances, user],
+  );
+
+  const textBalances: Partial<{ [key in Currency]: string }> = {
+    [Currency.Usd]: t("balances.primary"),
+    [Currency.Btc]: t("balances.secondary"),
+    [Currency.Donate]: t("balances.tertiary"),
   };
 
   const formatReloadDate = useMemo(
@@ -47,21 +47,22 @@ export const BalanceCard: BalanceCardProps = (props) => {
   );
 
   const iconCurrency = useMemo(() => {
-    switch (balances[currentBalance].currencyType) {
-      case TextCurrencyType.Bitcoin:
+    switch (userBalances[currentBalance].currency) {
+      case Currency.Btc:
         return <IconCurrencyBitcoin size={28} />;
-      case TextCurrencyType.Donate:
+      case Currency.Donate:
         return <IconDiamond size={28} />;
+      case Currency.Usd:
       default:
         return <IconCurrencyDollar size={28} />;
     }
-  }, [balances, currentBalance]);
+  }, [userBalances, currentBalance]);
 
   return (
     <Position type="column" className="BalanceCard" gap={8}>
       <Position type="line" gap={4}>
         <Text
-          text={balances[currentBalance].text}
+          text={textBalances[userBalances[currentBalance].currency] || ""}
           tag={"span"}
           isAccent
           onClick={() =>
@@ -80,12 +81,12 @@ export const BalanceCard: BalanceCardProps = (props) => {
         <div
           className={classNames("BalanceCard__currency", {
             "BalanceCard__currency-diamond":
-              balances[currentBalance].currencyType === TextCurrencyType.Donate,
+              userBalances[currentBalance].currency === Currency.Donate,
           })}
         >
           {iconCurrency}
           <Text
-            text={formatCurrency(balances[currentBalance].count)}
+            text={formatCurrency(userBalances[currentBalance].amount)}
             tag={"h1"}
           />
         </div>
@@ -93,6 +94,13 @@ export const BalanceCard: BalanceCardProps = (props) => {
           text={formatReloadDate}
           tag="span"
           linkIcon={<IconReload />}
+          onClick={() => {
+            dispatch(
+              realtimeActions.sendMessage({
+                event: SocketEvent.StartApp,
+              }),
+            );
+          }}
           isLink
           reverse
           isMuted
