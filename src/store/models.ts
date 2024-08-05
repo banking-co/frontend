@@ -96,4 +96,5 @@ export enum SocketEvent {
   ConnWebSocket = "conn_websocket",
   DiscWebSocket = "disc_websocket",
   StartApp = "start_app",
+  GetBusiness = "get_business",
 }
