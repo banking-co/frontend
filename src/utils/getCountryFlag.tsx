@@ -5,7 +5,7 @@ import Belarus from "assets/flags/4x3/by.svg";
 import Europe from "assets/flags/4x3/eu.svg";
 import American from "assets/flags/4x3/us.svg";
 
-const flags = {
+const flags: Partial<{ [key in Currency]: string }> = {
   [Currency.Rub]: Russia,
   [Currency.Usd]: American,
   [Currency.Byn]: Belarus,
