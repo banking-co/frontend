@@ -95,7 +95,7 @@ export const useTimeAgo = () => {
         return lasing(
           t("time.ago.years.accurate", {
             day: dayMonthString(),
-            year: date.getFullYear(),
+            year: date.getFullYear().toString(),
           }),
           "",
           Math.floor(seconds / 31536000),
