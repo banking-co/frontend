@@ -16,7 +16,7 @@ export interface UserModel {
   username: string;
   createdAt: string;
   updatedAt: string;
-  deletedAt: string;
+  deletedAt?: string;
 }
 
 export interface BalanceModel {
@@ -27,6 +27,16 @@ export interface BalanceModel {
   currency: Currency;
   createdAt: "2024-08-04T23:34:37.117+05:00";
   updateAt: "2024-08-04T23:34:37.117+05:00";
+  deletedAt?: string;
+}
+
+export interface BusinessModel {
+  id: number;
+  userId: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
 }
 
 export interface UserLevelModel {

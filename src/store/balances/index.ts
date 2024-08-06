@@ -24,11 +24,11 @@ export const { reducer, actions } = createSlice({
         {} as any,
       );
     },
+
     clearBalances(state) {
       state.balances = initialState.balances;
     },
-
-    clearAll(state) {
+    clearState(state) {
       state.balances = initialState.balances;
     },
   },

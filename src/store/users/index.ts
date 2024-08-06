@@ -15,6 +15,7 @@ export const { reducer, actions } = createSlice({
       if (!action.payload) return;
       state.primaryUser = action.payload;
     },
+
     setUsers(state, action: SetUsersPayload) {
       if (!action.payload) return;
 
@@ -27,14 +28,14 @@ export const { reducer, actions } = createSlice({
       if (!action.payload) return;
       state.users[action.payload.id] = action.payload;
     },
+
     clearPrimaryUser(state) {
       state.primaryUser = initialState.primaryUser;
     },
     clearUsers(state) {
       state.users = initialState.users;
     },
-
-    clearAll(state) {
+    clearState(state) {
       state.primaryUser = initialState.primaryUser;
       state.users = initialState.users;
     },
