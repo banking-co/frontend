@@ -12,6 +12,7 @@ export const Placeholder: PlaceholderProps = (props) => {
         Placeholder: true,
         Placeholder__center: !!props.isCenter,
         Placeholder__fullscreen: !!props.isFullScreen,
+        Placeholder__fullpage: !!props.isFullPage,
         [`${props.className}`]: props.className,
       })}
     >

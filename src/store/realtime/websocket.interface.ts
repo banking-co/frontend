@@ -1,4 +1,9 @@
-import type { BalanceModel, SocketEvent, UserModel } from "store/models";
+import type {
+  BalanceModel,
+  BusinessModel,
+  SocketEvent,
+  UserModel,
+} from "store/models";
 
 export interface ConnWebSocketEvent {
   event: SocketEvent.ConnWebSocket;
@@ -10,6 +15,14 @@ export interface DiscWebSocketEvent {
   data?: Event;
 }
 
+export interface ErrorEvent {
+  event: SocketEvent.Error;
+  data: {
+    msg: string;
+    code: number;
+  };
+}
+
 export interface StartAppEvent {
   event: SocketEvent.StartApp;
   data: {
@@ -19,7 +32,24 @@ export interface StartAppEvent {
   };
 }
 
+export interface GetBusinessEvent {
+  event: SocketEvent.GetBusiness;
+  data: {
+    bank?: BusinessModel;
+  };
+}
+
+export interface GetPrimaryBusinessEvent {
+  event: SocketEvent.GetPrimaryBusiness;
+  data: {
+    bank?: BusinessModel;
+  };
+}
+
 export type WebSocketListenerPayload =
   | ConnWebSocketEvent
   | StartAppEvent
-  | DiscWebSocketEvent;
+  | DiscWebSocketEvent
+  | GetBusinessEvent
+  | GetPrimaryBusinessEvent
+  | ErrorEvent;

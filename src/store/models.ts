@@ -107,4 +107,6 @@ export enum SocketEvent {
   DiscWebSocket = "disc_websocket",
   StartApp = "start_app",
   GetBusiness = "get_business",
+  GetPrimaryBusiness = "get_pr_business",
+  Error = "error",
 }

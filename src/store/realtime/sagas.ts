@@ -6,11 +6,13 @@ import { realtimeActions } from "./index";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { SendMessagePayload } from "./realtime.interface";
-import { WebSocketListenerPayload } from "./websocket.interface";
+import { StartAppEvent, WebSocketListenerPayload } from "./websocket.interface";
 import { SocketEvent } from "../models";
 import { vkSign } from "utils";
 import { usersActions } from "../users";
 import { balancesActions } from "../balances";
+import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
+import { appErrorWorker } from "../app/sagas";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
@@ -24,6 +26,18 @@ function createWebSocketListener(socket: WebSocket) {
 
     return () => socket.close();
   });
+}
+
+function* startAppWorker(action: StartAppEvent) {
+  try {
+    if (action.data.bans && action.data.bans.length >= 1) return;
+    yield put(realtimeActions.setLoggedIn(true));
+    yield put(usersActions.setUser(action.data.user));
+    yield put(usersActions.setPrimaryUser(action.data.user));
+    yield put(balancesActions.setBalances(action.data.balances));
+  } catch (e) {
+    console.error("Start app set error:", e);
+  }
 }
 
 function* connectSocketWorker(): unknown {
@@ -62,21 +76,26 @@ function* listenSocketMessageWorker(
   try {
     if (event) {
       switch (event) {
+        case SocketEvent.Error:
+          yield call(appErrorWorker, { event, data });
+          break;
+        case SocketEvent.StartApp:
+          yield call(startAppWorker, { event, data });
+          break;
+        case SocketEvent.GetBusiness:
+          yield call(setBusinessWorker, { event, data });
+          break;
+        case SocketEvent.GetPrimaryBusiness:
+          yield call(setPrimaryBusinessWorker, { event, data });
+          break;
         case SocketEvent.ConnWebSocket:
+          yield put(realtimeActions.setConnectionStatus(true));
           yield put(
             realtimeActions.sendMessage({
               event: SocketEvent.StartApp,
               data: null,
             }),
           );
-          yield put(realtimeActions.setConnectionStatus(true));
-          break;
-        case SocketEvent.StartApp:
-          if (data.bans && data.bans.length >= 1) return;
-          yield put(realtimeActions.setLoggedIn(true));
-          yield put(usersActions.setUser(data.user));
-          yield put(usersActions.setPrimaryUser(data.user));
-          yield put(balancesActions.setBalances(data.balances));
           break;
         case SocketEvent.DiscWebSocket:
         default:

@@ -8,6 +8,7 @@ interface PlaceholderParams extends HTMLAttributes<HTMLDivElement> {
   extra?: ReactNode;
   isCenter?: boolean;
   isFullScreen?: boolean;
+  isFullPage?: boolean;
 }
 
 export type PlaceholderProps = FC<PlaceholderParams>;

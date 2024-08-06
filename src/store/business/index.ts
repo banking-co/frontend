@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../rootReducer";
 import {
   BusinessState,
+  LoadPrimaryBusinessPayload,
   SetBusinessesPayload,
   SetBusinessPayload,
 } from "./interface";
@@ -9,12 +10,13 @@ import {
 export const initialState: BusinessState = {
   primaryBusiness: null,
   businesses: {},
+  businessesIdByUserID: {},
 
-  isLoadingBusiness: false,
+  isLoadingPrimaryBusiness: true,
 };
 
 export const { reducer, actions } = createSlice({
-  name: "balances",
+  name: "business",
   initialState,
   reducers: {
     setPrimaryBusiness(state, action: SetBusinessPayload) {
@@ -25,13 +27,23 @@ export const { reducer, actions } = createSlice({
     setBusinesses(state, action: SetBusinessesPayload) {
       if (!action.payload || !action.payload[0]) return;
       action.payload.forEach((b) => {
-        if (!b) return;
+        if (!b || !b.id || !b.userId) return;
         state.businesses[b.id] = b;
+        state.businessesIdByUserID[b.id] = b.userId;
       });
     },
     setBusiness(state, action: SetBusinessPayload) {
-      if (!action.payload) return;
+      if (!action.payload || !action.payload.userId || !action.payload.id)
+        return;
       state.businesses[action.payload.id] = action.payload;
+      state.businessesIdByUserID[action.payload.id] = action.payload.userId;
+    },
+
+    loadPrimaryBusiness(state, _: LoadPrimaryBusinessPayload) {
+      state.isLoadingPrimaryBusiness = true;
+    },
+    stopLoadingPrimaryBusiness(state) {
+      state.isLoadingPrimaryBusiness = false;
     },
 
     clearBusinesses(state) {
@@ -41,12 +53,12 @@ export const { reducer, actions } = createSlice({
       state.primaryBusiness = initialState.primaryBusiness;
     },
     clearState(state) {
-      state.isLoadingBusiness = initialState.isLoadingBusiness;
+      state.isLoadingPrimaryBusiness = initialState.isLoadingPrimaryBusiness;
       state.businesses = initialState.businesses;
       state.primaryBusiness = initialState.primaryBusiness;
     },
   },
 });
 
-export { reducer as balancesReducer, actions as balancesActions };
-export const balancesSelector = (state: RootState) => state.balances;
+export { reducer as businessReducer, actions as businessActions };
+export const businessSelector = (state: RootState) => state.business;
