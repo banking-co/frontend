@@ -40,6 +40,29 @@ function* startAppWorker(action: StartAppEvent) {
   }
 }
 
+function* connSocketWorker() {
+  try {
+    yield put(realtimeActions.setConnectionStatus(true));
+    yield put(
+      realtimeActions.sendMessage({
+        event: SocketEvent.StartApp,
+        data: null,
+      }),
+    );
+  } catch (e) {
+    console.error("Connection socket error:", e);
+  }
+}
+
+function* discSocketWorker() {
+  try {
+    yield put(realtimeActions.setConnectionStatus(false));
+    yield put(realtimeActions.setLoggedIn(false));
+  } catch (e) {
+    console.error("Disconnect socket error:", e);
+  }
+}
+
 function* connectSocketWorker(): unknown {
   try {
     const localStorageSign = localStorage.getItem("app-dev-sign");
@@ -89,18 +112,11 @@ function* listenSocketMessageWorker(
           yield call(setPrimaryBusinessWorker, { event, data });
           break;
         case SocketEvent.ConnWebSocket:
-          yield put(realtimeActions.setConnectionStatus(true));
-          yield put(
-            realtimeActions.sendMessage({
-              event: SocketEvent.StartApp,
-              data: null,
-            }),
-          );
+          yield call(connSocketWorker);
           break;
         case SocketEvent.DiscWebSocket:
         default:
-          yield put(realtimeActions.setConnectionStatus(false));
-          yield put(realtimeActions.setLoggedIn(false));
+          yield call(discSocketWorker);
           break;
       }
     }
