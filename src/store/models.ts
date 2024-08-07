@@ -39,6 +39,14 @@ export interface BusinessModel {
   deletedAt?: string;
 }
 
+export interface BonusModel {
+  id: number;
+  type: string;
+  createdAt: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
+
 export interface UserLevelModel {
   level: number;
   percentage: string;
