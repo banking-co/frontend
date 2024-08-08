@@ -2,7 +2,7 @@ import "./AppHeader.sass";
 
 import { useNavigate } from "react-router-dom";
 
-import { Text } from "uikit";
+import { AppUserFootnote } from "uikit";
 
 import { IconChevronLeft } from "@tabler/icons-react";
 
@@ -23,13 +23,7 @@ export const AppHeader: AppHeaderProps = (props) => {
         <div className="AppHeader__icon--before">{props.before}</div>
       )}
 
-      <div className="AppHeader__user">
-        <img src="https://placehold.co/200x200/png" alt="" />
-
-        <div>
-          <Text tag="p" isSecondary text="Дмитрий М." />
-        </div>
-      </div>
+      <AppUserFootnote />
     </div>
   );
 };

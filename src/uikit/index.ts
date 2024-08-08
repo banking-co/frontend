@@ -21,3 +21,4 @@ export * from "./Spinner/Spinner";
 export * from "./CurrencyIcon/CurrencyIcon";
 export * from "./StepByStep/StepByStep";
 export * from "./Switch/Switch";
+export * from "./AppUserFootnote/AppUserFootnote";

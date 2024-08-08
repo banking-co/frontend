@@ -17,6 +17,12 @@ export interface UserModel {
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
+  vkData?: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    photo200: string;
+  };
 }
 
 export interface BalanceModel {
