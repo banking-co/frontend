@@ -47,7 +47,7 @@ export const Management: ManagementProps = () => {
               type: "pagination",
               icon: itemsIcons[subKey],
               title: t(`management.${key}.${subKey}`),
-              to: `/${subKey}`,
+              to: `/${key}/${subKey}`,
             }))}
           />
         </Grid>

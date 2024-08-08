@@ -16,12 +16,13 @@ import {
   IconMoneybag,
   IconChecklist,
   IconFileSearch,
+  IconUsers,
 } from "@tabler/icons-react";
 
 export const itemsIds: ItemsIds = {
   bank: ["info", "rating", "transactions", "more"],
   contracts: ["take_contract", "close_contract"],
-  employment: ["recruit", "salary", "dismiss"],
+  employment: ["list", "recruit", "salary", "dismiss"],
   boost: ["boost_bank"],
   tax: ["pay_tax", "benefits", "reduce_tax"],
   wiki: ["how_start", "how_start_make_money"],
@@ -29,6 +30,7 @@ export const itemsIds: ItemsIds = {
 
 export const itemsIcons: ItemsIcons = {
   recruit: <IconUserSearch />,
+  list: <IconUsers />,
   info: <IconInfoSquareRounded />,
   rating: <IconChartLine />,
   transactions: <IconCreditCardPay />,
