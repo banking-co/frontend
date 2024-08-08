@@ -15,7 +15,7 @@ export const AppUserFootnote: AppUserFootnoteProps = () => {
 
   return (
     <div className="AppUserFootnote__user">
-      {user.vkData?.photo200 ? (
+      {user.personalInfo?.photo200 ? (
         <img src="https://placehold.co/200x200/png" alt="" />
       ) : (
         <IconUser color="var(--gray)" />

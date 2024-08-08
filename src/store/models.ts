@@ -11,18 +11,20 @@ export interface ExpModel {
   current: number;
 }
 
+export interface UserPersonalInfoModel {
+  id: number;
+  firstName: string;
+  lastName: string;
+  photo200: string;
+}
+
 export interface UserModel {
   id: number;
   username: string;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
-  vkData?: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    photo200: string;
-  };
+  personalInfo?: UserPersonalInfoModel;
 }
 
 export interface BalanceModel {
