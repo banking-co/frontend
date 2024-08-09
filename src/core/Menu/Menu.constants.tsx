@@ -13,7 +13,7 @@ import {
 
 export const itemsIds: ItemsIds = {
   entertainments: ["quests", "coin", "clicker", "bag"],
-  settings: ["language", "theme", "more"],
+  settings: ["settings"],
   wiki: ["how_start"],
 };
 
@@ -22,7 +22,7 @@ export const itemsIcons: ItemsIcons = {
   coin: <IconCoin />,
   bag: <IconCat />,
   quests: <IconMap />,
-  more: <IconAdjustmentsHorizontal />,
+  settings: <IconAdjustmentsHorizontal />,
   language: <IconLanguage />,
   theme: <IconBrush />,
   how_start: <IconHammer />,

@@ -2,7 +2,6 @@ import "./BottomNavbar.sass";
 
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { debounce } from "lodash";
 import { useTranslation } from "i18nano";
 import classNames from "classnames";
 
@@ -10,7 +9,7 @@ import { Position, Text } from "uikit";
 
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
-import { IconDots, IconHome } from "@tabler/icons-react";
+import { IconHome, IconLayoutDashboard } from "@tabler/icons-react";
 
 const items = [
   {
@@ -19,7 +18,7 @@ const items = [
     title: "home",
   },
   {
-    icon: <IconDots />,
+    icon: <IconLayoutDashboard />,
     key: "/menu",
     title: "menu",
   },

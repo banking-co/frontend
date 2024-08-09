@@ -18,7 +18,7 @@
   "name": "Rabotyaga",
   "navigation": {
     "home": "Главная",
-    "menu": "Меню"
+    "menu": "Еще"
   },
   "balances": {
     "primary": "Валютный",
@@ -118,9 +118,7 @@
     "settings": {
       "title": "Настройки",
       "description": "",
-      "language": "Язык",
-      "theme": "Тема",
-      "more": "Дополнительно"
+      "settings": "Настройки"
     }
   },
   "bank": {
