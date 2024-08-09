@@ -14,7 +14,8 @@ export const Management: ManagementProps = () => {
   const t = useTranslation();
   const dispatch = useDispatch();
   const user = useUser();
-  const { isLoadingPrimaryBusiness } = useSelector(businessSelector);
+  const { isLoadingPrimaryBusiness, primaryBusiness } =
+    useSelector(businessSelector);
 
   useEffect(() => {
     if (user) {
@@ -26,10 +27,18 @@ export const Management: ManagementProps = () => {
     }
   }, [user]);
 
-  if (isLoadingPrimaryBusiness) {
+  if (isLoadingPrimaryBusiness || !primaryBusiness) {
     return (
       <Placeholder isFullPage isCenter>
         <Spinner />
+      </Placeholder>
+    );
+  }
+
+  if (!primaryBusiness) {
+    return (
+      <Placeholder isFullPage isCenter>
+        Business Not Loaded
       </Placeholder>
     );
   }
@@ -46,7 +55,10 @@ export const Management: ManagementProps = () => {
             items={itemsIds[key].map((subKey) => ({
               type: "pagination",
               icon: itemsIcons[subKey],
-              title: t(`management.${key}.${subKey}`),
+              title:
+                key === "bank" && subKey === "info" && primaryBusiness.name
+                  ? primaryBusiness.name
+                  : t(`management.${key}.${subKey}`),
               to: `/${key}/${subKey}`,
             }))}
           />

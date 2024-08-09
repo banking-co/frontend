@@ -29,10 +29,15 @@ export const useTimeAgo = () => {
       case seconds < 10:
         return t("time.ago.now");
       case seconds < 60:
-        return lasing(t("time.ago.seconds"), t("time.ago.back"), seconds);
+        console.log(t("time.ago.seconds"));
+        return lasing(
+          t("time.ago.seconds").split(","),
+          t("time.ago.back"),
+          seconds,
+        );
       case seconds < 3600:
         return lasing(
-          t("time.ago.minutes"),
+          t("time.ago.minutes").split(","),
           t("time.ago.back"),
           Math.floor(seconds / 60),
         );

@@ -23,7 +23,7 @@ const routes: RouteObject[] = [
         element: <Management />,
       },
       {
-        path: "/menu/settings/more",
+        path: "/menu/settings/settings",
         element: <Settings />,
       },
     ],

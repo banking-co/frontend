@@ -9,11 +9,11 @@ import { Position, Text } from "uikit";
 
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
-import { IconHome, IconLayoutDashboard } from "@tabler/icons-react";
+import { IconBuildingBank, IconLayoutDashboard } from "@tabler/icons-react";
 
 const items = [
   {
-    icon: <IconHome />,
+    icon: <IconBuildingBank />,
     key: "/",
     title: "home",
   },

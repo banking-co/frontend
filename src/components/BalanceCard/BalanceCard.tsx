@@ -3,10 +3,11 @@ import "./BalanceCard.sass";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "i18nano";
 import { formatCurrency } from "utils";
-import { useTimeAgo, useUser } from "hooks";
+import { useUser } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
+import { RefreshButton } from "./RefreshButton/RefreshButton";
 import { Position, Tag, Text } from "uikit";
 
 import { Currency, SocketEvent } from "store/models";
@@ -17,7 +18,6 @@ import {
   IconCurrencyBitcoin,
   IconCurrencyDollar,
   IconDiamond,
-  IconReload,
 } from "@tabler/icons-react";
 
 import type { BalanceCardProps } from "./BalanceCard.interface";
@@ -25,12 +25,9 @@ import type { BalanceCardProps } from "./BalanceCard.interface";
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
   const dispatch = useDispatch();
-  const timeAgo = useTimeAgo();
   const user = useUser();
   const [currentBalance, setCurrentBalance] = useState<0 | 1 | 2>(0);
   const [isAnimateBalance, setStartAnimateBalance] = useState(false);
-  const [isAnimateReloadBalance, setStartAnimateReloadBalance] =
-    useState(false);
   const { balances } = useSelector(balancesSelector);
   const balanceAnimateDelay = 150;
 
@@ -44,11 +41,6 @@ export const BalanceCard: BalanceCardProps = (props) => {
     [Currency.Btc]: t("balances.secondary"),
     [Currency.Donate]: t("balances.tertiary"),
   };
-
-  const formatReloadDate = useMemo(
-    () => timeAgo(new Date(Date.now() - 12333412).getTime()),
-    [],
-  );
 
   const iconCurrency = useMemo(() => {
     switch (userBalances[currentBalance].currency) {
@@ -80,16 +72,12 @@ export const BalanceCard: BalanceCardProps = (props) => {
   }, [isAnimateBalance, balanceAnimateDelay]);
 
   const handleReloadBalance = useCallback(() => {
-    if (isAnimateReloadBalance) return;
-    setStartAnimateReloadBalance(true);
-    setTimeout(() => setCurrentBalance(0), balanceAnimateDelay);
-    setTimeout(() => setStartAnimateReloadBalance(false), 1000);
     dispatch(
       realtimeActions.sendMessage({
         event: SocketEvent.GetBalances,
       }),
     );
-  }, [isAnimateReloadBalance, isAnimateBalance, balanceAnimateDelay]);
+  }, []);
 
   return (
     <Position type="column" className="BalanceCard" gap={8}>
@@ -121,24 +109,13 @@ export const BalanceCard: BalanceCardProps = (props) => {
             tag={"h1"}
           />
         </div>
-        <Text
+        <RefreshButton
           className={classNames("BalanceCard_animate", {
             "BalanceCard_animate--hide": isAnimateBalance,
             "BalanceCard_animate--open": !isAnimateBalance,
           })}
-          text={formatReloadDate}
-          tag="span"
-          linkIcon={
-            <IconReload
-              className={classNames({
-                "BalanceCard_animate-reload": isAnimateReloadBalance,
-              })}
-            />
-          }
-          onClick={handleReloadBalance}
-          isLink
-          reverse
-          isMuted
+          animateDelay={balanceAnimateDelay}
+          handleReloadBalance={handleReloadBalance}
         />
       </Position>
       <Position type="line" gap={12}>

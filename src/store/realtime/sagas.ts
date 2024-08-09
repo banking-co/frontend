@@ -37,6 +37,7 @@ function* startAppWorker(action: StartAppEvent) {
     yield put(usersActions.setUser(action.data.user));
     yield put(usersActions.setPrimaryUser(action.data.user));
     yield put(balancesActions.setBalances(action.data.balances));
+    yield put(balancesActions.setBalancesUpdateAt(Date.now().valueOf()));
   } catch (e) {
     console.error("Start app set error:", e);
   }

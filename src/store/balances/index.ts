@@ -5,6 +5,7 @@ import { BalanceModel } from "../models";
 
 export const initialState: BalanceState = {
   isLoadingBalances: true,
+  balancesUpdatedAt: null,
   balances: {},
 };
 
@@ -24,6 +25,11 @@ export const { reducer, actions } = createSlice({
         },
         {} as any,
       );
+    },
+
+    setBalancesUpdateAt(state, action) {
+      if (!action.payload) return;
+      state.balancesUpdatedAt = action.payload;
     },
 
     clearBalances(state) {

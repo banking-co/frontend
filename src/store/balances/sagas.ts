@@ -9,6 +9,7 @@ export function* setBalancesWorker(action: GetBalancesEvent) {
 
   try {
     yield put(balancesActions.setBalances(action.data.balances));
+    yield put(balancesActions.setBalancesUpdateAt(Date.now()));
   } catch (e) {
     console.error("Connection socket error:", e);
   }

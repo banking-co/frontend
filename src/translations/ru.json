@@ -17,7 +17,7 @@
   },
   "name": "Rabotyaga",
   "navigation": {
-    "home": "Главная",
+    "home": "Банк",
     "menu": "Еще"
   },
   "balances": {
@@ -75,8 +75,8 @@
   "time": {
     "ago": {
       "now": "только что",
-      "seconds": ["секунду", "секунды", "секунд"],
-      "minutes": ["минуту", "минуты", "минут"],
+      "seconds": "секунду,секунды,секунд",
+      "minutes": "минуту,минуты,минут",
       "hours": {
         "accurate": "сегодня в {{hours}}",
         "one": "час",
@@ -102,6 +102,20 @@
     "rating": "рейтинге"
   },
   "menu" : {
+    "user": {
+      "title": "Профиль",
+      "description": "",
+      "inventory": "Инвентарь"
+    },
+    "store": {
+      "title": "Покупки",
+      "description": "",
+      "stocks": "Акции",
+      "store": "Обычный магазин",
+      "donate": "Премиум магазин",
+      "market": "Рынок",
+      "auction": "Аукцион"
+    },
     "wiki": {
       "title": "FAQ",
       "description": "Не знаешь что делать? Мы тебе поможет!",

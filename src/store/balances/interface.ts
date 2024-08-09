@@ -5,6 +5,7 @@ type BalanceWithId = { [key: number]: BalanceModel };
 
 export interface BalanceState {
   isLoadingBalances: boolean;
+  balancesUpdatedAt: number | null;
   balances: { [key: number]: BalanceWithId };
 }
 
