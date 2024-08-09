@@ -1,6 +1,6 @@
 import "./BalanceCard.sass";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "i18nano";
 import { formatCurrency } from "utils";
 import { useTimeAgo, useUser } from "hooks";
@@ -28,7 +28,11 @@ export const BalanceCard: BalanceCardProps = (props) => {
   const timeAgo = useTimeAgo();
   const user = useUser();
   const [currentBalance, setCurrentBalance] = useState<0 | 1 | 2>(0);
+  const [isAnimateBalance, setStartAnimateBalance] = useState(false);
+  const [isAnimateReloadBalance, setStartAnimateReloadBalance] =
+    useState(false);
   const { balances } = useSelector(balancesSelector);
+  const balanceAnimateDelay = 150;
 
   const userBalances = useMemo(
     () => (user?.id ? balances[user.id] : []),
@@ -58,6 +62,35 @@ export const BalanceCard: BalanceCardProps = (props) => {
     }
   }, [userBalances, currentBalance]);
 
+  const handleChangeBalance = useCallback(() => {
+    if (isAnimateBalance) return;
+    setStartAnimateBalance(true);
+    setTimeout(() => setStartAnimateBalance(false), balanceAnimateDelay);
+    setTimeout(
+      () =>
+        setCurrentBalance((value) => {
+          if (value >= 2) {
+            return 0;
+          }
+
+          return Number(value + 1) as 0 | 1 | 2;
+        }),
+      balanceAnimateDelay,
+    );
+  }, [isAnimateBalance, balanceAnimateDelay]);
+
+  const handleReloadBalance = useCallback(() => {
+    if (isAnimateReloadBalance) return;
+    setStartAnimateReloadBalance(true);
+    setTimeout(() => setCurrentBalance(0), balanceAnimateDelay);
+    setTimeout(() => setStartAnimateReloadBalance(false), 1000);
+    dispatch(
+      realtimeActions.sendMessage({
+        event: SocketEvent.GetBalances,
+      }),
+    );
+  }, [isAnimateReloadBalance, isAnimateBalance, balanceAnimateDelay]);
+
   return (
     <Position type="column" className="BalanceCard" gap={8}>
       <Position type="line" gap={4}>
@@ -65,24 +98,22 @@ export const BalanceCard: BalanceCardProps = (props) => {
           text={textBalances[userBalances[currentBalance].currency] || ""}
           tag={"span"}
           isAccent
-          onClick={() =>
-            setCurrentBalance((value) => {
-              if (value >= 2) {
-                return 0;
-              }
-
-              return Number(value + 1) as 0 | 1 | 2;
-            })
-          }
+          onClick={handleChangeBalance}
         />
         <Text text={t("balances.name")} tag={"span"} isMuted />
       </Position>
       <Position type="line" gap={8} alignItems={"center"}>
         <div
-          className={classNames("BalanceCard__currency", {
-            "BalanceCard__currency-diamond":
-              userBalances[currentBalance].currency === Currency.Donate,
-          })}
+          className={classNames(
+            "BalanceCard__currency",
+            "BalanceCard_animate",
+            {
+              "BalanceCard__currency-diamond":
+                userBalances[currentBalance].currency === Currency.Donate,
+              "BalanceCard_animate--hide": isAnimateBalance,
+              "BalanceCard_animate--open": !isAnimateBalance,
+            },
+          )}
         >
           {iconCurrency}
           <Text
@@ -91,16 +122,20 @@ export const BalanceCard: BalanceCardProps = (props) => {
           />
         </div>
         <Text
+          className={classNames("BalanceCard_animate", {
+            "BalanceCard_animate--hide": isAnimateBalance,
+            "BalanceCard_animate--open": !isAnimateBalance,
+          })}
           text={formatReloadDate}
           tag="span"
-          linkIcon={<IconReload />}
-          onClick={() => {
-            dispatch(
-              realtimeActions.sendMessage({
-                event: SocketEvent.StartApp,
-              }),
-            );
-          }}
+          linkIcon={
+            <IconReload
+              className={classNames({
+                "BalanceCard_animate-reload": isAnimateReloadBalance,
+              })}
+            />
+          }
+          onClick={handleReloadBalance}
           isLink
           reverse
           isMuted

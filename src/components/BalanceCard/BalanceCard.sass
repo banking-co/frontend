@@ -1,6 +1,19 @@
 .BalanceCard
   margin: 12px 0 24px
 
+  &_animate
+    transition: 0.2s
+
+    &-reload
+      transition: 1s
+      transform: rotate(360deg)
+
+    &--hide
+      opacity: 0
+
+    &--open
+      opacity: 1
+
   &__currency
     display: flex
     align-items: center

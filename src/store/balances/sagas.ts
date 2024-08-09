@@ -1,5 +1,19 @@
-import { all } from "redux-saga/effects";
+import { all, put } from "redux-saga/effects";
+import { balancesActions } from "./index";
+import { GetBalancesEvent } from "../realtime/websocket.interface";
 
-export function* usersSaga() {
+export function* setBalancesWorker(action: GetBalancesEvent) {
+  if (!action.data.balances || action.data.balances.length < 1) {
+    return;
+  }
+
+  try {
+    yield put(balancesActions.setBalances(action.data.balances));
+  } catch (e) {
+    console.error("Connection socket error:", e);
+  }
+}
+
+export function* balancesSaga() {
   yield all([]);
 }

@@ -4,6 +4,7 @@ import { BalanceModel } from "store/models";
 type BalanceWithId = { [key: number]: BalanceModel };
 
 export interface BalanceState {
+  isLoadingBalances: boolean;
   balances: { [key: number]: BalanceWithId };
 }
 

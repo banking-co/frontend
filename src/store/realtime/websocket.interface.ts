@@ -32,6 +32,13 @@ export interface StartAppEvent {
   };
 }
 
+export interface GetBalancesEvent {
+  event: SocketEvent.GetBalances;
+  data: {
+    balances?: Array<BalanceModel>;
+  };
+}
+
 export interface GetBusinessEvent {
   event: SocketEvent.GetBusiness;
   data: {
@@ -52,4 +59,5 @@ export type WebSocketListenerPayload =
   | DiscWebSocketEvent
   | GetBusinessEvent
   | GetPrimaryBusinessEvent
+  | GetBalancesEvent
   | ErrorEvent;

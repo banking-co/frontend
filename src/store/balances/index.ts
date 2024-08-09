@@ -4,6 +4,7 @@ import { BalanceState, SetUsersBalancesPayload } from "./interface";
 import { BalanceModel } from "../models";
 
 export const initialState: BalanceState = {
+  isLoadingBalances: true,
   balances: {},
 };
 

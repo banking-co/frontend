@@ -124,5 +124,6 @@ export enum SocketEvent {
   StartApp = "start_app",
   GetBusiness = "get_business",
   GetPrimaryBusiness = "get_pr_business",
+  GetBalances = "balance_get",
   Error = "error",
 }

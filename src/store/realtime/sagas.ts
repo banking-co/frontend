@@ -14,6 +14,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { SendMessagePayload } from "./realtime.interface";
 import { StartAppEvent, WebSocketListenerPayload } from "./websocket.interface";
 import { SocketEvent } from "../models";
+import { setBalancesWorker } from "../balances/sagas";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
@@ -105,6 +106,9 @@ function* listenSocketMessageWorker(
           break;
         case SocketEvent.StartApp:
           yield call(startAppWorker, { event, data });
+          break;
+        case SocketEvent.GetBalances:
+          yield call(setBalancesWorker, { event, data });
           break;
         case SocketEvent.GetBusiness:
           yield call(setBusinessWorker, { event, data });
