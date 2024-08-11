@@ -3,7 +3,7 @@ import "./Card.sass";
 import classNames from "classnames";
 import { useTranslation } from "i18nano";
 
-import { Text } from "uikit";
+import { Events, Text } from "uikit";
 import { CardChildren } from "./CardChildren/CardChildren";
 import { CardHeader } from "./CardHeader/CardHeader";
 
@@ -13,7 +13,8 @@ export const Card: CardProps = (props) => {
   const t = useTranslation();
 
   return (
-    <div
+    <Events
+      type={"div"}
       className={classNames({
         Card: true,
         "Card--shaped": !!props.isSquare,
@@ -44,6 +45,6 @@ export const Card: CardProps = (props) => {
         )}
       </div>
       {props.extra && <div className="Card__extra">{props.extra}</div>}
-    </div>
+    </Events>
   );
 };

@@ -5,6 +5,11 @@ export enum Theme {
   Light = "light",
 }
 
+export enum UserType {
+  Bot = 0,
+  User = 1,
+}
+
 export interface ExpModel {
   from: number;
   to: number;
@@ -47,6 +52,25 @@ export interface BusinessModel {
   deletedAt?: string;
 }
 
+export interface BusinessEmployeeModel {
+  id: number;
+  businessId: number;
+
+  userType: UserType;
+  roleName: string;
+  salary: number;
+
+  employerID: number;
+  workerID: number;
+
+  workerPersonalInfo: UserPersonalInfoModel;
+  employerPersonalInfo: UserPersonalInfoModel;
+
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
 export interface BonusModel {
   id: number;
   type: string;
@@ -59,31 +83,6 @@ export interface UserLevelModel {
   level: number;
   percentage: string;
   exp: ExpModel;
-}
-
-export enum NewsEventsModel {
-  Update = "update",
-  Important = "important",
-  Message = "message",
-  Congratulation = "congratulation",
-
-  PromoCode = "promo-code",
-  Rating = "rating",
-}
-
-export interface EventNewsModel {
-  type: NewsEventsModel;
-
-  title: string;
-  text: string;
-
-  promoActivatedCount?: number;
-  promoActiveCount?: number;
-  promoCode?: string;
-
-  createdAt?: number;
-  expiredAt?: number;
-  deletedAt?: number;
 }
 
 export enum Mode {

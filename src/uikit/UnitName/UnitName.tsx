@@ -1,11 +1,11 @@
 import "./UnitName.sass";
 
+import { useMemo } from "react";
 import { useUser } from "hooks";
 
 import { Text } from "uikit";
 
 import type { UnitNameProps } from "./UnitName.interface";
-import { useMemo } from "react";
 
 export const UnitName: UnitNameProps = (props) => {
   const user = useUser(props.userId);

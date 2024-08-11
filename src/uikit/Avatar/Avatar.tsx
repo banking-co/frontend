@@ -4,6 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 
 import type { AvatarProps } from "./Avatar.interface";
+import { IconRobot } from "@tabler/icons-react";
 
 // const images = new Map<string, string>();
 
@@ -45,24 +46,31 @@ export const Avatar: AvatarProps = (props) => {
 
   return (
     <div
-      className={classNames({
-        Avatar: true,
+      className={classNames("Avatar", {
+        "Avatar--bot": !!props.isBot,
+        "Avatar--rounded": !!props.isRounded,
+        "Avatar--square": !!props.isSquare,
+        [`Avatar_size--${props.size || "regular"}`]: true,
         [`${props.className}`]: !!props.className,
       })}
       style={props.style}
     >
-      <img
-        className={classNames({
-          Avatar__image: true,
-          "Avatar__image--error": loadingStatus === "error",
-          "Avatar__image--loading": loadingStatus === "loading",
-        })}
-        alt=""
-        loading={"eager"}
-        src={props.src}
-        onError={() => setLoadingStatus("error")}
-        onLoad={() => setLoadingStatus(undefined)}
-      />
+      {props.isBot ? (
+        <IconRobot color="var(--accent)" />
+      ) : (
+        <img
+          className={classNames({
+            Avatar__image: true,
+            "Avatar__image--error": loadingStatus === "error",
+            "Avatar__image--loading": loadingStatus === "loading",
+          })}
+          alt=""
+          loading={"eager"}
+          src={props.src}
+          onError={() => setLoadingStatus("error")}
+          onLoad={() => setLoadingStatus(undefined)}
+        />
+      )}
     </div>
   );
 };

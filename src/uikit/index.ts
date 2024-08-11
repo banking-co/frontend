@@ -22,3 +22,6 @@ export * from "./CurrencyIcon/CurrencyIcon";
 export * from "./StepByStep/StepByStep";
 export * from "./Switch/Switch";
 export * from "./AppUserFootnote/AppUserFootnote";
+export * from "./RichCell/RichCell";
+export * from "./Button/Button";
+export * from "./Events/Events";

@@ -5,6 +5,7 @@ export interface BusinessState {
   primaryBusiness: BusinessModel | null;
   businesses: { [key: number]: BusinessModel };
   businessesIdByUserID: { [key: number]: number };
+  businessEmployees?: BusinessModel[];
   isLoadingPrimaryBusiness: boolean;
 }
 

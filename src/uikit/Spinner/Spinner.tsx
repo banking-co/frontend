@@ -12,8 +12,8 @@ export const Spinner: SpinnerProps = ({
     <div
       className={classNames({
         Spinner: true,
-        [`Spinner__size--${size}`]: !!size,
-        [`Spinner__color--${color}`]: !!color,
+        [`Spinner_size--${size}`]: !!size,
+        [`Spinner_color--${color}`]: !!color,
       })}
     >
       <svg fill="currentColor" viewBox="0 0 50 50">

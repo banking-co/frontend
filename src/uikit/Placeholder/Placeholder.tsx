@@ -24,6 +24,7 @@ export const Placeholder: PlaceholderProps = (props) => {
         )}
         {props.children}
       </div>
+      {props.bottom}
     </div>
   );
 };

@@ -1,4 +1,9 @@
 {
+  "name": "Rabotyaga",
+  "navigation": {
+    "home": "Банк",
+    "menu": "Еще"
+  },
   "loading": {
     "steps": {
       "connect": {
@@ -14,11 +19,6 @@
         "text": "Загружаем интерфейс!"
       }
     }
-  },
-  "name": "Rabotyaga",
-  "navigation": {
-    "home": "Банк",
-    "menu": "Еще"
   },
   "balances": {
     "primary": "Валютный",
@@ -174,7 +174,17 @@
       "list": "Список",
       "recruit": "Поиск",
       "salary": "Зарплаты",
-      "dismiss": "Уволить"
+      "dismiss": "Уволить",
+      "page": {
+        "list": {
+          "title": "Сотрудники",
+          "undefined": {
+            "title": "У вас нет сотрудников",
+            "subtitle": "Найм сотрудников доступен в управлении банком!",
+            "goto": "Нанять!"
+          }
+        }
+      }
     },
     "boost": {
       "title": "Улучшить",
@@ -194,5 +204,9 @@
       "how_start": "Как управлять банком?",
       "how_start_make_money": "Как заработать деньги?"
     }
+  },
+  "user": {
+    "bot": "Бот",
+    "user": "Пользователь"
   }
 }

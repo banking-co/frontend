@@ -27,18 +27,10 @@ export const Management: ManagementProps = () => {
     }
   }, [user]);
 
-  if (isLoadingPrimaryBusiness || !primaryBusiness) {
+  if (isLoadingPrimaryBusiness && !primaryBusiness) {
     return (
       <Placeholder isFullPage isCenter>
         <Spinner />
-      </Placeholder>
-    );
-  }
-
-  if (!primaryBusiness) {
-    return (
-      <Placeholder isFullPage isCenter>
-        Business Not Loaded
       </Placeholder>
     );
   }
@@ -56,10 +48,10 @@ export const Management: ManagementProps = () => {
               type: "pagination",
               icon: itemsIcons[subKey],
               title:
-                key === "bank" && subKey === "info" && primaryBusiness.name
+                key === "bank" && subKey === "info" && primaryBusiness?.name
                   ? primaryBusiness.name
                   : t(`management.${key}.${subKey}`),
-              to: `/${key}/${subKey}`,
+              to: `/management/${key}/${subKey}`,
             }))}
           />
         </Grid>
