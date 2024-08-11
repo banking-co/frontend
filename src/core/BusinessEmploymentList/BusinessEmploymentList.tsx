@@ -1,5 +1,6 @@
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "i18nano";
-import { useSelector } from "react-redux";
 import { formatCurrency } from "utils";
 
 import {
@@ -9,19 +10,24 @@ import {
   Placeholder,
   Position,
   RichCell,
+  Spinner,
   Text,
 } from "uikit";
 
 import { businessSelector } from "store/business";
+import { realtimeActions } from "store/realtime";
 
-import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
-import { useMemo } from "react";
 import { IconUsers } from "@tabler/icons-react";
+
+import { SocketEvent } from "store/models";
+import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
 
 export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const tKey = "management.employment.page";
   const t = useTranslation();
-  const { primaryBusiness, businessEmployees } = useSelector(businessSelector);
+  const d = useDispatch();
+  const { primaryBusiness, businessEmployees, isLoadingBusinessStaff } =
+    useSelector(businessSelector);
 
   const staffs = useMemo(() => {
     if (
@@ -35,7 +41,28 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
     return businessEmployees[primaryBusiness.id];
   }, [primaryBusiness, businessEmployees]);
 
-  if (!staffs) {
+  useEffect(() => {
+    if (primaryBusiness) {
+      d(
+        realtimeActions.sendMessage({
+          event: SocketEvent.GetBusinessStaff,
+          data: {
+            businessId: primaryBusiness?.id,
+          },
+        }),
+      );
+    }
+  }, [primaryBusiness]);
+
+  if (isLoadingBusinessStaff || !primaryBusiness || !staffs) {
+    return (
+      <Placeholder isCenter isFullPage>
+        <Spinner />
+      </Placeholder>
+    );
+  }
+
+  if (staffs && staffs.length < 1) {
     return (
       <Placeholder
         icon={<IconUsers color="var(--accent)" />}

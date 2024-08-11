@@ -121,8 +121,12 @@ export enum SocketEvent {
   ConnWebSocket = "conn_websocket",
   DiscWebSocket = "disc_websocket",
   StartApp = "start_app",
+
+  GetBalances = "balance_get",
+
   GetBusiness = "get_business",
   GetPrimaryBusiness = "get_pr_business",
-  GetBalances = "balance_get",
+  GetBusinessStaff = "get_st_business",
+
   Error = "error",
 }

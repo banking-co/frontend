@@ -13,6 +13,7 @@ export const initialState: BusinessState = {
   businessesIdByUserID: {},
 
   isLoadingPrimaryBusiness: true,
+  isLoadingBusinessStaff: true,
 };
 
 export const { reducer, actions } = createSlice({
