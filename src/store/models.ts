@@ -57,7 +57,7 @@ export interface BusinessEmployeeModel {
   businessId: number;
 
   userType: UserType;
-  roleName: string;
+  roleId: string;
   salary: number;
 
   employerID: number;
