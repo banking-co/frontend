@@ -122,6 +122,9 @@ export enum SocketEvent {
   DiscWebSocket = "disc_websocket",
   StartApp = "start_app",
 
+  Ping = "ping",
+  Pong = "pong",
+
   GetBalances = "balance_get",
 
   GetBusiness = "get_business",
