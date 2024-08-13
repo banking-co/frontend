@@ -1,6 +1,6 @@
 import "./ListItem.sass";
 
-import { Text, Switch as SwitchComponent } from "uikit";
+import { Text, Switch as SwitchComponent, Events } from "uikit";
 
 import { IconChevronRight } from "@tabler/icons-react";
 
@@ -12,13 +12,13 @@ import type {
 
 const Component: ListItemProps = (props) => {
   return (
-    <div className="ListItem" onClick={props.onClick}>
+    <Events type="div" className="ListItem" onClick={props.onClick}>
       <div className="ListItem__container">
         {props.icon}
         <Text text={props.title} tag="p" />
       </div>
       {props.after}
-    </div>
+    </Events>
   );
 };
 
