@@ -1,4 +1,4 @@
-import { all, call, fork, take, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, take, takeLatest } from "redux-saga/effects";
 import { EventChannel, eventChannel } from "redux-saga";
 import { apiUrl } from "api";
 import { vkSign } from "utils";
@@ -34,15 +34,15 @@ function createWebSocketListener(socket: WebSocket) {
   });
 }
 
-function* messageEventsWorker(action: EventChannel<WebSocket>) {
+function* messageEventsWorker(socketChannel: EventChannel<WebSocket>) {
   while (true) {
-    const payload: object | string = yield take(action);
-    if (!payload) continue;
+    const socket: object | string = yield take(socketChannel);
+    if (!socket) continue;
 
     let { event, data } =
-      typeof payload === "string"
-        ? JSON.parse(payload)
-        : (payload as WebSocketListenerPayload);
+      typeof socket === "string"
+        ? JSON.parse(socket)
+        : (socket as WebSocketListenerPayload);
 
     if (!event) continue;
     console.log(event, data);
@@ -66,6 +66,8 @@ function* messageEventsWorker(action: EventChannel<WebSocket>) {
             break;
           case SocketEvent.ConnWebSocket:
             yield call(connSocketWorker);
+            break;
+          case SocketEvent.Pong:
             break;
           case SocketEvent.DiscWebSocket:
           default:

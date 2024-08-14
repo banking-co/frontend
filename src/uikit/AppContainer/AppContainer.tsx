@@ -1,16 +1,20 @@
 import "./AppContainer.sass";
 
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 
-import { AppHeader, BottomNavbar } from "uikit";
+import { AppHeader, BottomNavbar, Placeholder, Spinner } from "uikit";
+
+import { realtimeSelector } from "store/realtime";
 
 import type { AppContainerProps } from "./AppContainer.interface";
 
 export const AppContainer: AppContainerProps = (props) => {
   const location = useLocation();
   const [showBackButton, setShowBackButton] = useState(false);
+  const { isLoggedIn, isConnected } = useSelector(realtimeSelector);
 
   useEffect(() => {
     const path = location.pathname;
@@ -20,6 +24,14 @@ export const AppContainer: AppContainerProps = (props) => {
       setShowBackButton(false);
     }
   }, [location.pathname]);
+
+  if (isLoggedIn && !isConnected) {
+    return (
+      <Placeholder isFullPage isCenter>
+        <Spinner />
+      </Placeholder>
+    );
+  }
 
   return (
     <div

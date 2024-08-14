@@ -23,6 +23,11 @@ export interface ErrorEvent {
   };
 }
 
+export interface PongEvent {
+  event: SocketEvent.Pong;
+  data: {};
+}
+
 export interface StartAppEvent {
   event: SocketEvent.StartApp;
   data: {
@@ -60,4 +65,5 @@ export type WebSocketListenerPayload =
   | GetBusinessEvent
   | GetPrimaryBusinessEvent
   | GetBalancesEvent
-  | ErrorEvent;
+  | ErrorEvent
+  | PongEvent;

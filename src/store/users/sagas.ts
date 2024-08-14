@@ -49,7 +49,6 @@ export function* connSocketWorker() {
 export function* discSocketWorker() {
   try {
     yield put(realtimeActions.setConnectionStatus(false));
-    yield put(realtimeActions.setLoggedIn(false));
   } catch (e) {
     console.error("Disconnect socket error:", e);
   }
