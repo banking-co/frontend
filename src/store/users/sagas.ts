@@ -1,8 +1,19 @@
-import { all, put } from "redux-saga/effects";
+import { END, eventChannel, EventChannel } from "redux-saga";
+import {
+  all,
+  put,
+  take,
+  race,
+  delay,
+  call,
+  takeEvery,
+} from "redux-saga/effects";
 
 import { usersActions } from "./index";
 import { realtimeActions } from "../realtime";
 import { balancesActions } from "../balances";
+
+import { connectSocketWorker } from "../realtime/sagas";
 
 import { SocketEvent } from "../models";
 import type { StartAppEvent } from "../realtime/websocket.interface";
@@ -43,16 +54,46 @@ export function* discSocketWorker() {
   }
 }
 
-export function* pingSocketWorker() {
+function createPingChannel() {
+  return eventChannel((emitter) => {
+    const intervalId = setInterval(() => {
+      emitter("PING");
+    }, 10000);
+
+    return () => {
+      clearInterval(intervalId);
+      emitter(END);
+    };
+  });
+}
+
+function* reconnectSocketWorker(socket: WebSocket) {
   try {
-    yield put(
-      realtimeActions.sendMessage({
-        event: SocketEvent.Ping,
-      }),
-    );
+    yield delay(5000);
+    yield connectSocketWorker();
   } catch (e) {
-    console.error("Disconnect socket error:", e);
+    console.error("Reconnect error:", e);
   }
+}
+
+export function* pingSocketWorker(
+  socketChannel: EventChannel<WebSocket>,
+): unknown {
+  const pingChannel = yield call(createPingChannel);
+
+  yield takeEvery(pingChannel, function* (ping) {
+    const { messageReceived } = yield race({
+      messageReceived: take(socketChannel),
+      timeout: delay(10000),
+    });
+
+    if (!messageReceived) {
+      console.log("pong");
+      yield put(realtimeActions.sendMessage({ event: SocketEvent.Ping }));
+    } else {
+      console.log("err");
+    }
+  });
 }
 
 export function* usersSaga() {

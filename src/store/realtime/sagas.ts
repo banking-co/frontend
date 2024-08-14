@@ -9,6 +9,7 @@ import {
   discSocketWorker,
   connSocketWorker,
   startAppWorker,
+  pingSocketWorker,
 } from "../users/sagas";
 import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
 import { appErrorWorker } from "../app/sagas";
@@ -44,6 +45,7 @@ function* messageEventsWorker(action: EventChannel<WebSocket>) {
         : (payload as WebSocketListenerPayload);
 
     if (!event) continue;
+    console.log(event, data);
     try {
       if (event) {
         switch (event) {
@@ -100,7 +102,7 @@ function* sendMessageSocketWorker(socket: WebSocket): unknown {
   );
 }
 
-function* connectSocketWorker(): unknown {
+export function* connectSocketWorker(): unknown {
   try {
     const localStorageSign = localStorage.getItem("app-dev-sign");
     const sign = localStorageSign || vkSign();
@@ -118,6 +120,8 @@ function* connectSocketWorker(): unknown {
       fork(sendMessageSocketWorker, serviceWebSocket),
       fork(disconnectSocketWorker, serviceWebSocket),
     ]);
+
+    yield fork(pingSocketWorker, socket);
   } catch (e) {
     console.error("WebSocket connection error:", e);
   }
