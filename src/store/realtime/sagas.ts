@@ -1,5 +1,5 @@
 import { all, call, fork, put, take, takeLatest } from "redux-saga/effects";
-import { eventChannel } from "redux-saga";
+import { EventChannel, eventChannel } from "redux-saga";
 import { apiUrl } from "api";
 import { vkSign } from "utils";
 
@@ -66,69 +66,58 @@ function* discSocketWorker() {
   }
 }
 
-function* connectSocketWorker(): unknown {
-  try {
-    const localStorageSign = localStorage.getItem("app-dev-sign");
-    const sign = localStorageSign || vkSign();
+function* messageEventsWorker(action: EventChannel<WebSocket>) {
+  while (true) {
+    const payload: object | string = yield take(action);
+    if (!payload) continue;
 
-    if (!sign || sign?.includes("sign=undefined")) return;
+    let { event, data } =
+      typeof payload === "string"
+        ? JSON.parse(payload)
+        : (payload as WebSocketListenerPayload);
 
-    const serviceWebSocket = new WebSocket(`${apiUrl}?${sign}`);
-    const socket = yield call(createWebSocketListener, serviceWebSocket);
-
-    yield fork(sendMessageSocketWorker, serviceWebSocket);
-    yield fork(disconnectSocketWorker, serviceWebSocket);
-
-    while (true) {
-      const payload: object | string = yield take(socket);
-      yield put(
-        realtimeActions.listenMessage(
-          typeof payload === "string" ? JSON.parse(payload) : payload,
-        ),
-      );
+    if (!event) continue;
+    try {
+      if (event) {
+        switch (event) {
+          case SocketEvent.Error:
+            yield call(appErrorWorker, { event, data });
+            break;
+          case SocketEvent.StartApp:
+            yield call(startAppWorker, { event, data });
+            break;
+          case SocketEvent.GetBalances:
+            yield call(setBalancesWorker, { event, data });
+            break;
+          case SocketEvent.GetBusiness:
+            yield call(setBusinessWorker, { event, data });
+            break;
+          case SocketEvent.GetPrimaryBusiness:
+            yield call(setPrimaryBusinessWorker, { event, data });
+            break;
+          case SocketEvent.ConnWebSocket:
+            yield call(connSocketWorker);
+            break;
+          case SocketEvent.DiscWebSocket:
+          default:
+            yield call(discSocketWorker);
+            break;
+        }
+      }
+    } catch (e) {
+      console.error("WebSocket listener error:", e);
     }
-  } catch (e) {
-    console.error("WebSocket connection error:", e);
   }
 }
 
-function* listenSocketMessageWorker(
-  action: PayloadAction<undefined | WebSocketListenerPayload>,
-) {
-  if (!action.payload) return;
-
-  const { event, data } = action.payload;
-
-  try {
-    if (event) {
-      switch (event) {
-        case SocketEvent.Error:
-          yield call(appErrorWorker, { event, data });
-          break;
-        case SocketEvent.StartApp:
-          yield call(startAppWorker, { event, data });
-          break;
-        case SocketEvent.GetBalances:
-          yield call(setBalancesWorker, { event, data });
-          break;
-        case SocketEvent.GetBusiness:
-          yield call(setBusinessWorker, { event, data });
-          break;
-        case SocketEvent.GetPrimaryBusiness:
-          yield call(setPrimaryBusinessWorker, { event, data });
-          break;
-        case SocketEvent.ConnWebSocket:
-          yield call(connSocketWorker);
-          break;
-        case SocketEvent.DiscWebSocket:
-        default:
-          yield call(discSocketWorker);
-          break;
-      }
+function* disconnectSocketWorker(socket: WebSocket) {
+  yield takeLatest(realtimeActions.disconnect, function* () {
+    try {
+      socket.close(401);
+    } catch (e) {
+      console.error("WebSocket disconnect error:", e);
     }
-  } catch (e) {
-    console.error("WebSocket listener error:", e);
-  }
+  });
 }
 
 function* sendMessageSocketWorker(socket: WebSocket): unknown {
@@ -144,19 +133,29 @@ function* sendMessageSocketWorker(socket: WebSocket): unknown {
   );
 }
 
-function* disconnectSocketWorker(socket: WebSocket) {
-  yield takeLatest(realtimeActions.disconnect, function* () {
-    try {
-      socket.close(401);
-    } catch (e) {
-      console.error("WebSocket disconnect error:", e);
-    }
-  });
+function* connectSocketWorker(): unknown {
+  try {
+    const localStorageSign = localStorage.getItem("app-dev-sign");
+    const sign = localStorageSign || vkSign();
+
+    if (!sign || sign?.includes("sign=undefined")) return;
+
+    const serviceWebSocket: WebSocket = new WebSocket(`${apiUrl}?${sign}`);
+    const socket: EventChannel<WebSocket> = yield call(
+      createWebSocketListener,
+      serviceWebSocket,
+    );
+
+    yield all([
+      fork(messageEventsWorker, socket),
+      fork(sendMessageSocketWorker, serviceWebSocket),
+      fork(disconnectSocketWorker, serviceWebSocket),
+    ]);
+  } catch (e) {
+    console.error("WebSocket connection error:", e);
+  }
 }
 
 export function* realtimeSaga() {
-  yield all([
-    takeLatest(realtimeActions.connection, connectSocketWorker),
-    takeLatest(realtimeActions.listenMessage, listenSocketMessageWorker),
-  ]);
+  yield all([takeLatest(realtimeActions.connection, connectSocketWorker)]);
 }

@@ -19,7 +19,6 @@ export const { reducer, actions } = createSlice({
       st.isConnected = false;
     },
 
-    listenMessage(_st, _ac) {},
     sendMessage(_st, _ac: PayloadAction<SendMessagePayload>) {},
 
     disconnect(st) {
