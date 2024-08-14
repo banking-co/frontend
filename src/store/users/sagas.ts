@@ -7,6 +7,7 @@ import {
   delay,
   call,
   takeEvery,
+  fork,
 } from "redux-saga/effects";
 
 import { usersActions } from "./index";
@@ -67,7 +68,7 @@ function createPingChannel() {
   });
 }
 
-function* reconnectSocketWorker(socket: WebSocket) {
+function* reconnectSocketWorker() {
   try {
     yield delay(5000);
     yield connectSocketWorker();
@@ -81,17 +82,14 @@ export function* pingSocketWorker(
 ): unknown {
   const pingChannel = yield call(createPingChannel);
 
-  yield takeEvery(pingChannel, function* (ping) {
+  yield takeEvery(pingChannel, function* () {
     const { messageReceived } = yield race({
       messageReceived: take(socketChannel),
       timeout: delay(10000),
     });
 
     if (!messageReceived) {
-      console.log("pong");
       yield put(realtimeActions.sendMessage({ event: SocketEvent.Ping }));
-    } else {
-      console.log("err");
     }
   });
 }
