@@ -1,20 +1,23 @@
-import { all, call, fork, put, take, takeLatest } from "redux-saga/effects";
+import { all, call, fork, take, takeLatest } from "redux-saga/effects";
 import { EventChannel, eventChannel } from "redux-saga";
 import { apiUrl } from "api";
 import { vkSign } from "utils";
 
 import { realtimeActions } from "./index";
 
-import { usersActions } from "../users";
-import { balancesActions } from "../balances";
+import {
+  discSocketWorker,
+  connSocketWorker,
+  startAppWorker,
+} from "../users/sagas";
 import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
 import { appErrorWorker } from "../app/sagas";
-
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { SendMessagePayload } from "./realtime.interface";
-import { StartAppEvent, WebSocketListenerPayload } from "./websocket.interface";
-import { SocketEvent } from "../models";
 import { setBalancesWorker } from "../balances/sagas";
+
+import { SocketEvent } from "../models";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { SendMessagePayload } from "./realtime.interface";
+import type { WebSocketListenerPayload } from "./websocket.interface";
 
 function createWebSocketListener(socket: WebSocket) {
   return eventChannel((emitter) => {
@@ -28,42 +31,6 @@ function createWebSocketListener(socket: WebSocket) {
 
     return () => socket.close();
   });
-}
-
-function* startAppWorker(action: StartAppEvent) {
-  try {
-    if (action.data.bans && action.data.bans.length >= 1) return;
-    yield put(realtimeActions.setLoggedIn(true));
-    yield put(usersActions.setUser(action.data.user));
-    yield put(usersActions.setPrimaryUser(action.data.user));
-    yield put(balancesActions.setBalances(action.data.balances));
-    yield put(balancesActions.setBalancesUpdateAt(Date.now().valueOf()));
-  } catch (e) {
-    console.error("Start app set error:", e);
-  }
-}
-
-function* connSocketWorker() {
-  try {
-    yield put(realtimeActions.setConnectionStatus(true));
-    yield put(
-      realtimeActions.sendMessage({
-        event: SocketEvent.StartApp,
-        data: null,
-      }),
-    );
-  } catch (e) {
-    console.error("Connection socket error:", e);
-  }
-}
-
-function* discSocketWorker() {
-  try {
-    yield put(realtimeActions.setConnectionStatus(false));
-    yield put(realtimeActions.setLoggedIn(false));
-  } catch (e) {
-    console.error("Disconnect socket error:", e);
-  }
 }
 
 function* messageEventsWorker(action: EventChannel<WebSocket>) {
