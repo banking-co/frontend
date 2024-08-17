@@ -20,7 +20,7 @@ const createSocketMiddleware =
 
     switch (type) {
       case realtimeActions.connection.type:
-        socket.connect();
+        socket.connect(dispatch);
 
         socket.on(SocketEvent.Open, () => {
           dispatch(realtimeActions.setConnectionStatus(true));
@@ -59,6 +59,7 @@ const createSocketMiddleware =
         break;
 
       case realtimeActions.disconnect.type:
+        console.log("disconnect with middleware");
         socket.disconnect();
         break;
 

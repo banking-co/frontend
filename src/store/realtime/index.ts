@@ -16,9 +16,7 @@ export const { reducer, actions } = createSlice({
   name: "realtime",
   initialState,
   reducers: {
-    connection(st) {
-      st.isConnected = false;
-    },
+    connection() {},
 
     listenMessage(_st, _ac: PayloadAction<WebSocketListenerPayload>) {},
 
@@ -27,7 +25,6 @@ export const { reducer, actions } = createSlice({
     disconnect(st) {
       st.isConnected = false;
       st.isLoggedIn = false;
-      // st.
     },
 
     setConnectionStatus(st, ac: SetConnectionStatusPayload) {

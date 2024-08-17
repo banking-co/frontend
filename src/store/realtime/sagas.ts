@@ -38,6 +38,7 @@ function* listenSocketMessageWorker(
   try {
     switch (event) {
       case SocketEvent.Pong:
+        yield put(realtimeActions.setConnectionStatus(true));
         break;
 
       case SocketEvent.Error:
@@ -45,7 +46,6 @@ function* listenSocketMessageWorker(
         break;
 
       case SocketEvent.StartApp:
-        console.log("start_app");
         yield call(startAppWorker, { event, data });
         break;
 
