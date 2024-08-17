@@ -7,5 +7,6 @@ export * from "./Menu/Menu";
 
 export * from "./Management/Management";
 export * from "./BusinessEmploymentList/BusinessEmploymentList";
+export * from "./BusinessEmploymentRecruit/BusinessEmploymentRecruit";
 
 export * from "./Settings/Settings";

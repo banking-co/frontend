@@ -6,6 +6,7 @@ import {
   Menu,
   Management,
   BusinessEmploymentList,
+  BusinessEmploymentRecruit,
 } from "core";
 import { RouteObject } from "react-router-dom";
 
@@ -34,6 +35,10 @@ const routes: RouteObject[] = [
       {
         path: "/management/employment/list",
         element: <BusinessEmploymentList />,
+      },
+      {
+        path: "/management/employment/recruit",
+        element: <BusinessEmploymentRecruit />,
       },
 
       {
