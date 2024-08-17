@@ -33,7 +33,7 @@ export const Events: EventsProps = ({
   };
 
   const onClickDelay = (e: any) => {
-    if (!active) {
+    if (!active && !disabled) {
       if (onClick) {
         setTimeout(() => onClick(e), animateDelay);
       }

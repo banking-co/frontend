@@ -14,11 +14,11 @@ export const Card: CardProps = (props) => {
 
   return (
     <Events
+      disabled={props.disable}
       type={"div"}
       className={classNames({
         Card: true,
         "Card--shaped": !!props.isSquare,
-        "Card--disabled": !!props.disable,
         "Card--clickable": !!props.onClick,
         [`${props.className}`]: !!props.className,
       })}

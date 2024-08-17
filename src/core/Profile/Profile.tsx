@@ -71,6 +71,7 @@ export const Profile: ProfileProps = () => {
           <Text text={t("bank.card.management.subtitle")} tag="span" isMuted />
         </Card>
         <Card
+          disable
           className={"Profile__bank-cards"}
           title={t("bank.card.upgrades.title")}
           titleWrap
