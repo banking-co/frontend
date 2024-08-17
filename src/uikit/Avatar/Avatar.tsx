@@ -3,8 +3,9 @@ import "./Avatar.sass";
 import { useState } from "react";
 import classNames from "classnames";
 
-import type { AvatarProps } from "./Avatar.interface";
 import { IconRobot, IconUser } from "@tabler/icons-react";
+
+import type { AvatarProps } from "./Avatar.interface";
 
 export const Avatar: AvatarProps = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
