@@ -16,6 +16,7 @@ function* startAppWorker(action: StartAppEvent) {
   try {
     if (action.data.bans && action.data.bans.length >= 1) return;
     yield put(realtimeActions.setLoggedIn(true));
+    yield put(realtimeActions.setConnectionStatus(true));
     yield put(usersActions.setUser(action.data.user));
     yield put(usersActions.setPrimaryUser(action.data.user));
     yield put(balancesActions.setBalances(action.data.balances));
@@ -44,6 +45,7 @@ function* listenSocketMessageWorker(
         break;
 
       case SocketEvent.StartApp:
+        console.log("start_app");
         yield call(startAppWorker, { event, data });
         break;
 
