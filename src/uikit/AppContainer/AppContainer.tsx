@@ -25,7 +25,7 @@ export const AppContainer: AppContainerProps = (props) => {
     }
   }, [location.pathname]);
 
-  if (isLoggedIn && !isConnected) {
+  if (!isConnected && isLoggedIn) {
     return (
       <Placeholder isFullPage isCenter>
         <Spinner />

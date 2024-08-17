@@ -32,6 +32,10 @@ const createSocketMiddleware =
         });
 
         socket.on(SocketEvent.Close, () => {
+          dispatch(realtimeActions.setConnectionStatus(false));
+        });
+
+        socket.on(SocketEvent.Error, () => {
           dispatch(realtimeActions.disconnect());
         });
 
