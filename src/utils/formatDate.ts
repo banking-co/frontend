@@ -6,7 +6,7 @@ interface FormatDateParams {
 }
 
 export const formatDate = (
-  date: number | undefined,
+  date: number | string | undefined,
   params?: FormatDateParams,
 ) => {
   if (date === 0 || !date || date.toString()?.length <= 1) {
@@ -18,7 +18,7 @@ export const formatDate = (
   }
 
   return format(
-    new Date(date * 1000),
+    new Date(typeof date === "string" ? date : date * 1000),
     params?.dateFormat || "HH:mm, dd.MM.yyyy",
   );
 };

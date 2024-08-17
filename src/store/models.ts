@@ -118,6 +118,10 @@ export enum Platform {
 }
 
 export enum SocketEvent {
+  Open = "open",
+  Close = "close",
+  Message = "message",
+
   ConnWebSocket = "conn_websocket",
   DiscWebSocket = "disc_websocket",
   StartApp = "start_app",

@@ -8,6 +8,7 @@ import { AppLoading } from "../AppLoading/AppLoading";
 import { realtimeActions } from "store/realtime";
 
 import type { AppProps } from "./App.interface";
+import { SocketEvent } from "../../store/models";
 
 export const App: AppProps = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,25 @@ export const App: AppProps = () => {
 
   useEffect(() => {
     dispatch(realtimeActions.connection());
+  }, []);
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      const date = new Date(Date.now());
+
+      dispatch(
+        realtimeActions.sendMessage({
+          event: SocketEvent.Ping,
+          data: {
+            timestamp: date,
+          },
+        }),
+      );
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (

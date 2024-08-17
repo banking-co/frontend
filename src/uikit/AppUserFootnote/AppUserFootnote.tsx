@@ -3,11 +3,11 @@ import "./AppUserFootnote.sass";
 import { UnitName } from "uikit";
 
 import type { AppUserFootnoteProps } from "./AppUserFootnote.interface";
-import { useUser } from "hooks";
+import { useGetUser } from "hooks";
 import { IconUser } from "@tabler/icons-react";
 
 export const AppUserFootnote: AppUserFootnoteProps = () => {
-  const user = useUser();
+  const user = useGetUser();
 
   if (!user) {
     return null;

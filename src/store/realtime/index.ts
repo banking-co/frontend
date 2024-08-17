@@ -4,7 +4,8 @@ import {
   RealtimeState,
   SendMessagePayload,
   SetConnectionStatusPayload,
-} from "./realtime.interface";
+  WebSocketListenerPayload,
+} from "./interface";
 
 export const initialState: RealtimeState = {
   isConnected: false,
@@ -19,10 +20,13 @@ export const { reducer, actions } = createSlice({
       st.isConnected = false;
     },
 
+    listenMessage(_st, _ac: PayloadAction<WebSocketListenerPayload>) {},
+
     sendMessage(_st, _ac: PayloadAction<SendMessagePayload>) {},
 
     disconnect(st) {
       st.isConnected = false;
+      st.isLoggedIn = false;
     },
 
     setConnectionStatus(st, ac: SetConnectionStatusPayload) {

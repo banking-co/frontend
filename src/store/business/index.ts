@@ -30,7 +30,7 @@ export const { reducer, actions } = createSlice({
       action.payload.forEach((b) => {
         if (!b || !b.id || !b.userId) return;
         state.businesses[b.id] = b;
-        state.businessesIdByUserID[b.id] = b.userId;
+        state.businessesIdByUserID[b.userId] = b.id;
       });
     },
     setBusiness(state, action: SetBusinessPayload) {

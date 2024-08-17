@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "i18nano";
 import { useTimeAgo } from "hooks";
 import { useSelector } from "react-redux";
@@ -18,12 +18,17 @@ export const RefreshButton: RefreshButtonProps = (props) => {
   const [isAnimateReloadBalance, setStartAnimateReloadBalance] =
     useState(false);
   const { balancesUpdatedAt } = useSelector(balancesSelector);
-  const [trigger, setTrigger] = useState(Date.now());
+  const [formattedDate, setFormattedDate] = useState(
+    !!balancesUpdatedAt ? timeAgo(balancesUpdatedAt) : t("time.ago.now"),
+  );
 
-  const formatReloadDate = useMemo(() => {
-    if (!balancesUpdatedAt) return t("time.ago.now");
-    return timeAgo(new Date(balancesUpdatedAt).getTime());
-  }, [balancesUpdatedAt, trigger]);
+  const formatDate = () => {
+    const date = !!balancesUpdatedAt && timeAgo(balancesUpdatedAt);
+
+    if (date && formattedDate !== date) {
+      setFormattedDate(date);
+    }
+  };
 
   const handleAnimate = useCallback(() => {
     if (isAnimateReloadBalance) return;
@@ -34,16 +39,16 @@ export const RefreshButton: RefreshButtonProps = (props) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTrigger(Date.now());
-    }, 60 * 1000);
+      formatDate();
+    }, 250);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [balancesUpdatedAt]);
 
   return (
     <Text
       className={props.className}
-      text={formatReloadDate}
+      text={formattedDate}
       tag="span"
       linkIcon={
         <IconReload

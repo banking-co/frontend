@@ -9,3 +9,4 @@ export * from "./getDevice";
 export * from "./dataset";
 export * from "./queueExecute";
 export * from "./vkSign";
+export * from "./shrinkUserName";

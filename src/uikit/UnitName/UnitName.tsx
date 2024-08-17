@@ -1,26 +1,20 @@
 import "./UnitName.sass";
 
 import { useMemo } from "react";
-import { useUser } from "hooks";
+import { useGetUser } from "hooks";
 
 import { Text } from "uikit";
 
 import type { UnitNameProps } from "./UnitName.interface";
+import { shrinkUserName } from "utils";
 
 export const UnitName: UnitNameProps = (props) => {
-  const user = useUser(props.userId);
-
-  const userLastName = useMemo(() => {
-    if (!user || !user?.personalInfo || !user.personalInfo.lastName) {
-      return "";
-    }
-
-    if (props.isShortLastName && user.personalInfo.lastName[0]) {
-      return user.personalInfo.lastName[0] + ".";
-    }
-
-    return user.personalInfo.lastName;
-  }, [props.isShortLastName, user]);
+  const getUser = useGetUser();
+  const user = useMemo(() => getUser(props.userId), [props.userId]);
+  const userLastName = useMemo(
+    () => shrinkUserName(user, true),
+    [props.isShortLastName, user],
+  );
 
   if (!user || !user.personalInfo) {
     return null;
@@ -28,7 +22,6 @@ export const UnitName: UnitNameProps = (props) => {
 
   return (
     <div className="UnitName">
-      <Text text={user.personalInfo.firstName} tag={props.tagName || "p"} />
       <Text text={userLastName} tag={props.tagName || "p"} />
       {props.visibleUserId && (
         <Text

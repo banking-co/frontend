@@ -3,7 +3,7 @@ import "./BalanceCard.sass";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "i18nano";
 import { formatCurrency } from "utils";
-import { useUser } from "hooks";
+import { useGetUser } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
@@ -25,12 +25,13 @@ import type { BalanceCardProps } from "./BalanceCard.interface";
 export const BalanceCard: BalanceCardProps = (props) => {
   const t = useTranslation();
   const dispatch = useDispatch();
-  const user = useUser();
+  const getUser = useGetUser();
   const [currentBalance, setCurrentBalance] = useState<0 | 1 | 2>(0);
   const [isAnimateBalance, setStartAnimateBalance] = useState(false);
   const { balances } = useSelector(balancesSelector);
   const balanceAnimateDelay = 150;
 
+  const user = useMemo(() => getUser(), []);
   const userBalances = useMemo(
     () => (user?.id ? balances[user.id] : []),
     [balances, user],

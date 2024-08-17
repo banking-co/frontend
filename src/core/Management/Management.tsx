@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "i18nano";
-import { useUser } from "hooks";
+import { useGetUser } from "hooks";
 
 import { Grid, List, Placeholder, Position, Spinner } from "uikit";
 
@@ -13,9 +13,11 @@ import { businessActions, businessSelector } from "store/business";
 export const Management: ManagementProps = () => {
   const t = useTranslation();
   const dispatch = useDispatch();
-  const user = useUser();
+  const getUser = useGetUser();
   const { isLoadingPrimaryBusiness, primaryBusiness } =
     useSelector(businessSelector);
+
+  const user = useMemo(() => getUser(), []);
 
   useEffect(() => {
     if (user) {

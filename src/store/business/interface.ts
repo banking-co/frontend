@@ -1,11 +1,10 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { BusinessEmployeeModel, BusinessModel } from "store/models";
+import type { BusinessModel } from "store/models";
 
 export interface BusinessState {
   primaryBusiness: BusinessModel | null;
   businesses: { [key: number]: BusinessModel };
   businessesIdByUserID: { [key: number]: number };
-  businessEmployees?: { [key: number]: BusinessEmployeeModel[] };
   isLoadingPrimaryBusiness: boolean;
   isLoadingBusinessStaff: boolean;
 }
