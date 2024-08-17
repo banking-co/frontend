@@ -1,7 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "i18nano";
 import { formatCurrency, formatDate, shrinkUserName } from "utils";
+import { useGetUser } from "hooks";
 
 import {
   Avatar,
@@ -12,24 +14,25 @@ import {
   RichCell,
   Spinner,
   Tag,
+  Text,
 } from "uikit";
 
+import {
+  businessStaffActions,
+  businessStaffSelector,
+} from "store/businessStaff";
 import { businessSelector } from "store/business";
 
 import { IconUsers } from "@tabler/icons-react";
 
 import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
-import {
-  businessStaffActions,
-  businessStaffSelector,
-} from "store/businessStaff";
-import { useGetUser } from "hooks";
-import { Mode, UserType } from "../../store/models";
+import { Mode, UserType } from "store/models";
 
 export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const tKey = "management.employment.page";
   const t = useTranslation();
   const d = useDispatch();
+  const navigate = useNavigate();
   const getUser = useGetUser();
   const { primaryBusinessId } = useSelector(businessSelector);
   const { isLoadingBusinessStaffPage, businessesStaff } = useSelector(
@@ -78,7 +81,12 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   }
 
   return (
-    <Grid title={t(`${tKey}.list.title`)}>
+    <Grid
+      title={t(`${tKey}.list.title`)}
+      headerAfter={
+        <>{staffs && <Tag value={`${staffs?.length}`} mode={Mode.Default} />}</>
+      }
+    >
       <Position type="column" gap={12}>
         {staffs?.map((emp) => {
           const symbol = emp.salary >= 1 ? "-" : "";
@@ -90,7 +98,9 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
           return (
             <RichCell
               title={isBot ? t("user.bot") : shrinkUserName(user)}
-              subtitle={"Принят от: " + formatDate(emp.createdAt)}
+              subtitle={t("user.invited_at", {
+                date: formatDate(emp.createdAt),
+              })}
               after={<Tag value={fmtCurrency} mode={mode} />}
               before={
                 <Avatar
@@ -103,6 +113,20 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
             />
           );
         })}
+        <Position
+          type="line"
+          justifyContent="center"
+          style={{ width: "100%", padding: "12px 0" }}
+        >
+          <Button
+            type="secondary"
+            onClick={() =>
+              navigate("/management/employment/recruit", { replace: true })
+            }
+          >
+            <Text text={t("user.invite_more")} tag={"p"} isMuted />
+          </Button>
+        </Position>
       </Position>
     </Grid>
   );

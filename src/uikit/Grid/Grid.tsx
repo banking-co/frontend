@@ -7,7 +7,10 @@ export const Grid: GridProps = (props) => {
   return (
     <div className="Grid">
       {props.title && (
-        <Text className="Grid__header" tag="h2" text={props.title} />
+        <div className="Grid__header">
+          <Text className="Grid__title" tag="h2" text={props.title} />
+          {props.headerAfter}
+        </div>
       )}
       {props.children}
       {props.description && (
