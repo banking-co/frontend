@@ -2,7 +2,7 @@ import "./AppHeader.sass";
 
 import { useNavigate } from "react-router-dom";
 
-import { AppUserFootnote } from "uikit";
+import { AppUserFootnote, Events } from "uikit";
 
 import { IconChevronLeft } from "@tabler/icons-react";
 
@@ -14,9 +14,13 @@ export const AppHeader: AppHeaderProps = (props) => {
   return (
     <div className="AppHeader">
       {props.withBack && !props.before && (
-        <div className="AppHeader__icon--before" onClick={() => navigate(-1)}>
+        <Events
+          type="div"
+          className="AppHeader__icon--before"
+          onClick={() => navigate(-1)}
+        >
           <IconChevronLeft />
-        </div>
+        </Events>
       )}
 
       {!props.withBack && props.before && (
