@@ -95,6 +95,7 @@ export class Socket {
     if (message && this.socket && this.socket.readyState === WebSocket.OPEN) {
       const msg = JSON.stringify(message);
       this.socket.send(msg);
+      this.startPing();
     }
   }
 
@@ -120,6 +121,7 @@ export class Socket {
 
   startPing() {
     this.stopPing();
+    this.stopPong();
 
     this.pingInterval = setInterval(() => {
       this.send({
