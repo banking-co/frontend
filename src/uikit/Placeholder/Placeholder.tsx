@@ -16,6 +16,7 @@ export const Placeholder: PlaceholderProps = (props) => {
         [`${props.className}`]: props.className,
       })}
     >
+      {props.icon && <div className="Placeholder__icon">{props.icon}</div>}
       <div className="Placeholder__container">
         {props.title && <Text text={props.title} tag="h1" isAccent isBold />}
         {props.text && <Text text={props.text} tag="p" isSecondary />}
