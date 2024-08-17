@@ -1,9 +1,10 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { BusinessModel } from "store/models";
+import { BusinessEmployerRoleModel, BusinessModel } from "store/models";
 
 export interface BusinessState {
-  primaryBusiness: BusinessModel | null;
+  primaryBusinessId: number | null;
   businesses: { [key: number]: BusinessModel };
+  businessesRoles: { [key: number]: Array<BusinessEmployerRoleModel> };
   businessesIdByUserID: { [key: number]: number };
   isLoadingPrimaryBusiness: boolean;
   isLoadingBusinessStaff: boolean;
@@ -17,4 +18,10 @@ export type SetBusinessesPayload = PayloadAction<
   Array<BusinessModel | undefined> | undefined
 >;
 
-export type SetBusinessPayload = PayloadAction<BusinessModel | undefined>;
+export type SetPrimaryBusinessPayload = PayloadAction<number>;
+
+export type SetBusinessPayload = PayloadAction<{
+  bankId: number;
+  bank: BusinessModel;
+  bankRoles: Array<BusinessEmployerRoleModel>;
+}>;

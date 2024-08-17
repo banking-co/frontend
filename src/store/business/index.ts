@@ -5,11 +5,14 @@ import {
   LoadPrimaryBusinessPayload,
   SetBusinessesPayload,
   SetBusinessPayload,
+  SetPrimaryBusinessPayload,
 } from "./interface";
 
 export const initialState: BusinessState = {
-  primaryBusiness: null,
+  primaryBusinessId: null,
+
   businesses: {},
+  businessesRoles: {},
   businessesIdByUserID: {},
 
   isLoadingPrimaryBusiness: true,
@@ -20,9 +23,9 @@ export const { reducer, actions } = createSlice({
   name: "business",
   initialState,
   reducers: {
-    setPrimaryBusiness(state, action: SetBusinessPayload) {
+    setPrimaryBusiness(state, action: SetPrimaryBusinessPayload) {
       if (!action.payload) return;
-      state.primaryBusiness = action.payload;
+      state.primaryBusinessId = action.payload;
     },
 
     setBusinesses(state, action: SetBusinessesPayload) {
@@ -34,10 +37,14 @@ export const { reducer, actions } = createSlice({
       });
     },
     setBusiness(state, action: SetBusinessPayload) {
-      if (!action.payload || !action.payload.userId || !action.payload.id)
-        return;
-      state.businesses[action.payload.id] = action.payload;
-      state.businessesIdByUserID[action.payload.id] = action.payload.userId;
+      if (!action.payload || !action.payload.bank) return;
+
+      const bId = action.payload.bankId || action.payload.bank.id;
+      const uId = action.payload.bank.userId;
+
+      state.businesses[bId] = action.payload.bank;
+      state.businessesRoles[bId] = action.payload.bankRoles;
+      state.businessesIdByUserID[uId] = bId;
     },
 
     loadPrimaryBusiness(state, _: LoadPrimaryBusinessPayload) {
@@ -51,12 +58,12 @@ export const { reducer, actions } = createSlice({
       state.businesses = initialState.businesses;
     },
     clearPrimaryBusiness(state) {
-      state.primaryBusiness = initialState.primaryBusiness;
+      state.primaryBusinessId = initialState.primaryBusinessId;
     },
     clearState(state) {
       state.isLoadingPrimaryBusiness = initialState.isLoadingPrimaryBusiness;
       state.businesses = initialState.businesses;
-      state.primaryBusiness = initialState.primaryBusiness;
+      state.primaryBusinessId = initialState.primaryBusinessId;
     },
   },
 });

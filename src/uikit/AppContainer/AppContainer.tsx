@@ -5,11 +5,9 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 
-import { AppHeader, BottomNavbar, Placeholder, Spinner, Text } from "uikit";
+import { AppHeader, BottomNavbar, Placeholder, Spinner } from "uikit";
 
 import { realtimeSelector } from "store/realtime";
-
-import { IconPlugConnectedX } from "@tabler/icons-react";
 
 import type { AppContainerProps } from "./AppContainer.interface";
 import { useTranslation } from "i18nano";
@@ -35,7 +33,7 @@ export const AppContainer: AppContainerProps = (props) => {
         icon={<Spinner />}
         title={t("errors.connection_retry.title")}
         text={t("errors.connection_retry.description")}
-        isFullPage
+        isFullScreen
         isCenter
       />
     );

@@ -1,13 +1,20 @@
 import "./AppUserFootnote.sass";
 
-import { UnitName } from "uikit";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useGetUser } from "hooks";
+
+import { Avatar, UnitName } from "uikit";
+
+import { usersSelector } from "store/users";
 
 import type { AppUserFootnoteProps } from "./AppUserFootnote.interface";
-import { useGetUser } from "hooks";
-import { IconUser } from "@tabler/icons-react";
 
 export const AppUserFootnote: AppUserFootnoteProps = () => {
-  const user = useGetUser();
+  const getUser = useGetUser();
+  const { primaryUserId } = useSelector(usersSelector);
+
+  const user = useMemo(() => getUser(), [primaryUserId]);
 
   if (!user) {
     return null;
@@ -15,12 +22,7 @@ export const AppUserFootnote: AppUserFootnoteProps = () => {
 
   return (
     <div className="AppUserFootnote__user">
-      {user.personalInfo?.photo200 ? (
-        <img src="https://placehold.co/200x200/png" alt="" />
-      ) : (
-        <IconUser color="var(--gray)" />
-      )}
-
+      <Avatar src={user.personalInfo?.photo200} isSquare />
       <UnitName isShortLastName />
     </div>
   );

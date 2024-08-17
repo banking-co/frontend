@@ -3,6 +3,8 @@ import { businessStaffActions } from "./index";
 import { realtimeActions } from "../realtime";
 import { LoadBusinessStaffPayload } from "./interface";
 import { SocketEvent } from "../models";
+import { usersActions } from "../users";
+import { GetBusinessEmployersEvent } from "../realtime/interface";
 
 function* loadBusinessStaffWorker(action: LoadBusinessStaffPayload): unknown {
   if (!action.payload?.businessId) return;
@@ -16,6 +18,25 @@ function* loadBusinessStaffWorker(action: LoadBusinessStaffPayload): unknown {
         },
       }),
     );
+  } catch (e) {
+    console.error("Loading primary business error:", e);
+  }
+}
+
+export function* setBusinessStaffWorker(
+  action: GetBusinessEmployersEvent,
+): unknown {
+  console.log(action);
+  if (!action.data?.bankId) return;
+
+  try {
+    yield put(
+      businessStaffActions.setBusinessesStaffs({
+        bankId: action.data.bankId,
+        bankStaff: action.data.bankStaff,
+      }),
+    );
+    yield put(usersActions.setUsers(action.data.users));
   } catch (e) {
     console.error("Loading primary business error:", e);
   }

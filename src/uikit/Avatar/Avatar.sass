@@ -1,6 +1,11 @@
 .Avatar
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
   overflow: hidden
   aspect-ratio: 1/1
+  background: var(--primary)
 
   &_size
     &--auto
@@ -33,26 +38,14 @@
     border-radius: 10000px
 
   &--square
-    border-radius: 15px
+    border-radius: 10px
 
   &__image
-    position: relative
-    object-fit: cover
-    height: 100%
     width: 100%
+    height: 100%
+    object-fit: cover
+    opacity: 0
+    transition: opacity 0.5s ease-in-out
 
-    &--loading
-      visibility: hidden
-      background-color: orange
-
-    &--error
-      visibility: hidden
-      background-color: wheat
-
-    &::after
-      content: ""
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-      height: 100%
+    &--loaded
+      opacity: 1

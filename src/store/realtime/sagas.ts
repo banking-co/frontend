@@ -1,16 +1,17 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
 import { realtimeActions } from "./index";
+import { usersActions } from "../users";
+import { balancesActions } from "../balances";
 
 import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
 import { appErrorWorker } from "../app/sagas";
 import { setBalancesWorker } from "../balances/sagas";
+import { setBusinessStaffWorker } from "../businessStaff/sagas";
 
 import { SocketEvent } from "../models";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { StartAppEvent, WebSocketListenerPayload } from "./interface";
-import { usersActions } from "../users";
-import { balancesActions } from "../balances";
 
 function* startAppWorker(action: StartAppEvent) {
   try {
@@ -18,7 +19,7 @@ function* startAppWorker(action: StartAppEvent) {
     yield put(realtimeActions.setLoggedIn(true));
     yield put(realtimeActions.setConnectionStatus(true));
     yield put(usersActions.setUser(action.data.user));
-    yield put(usersActions.setPrimaryUser(action.data.user));
+    yield put(usersActions.setPrimaryUser(action.data.user?.id || null));
     yield put(balancesActions.setBalances(action.data.balances));
     yield put(balancesActions.setBalancesUpdateAt(Date.now().valueOf()));
   } catch (e) {
@@ -32,7 +33,7 @@ function* listenSocketMessageWorker(
   const { payload } = ac;
   if (!payload) return;
 
-  const { event, data } = payload;
+  const { event } = payload;
   if (!event) return;
 
   try {
@@ -42,23 +43,27 @@ function* listenSocketMessageWorker(
         break;
 
       case SocketEvent.Error:
-        yield call(appErrorWorker, { event, data });
+        yield call(appErrorWorker, payload);
         break;
 
       case SocketEvent.StartApp:
-        yield call(startAppWorker, { event, data });
+        yield call(startAppWorker, payload);
         break;
 
       case SocketEvent.GetBalances:
-        yield call(setBalancesWorker, { event, data });
+        yield call(setBalancesWorker, payload);
         break;
 
       case SocketEvent.GetBusiness:
-        yield call(setBusinessWorker, { event, data });
+        yield call(setBusinessWorker, payload);
         break;
 
       case SocketEvent.GetPrimaryBusiness:
-        yield call(setPrimaryBusinessWorker, { event, data });
+        yield call(setPrimaryBusinessWorker, payload);
+        break;
+
+      case SocketEvent.GetBusinessStaff:
+        yield call(setBusinessStaffWorker, payload);
         break;
 
       default:

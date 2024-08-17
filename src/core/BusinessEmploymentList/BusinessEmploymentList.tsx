@@ -11,7 +11,7 @@ import {
   Position,
   RichCell,
   Spinner,
-  Text,
+  Tag,
 } from "uikit";
 
 import { businessSelector } from "store/business";
@@ -24,40 +24,37 @@ import {
   businessStaffSelector,
 } from "store/businessStaff";
 import { useGetUser } from "hooks";
+import { Mode, UserType } from "../../store/models";
 
 export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const tKey = "management.employment.page";
   const t = useTranslation();
   const d = useDispatch();
   const getUser = useGetUser();
-  const { primaryBusiness } = useSelector(businessSelector);
+  const { primaryBusinessId } = useSelector(businessSelector);
   const { isLoadingBusinessStaffPage, businessesStaff } = useSelector(
     businessStaffSelector,
   );
 
   const staffs = useMemo(() => {
-    if (
-      !primaryBusiness ||
-      !businessesStaff ||
-      !businessesStaff[primaryBusiness.id]
-    ) {
+    if (!primaryBusinessId || !businessesStaff[primaryBusinessId]) {
       return;
     }
 
-    return businessesStaff[primaryBusiness.id];
-  }, [primaryBusiness, businessesStaff]);
+    return businessesStaff[primaryBusinessId];
+  }, [primaryBusinessId, businessesStaff]);
 
   useEffect(() => {
-    if (primaryBusiness) {
+    if (primaryBusinessId) {
       d(
         businessStaffActions.loadBusinessStaff({
-          businessId: primaryBusiness.id,
+          businessId: primaryBusinessId,
         }),
       );
     }
-  }, [primaryBusiness]);
+  }, [primaryBusinessId]);
 
-  if ((isLoadingBusinessStaffPage && !staffs) || !primaryBusiness) {
+  if ((isLoadingBusinessStaffPage && !staffs) || !primaryBusinessId) {
     return (
       <Placeholder isCenter isFullPage>
         <Spinner />
@@ -81,23 +78,32 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   }
 
   return (
-    <Position type="column" gap={12}>
-      <Grid title={t(`${tKey}.list.title`)}>
-        {staffs?.map((emp) => (
-          <RichCell
-            title={shrinkUserName(getUser(emp.workerID))}
-            subtitle={"Принят от: " + formatDate(emp.createdAt)}
-            after={
-              <Text
-                text={"-" + formatCurrency(105103, { symbol: "$" })}
-                tag={"p"}
-                isBold
-              />
-            }
-            before={<Avatar isBot isSquare size="medium" />}
-          />
-        ))}
-      </Grid>
-    </Position>
+    <Grid title={t(`${tKey}.list.title`)}>
+      <Position type="column" gap={12}>
+        {staffs?.map((emp) => {
+          const symbol = emp.salary >= 1 ? "-" : "";
+          const mode = Mode.Destroy;
+          const fmtCurrency = `${symbol}${formatCurrency(emp.salary, { symbol: "$" })}`;
+          const isBot = emp.userType === UserType.Bot;
+          const user = !isBot ? getUser(emp.workerID) : undefined;
+
+          return (
+            <RichCell
+              title={isBot ? t("user.bot") : shrinkUserName(user)}
+              subtitle={"Принят от: " + formatDate(emp.createdAt)}
+              after={<Tag value={fmtCurrency} mode={mode} />}
+              before={
+                <Avatar
+                  isBot={isBot}
+                  src={user?.personalInfo?.photo200}
+                  isSquare
+                  size="medium"
+                />
+              }
+            />
+          );
+        })}
+      </Position>
+    </Grid>
   );
 };

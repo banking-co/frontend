@@ -3,10 +3,11 @@ import { usersSelector } from "../store/users";
 import { UserModel } from "../store/models";
 
 export const useGetUser = () => {
-  const { primaryUser, users } = useSelector(usersSelector);
+  const { primaryUserId, users } = useSelector(usersSelector);
 
   return (uid?: number): UserModel | undefined | null => {
-    if (!uid) return primaryUser;
-    return users[uid];
+    if (uid) return users[uid];
+    if (!uid && primaryUserId) return users[primaryUserId];
+    return;
   };
 };

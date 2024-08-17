@@ -6,7 +6,7 @@ import { SocketEvent } from "../models";
 import {
   GetBusinessEvent,
   GetPrimaryBusinessEvent,
-} from "../realtime/websocket.interface";
+} from "../realtime/interface";
 
 function* loadPrimaryBusinessWorker(
   action: LoadPrimaryBusinessPayload,
@@ -30,7 +30,7 @@ function* loadPrimaryBusinessWorker(
 export function* setBusinessWorker(action: GetBusinessEvent): unknown {
   try {
     if (!action.data?.bank) return;
-    yield put(businessActions.setBusiness(action.data.bank));
+    yield put(businessActions.setBusiness(action.data));
   } catch (e) {
     console.error("Set business error:", e);
   }
@@ -41,8 +41,8 @@ export function* setPrimaryBusinessWorker(
 ): unknown {
   try {
     if (!action.data?.bank) return;
-    yield put(businessActions.setBusiness(action.data.bank));
-    yield put(businessActions.setPrimaryBusiness(action.data.bank));
+    yield put(businessActions.setBusiness(action.data));
+    yield put(businessActions.setPrimaryBusiness(action.data.bankId));
     yield put(businessActions.stopLoadingPrimaryBusiness());
   } catch (e) {
     console.error("Set primary business error:", e);

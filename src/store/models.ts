@@ -10,6 +10,13 @@ export enum UserType {
   User = 1,
 }
 
+export interface ModelsDefaultKeys {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
 export interface ExpModel {
   from: number;
   to: number;
@@ -23,37 +30,24 @@ export interface UserPersonalInfoModel {
   photo200: string;
 }
 
-export interface UserModel {
-  id: number;
+export interface UserModel extends ModelsDefaultKeys {
   username: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
   personalInfo?: UserPersonalInfoModel;
 }
 
-export interface BalanceModel {
-  id: number;
+export interface BalanceModel extends ModelsDefaultKeys {
   importance: number;
   userId: number;
   amount: number;
   currency: Currency;
-  createdAt: "2024-08-04T23:34:37.117+05:00";
-  updateAt: "2024-08-04T23:34:37.117+05:00";
-  deletedAt?: string;
 }
 
-export interface BusinessModel {
-  id: number;
+export interface BusinessModel extends ModelsDefaultKeys {
   userId: number;
   name: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
 }
 
-export interface BusinessEmployeeModel {
-  id: number;
+export interface BusinessEmployeeModel extends ModelsDefaultKeys {
   businessId: number;
 
   userType: UserType;
@@ -65,18 +59,16 @@ export interface BusinessEmployeeModel {
 
   workerPersonalInfo: UserPersonalInfoModel;
   employerPersonalInfo: UserPersonalInfoModel;
-
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
 }
 
-export interface BonusModel {
-  id: number;
+export interface BusinessEmployerRoleModel extends ModelsDefaultKeys {
+  bankId: number;
+  roleId: number;
+  roleName: string;
+}
+
+export interface BonusModel extends ModelsDefaultKeys {
   type: string;
-  createdAt: string;
-  updatedAt?: string;
-  deletedAt?: string;
 }
 
 export interface UserLevelModel {
@@ -89,6 +81,7 @@ export enum Mode {
   Default = "default",
   Destroy = "destroy",
   Progress = "progress",
+  Primary = "primary",
 }
 
 export enum Currency {

@@ -14,7 +14,7 @@ export const Events: EventsProps = ({
   ...props
 }) => {
   const isTouchSupport = window && "ontouchstart" in window;
-  const animateDelay = 200;
+  const animateDelay = 100;
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
 

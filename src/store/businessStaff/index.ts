@@ -21,14 +21,14 @@ export const { reducer, actions } = createSlice({
     },
 
     setBusinessesStaffs(state, action: SetBusinessStaffPayload) {
-      if (!action.payload.staff || action.payload.staff.length === 0) return;
+      if (!action.payload.bankStaff) return;
 
-      if (action.payload.businessId) {
-        state.businessesStaff[action.payload.businessId] =
-          action.payload.staff.filter((b) => !!b) as BusinessEmployeeModel[];
-      }
+      const bId = action.payload.bankId;
 
-      if (!action.payload.businessId) {
+      if (bId) {
+        state.businessesStaff[bId] = action.payload.bankStaff.filter(
+          (b) => !!b,
+        ) as BusinessEmployeeModel[];
       }
     },
 

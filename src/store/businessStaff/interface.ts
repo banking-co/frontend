@@ -3,8 +3,6 @@ import type { BusinessEmployeeModel } from "store/models";
 
 export interface BusinessStaffState {
   isLoadingBusinessStaffPage: boolean;
-
-  // key - businessId
   businessesStaff: { [key: number]: Array<BusinessEmployeeModel> };
 }
 
@@ -13,6 +11,6 @@ export type LoadBusinessStaffPayload = PayloadAction<{
 }>;
 
 export type SetBusinessStaffPayload = PayloadAction<{
-  businessId?: number;
-  staff: Array<BusinessEmployeeModel | undefined> | undefined;
+  bankId?: number;
+  bankStaff: Array<BusinessEmployeeModel | undefined> | undefined;
 }>;

@@ -4,6 +4,8 @@ import type {
   BusinessModel,
   UserModel,
   SocketEvent,
+  BusinessEmployerRoleModel,
+  BusinessEmployeeModel,
 } from "store/models";
 
 export interface RealtimeState {
@@ -55,17 +57,28 @@ export interface GetBalancesEvent {
   };
 }
 
+interface DataGetBusinessModel {
+  bankId: number;
+  bank: BusinessModel;
+  bankRoles: BusinessEmployerRoleModel[];
+}
+
 export interface GetBusinessEvent {
   event: SocketEvent.GetBusiness;
-  data: {
-    bank?: BusinessModel;
-  };
+  data: DataGetBusinessModel;
 }
 
 export interface GetPrimaryBusinessEvent {
   event: SocketEvent.GetPrimaryBusiness;
+  data: DataGetBusinessModel;
+}
+
+export interface GetBusinessEmployersEvent {
+  event: SocketEvent.GetBusinessStaff;
   data: {
-    bank?: BusinessModel;
+    bankId: number;
+    bankStaff: Array<BusinessEmployeeModel>;
+    users: Array<UserModel>;
   };
 }
 
@@ -77,6 +90,7 @@ export type WebSocketListenerPayload =
   | GetPrimaryBusinessEvent
   | GetBalancesEvent
   | ErrorEvent
-  | PongEvent;
+  | PongEvent
+  | GetBusinessEmployersEvent;
 
 export type SetConnectionStatusPayload = PayloadAction<boolean>;

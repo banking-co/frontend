@@ -14,10 +14,14 @@ export const Management: ManagementProps = () => {
   const t = useTranslation();
   const dispatch = useDispatch();
   const getUser = useGetUser();
-  const { isLoadingPrimaryBusiness, primaryBusiness } =
+  const { isLoadingPrimaryBusiness, primaryBusinessId, businesses } =
     useSelector(businessSelector);
 
   const user = useMemo(() => getUser(), []);
+  const primaryBusiness = useMemo(
+    () => (primaryBusinessId ? businesses[primaryBusinessId] : undefined),
+    [primaryBusinessId, businesses],
+  );
 
   useEffect(() => {
     if (user) {

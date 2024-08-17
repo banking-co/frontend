@@ -44,7 +44,7 @@ export const BalanceCard: BalanceCardProps = (props) => {
   };
 
   const iconCurrency = useMemo(() => {
-    switch (userBalances[currentBalance].currency) {
+    switch (userBalances[currentBalance]?.currency) {
       case Currency.Btc:
         return <IconCurrencyBitcoin size={28} />;
       case Currency.Donate:
@@ -79,6 +79,10 @@ export const BalanceCard: BalanceCardProps = (props) => {
       }),
     );
   }, []);
+
+  if (!user || !userBalances) {
+    return null;
+  }
 
   return (
     <Position type="column" className="BalanceCard" gap={8}>

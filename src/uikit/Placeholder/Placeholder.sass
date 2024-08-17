@@ -14,7 +14,7 @@
     justify-content: center
 
   &__fullpage
-    height: 100vh
+    height: calc(100vh - var(--tabbar-height) - 24px - (calc(var(--header-height) + var(--safe_area_inset_top))))
 
   &__fullscreen
     height: 100%
