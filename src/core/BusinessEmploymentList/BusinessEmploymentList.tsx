@@ -25,8 +25,8 @@ import { businessSelector } from "store/business";
 
 import { IconUsers } from "@tabler/icons-react";
 
-import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
 import { Mode, UserType } from "models";
+import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
 
 export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const tKey = "management.employment.page";
