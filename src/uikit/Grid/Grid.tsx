@@ -1,7 +1,8 @@
 import "./Grid.sass";
 
+import { Text } from "uikit";
+
 import type { GridProps } from "./Grid.interface";
-import { Text } from "uikit/Text/Text";
 
 export const Grid: GridProps = (props) => {
   return (

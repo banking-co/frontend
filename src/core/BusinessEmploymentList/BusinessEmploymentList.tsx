@@ -97,6 +97,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
 
           return (
             <RichCell
+              onClick={() => {}}
               title={isBot ? t("user.bot") : shrinkUserName(user)}
               subtitle={t("user.invited_at", {
                 date: formatDate(emp.createdAt),

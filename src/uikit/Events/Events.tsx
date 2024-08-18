@@ -11,10 +11,11 @@ export const Events: EventsProps = ({
   children,
   disabled = false,
   onClick,
+  clickable = false,
   ...props
 }) => {
-  const isTouchSupport = window && "ontouchstart" in window;
   const animateDelay = 100;
+  const isTouchSupport = window && "ontouchstart" in window;
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
 
@@ -43,6 +44,14 @@ export const Events: EventsProps = ({
     }
   };
 
+  const events = !!onClick
+    ? {
+        onMouseEnter: onStartHover,
+        onMouseLeave: onEndHover,
+        onClick: onClickDelay,
+      }
+    : {};
+
   return createElement(
     type,
     {
@@ -52,9 +61,7 @@ export const Events: EventsProps = ({
         "Events--active": active,
         [`${className}`]: className,
       }),
-      onMouseEnter: onStartHover,
-      onMouseLeave: onEndHover,
-      onClick: onClickDelay,
+      ...events,
       ...props,
     },
     children,

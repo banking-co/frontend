@@ -7,6 +7,7 @@ import type { UnitNameProps } from "./RichCell.interface";
 export const RichCell: UnitNameProps = (props) => {
   return (
     <Position
+      onClick={props.onClick}
       type={"line"}
       justifyContent={"space-between"}
       gap={12}
