@@ -10,7 +10,7 @@ import classNames from "classnames";
 import { RefreshButton } from "./RefreshButton/RefreshButton";
 import { Position, Tag, Text } from "uikit";
 
-import { Currency, SocketEvent } from "store/models";
+import { Currency, SocketEvent } from "models";
 import { realtimeActions } from "store/realtime";
 import { balancesSelector } from "store/balances";
 

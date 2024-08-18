@@ -10,7 +10,8 @@
       "store": ["store"],
       "translations": ["translations"],
       "uikit": ["uikit"],
-      "utils": ["utils"]
+      "utils": ["utils"],
+      "models": ["models"]
     }
   }
 }

@@ -16,7 +16,7 @@ import {
   IconCurrencyDollar,
 } from "@tabler/icons-react";
 
-import { Mode } from "store/models";
+import { Mode } from "models";
 import type { ProfileProps } from "./Profile.interface";
 
 export const Profile: ProfileProps = () => {

@@ -2,7 +2,7 @@ import { all, put, takeLatest } from "redux-saga/effects";
 import { businessActions } from "./index";
 import { realtimeActions } from "../realtime";
 import { LoadPrimaryBusinessPayload } from "./interface";
-import { SocketEvent } from "../models";
+import { SocketEvent } from "models";
 import {
   GetBusinessEvent,
   GetPrimaryBusinessEvent,

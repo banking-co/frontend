@@ -7,11 +7,13 @@ import { balancesActions } from "../balances";
 import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
 import { appErrorWorker } from "../app/sagas";
 import { setBalancesWorker } from "../balances/sagas";
-import { setBusinessStaffWorker } from "../businessStaff/sagas";
+import {
+  setBusinessStaffRecruitItemsWorker,
+  setBusinessStaffWorker,
+} from "../businessStaff/sagas";
 
-import { SocketEvent } from "../models";
+import { SocketEvent, StartAppEvent, WebSocketListenerPayload } from "models";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { StartAppEvent, WebSocketListenerPayload } from "./interface";
 
 function* startAppWorker(action: StartAppEvent) {
   try {
@@ -64,6 +66,10 @@ function* listenSocketMessageWorker(
 
       case SocketEvent.GetBusinessStaff:
         yield call(setBusinessStaffWorker, payload);
+        break;
+
+      case SocketEvent.GetBusinessStaffRecruit:
+        yield call(setBusinessStaffRecruitItemsWorker, payload);
         break;
 
       default:

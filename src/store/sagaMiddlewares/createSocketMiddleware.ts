@@ -2,13 +2,12 @@ import { Socket } from "api";
 
 import { realtimeActions } from "../realtime";
 
-import { SocketEvent } from "../models";
-import type { SendMessagePayload } from "../realtime/interface";
 import type {
   Middleware,
   PayloadAction,
   UnknownAction,
 } from "@reduxjs/toolkit";
+import { SocketEvent, SendMessagePayload } from "models";
 
 const createSocketMiddleware =
   (socket: Socket): Middleware =>

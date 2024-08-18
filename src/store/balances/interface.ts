@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { BalanceModel } from "store/models";
+import { BalanceModel } from "models";
 
 type BalanceWithId = { [key: number]: BalanceModel };
 

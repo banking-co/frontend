@@ -1,4 +1,4 @@
-import { UserModel } from "../store/models";
+import { UserModel } from "models";
 
 export const shrinkUserName = (
   u: UserModel | undefined | null,

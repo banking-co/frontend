@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes, ReactNode } from "react";
 
-import { Mode } from "store/models";
+import { Mode } from "models";
 
 type TextTags = "h1" | "h2" | "h3" | "p" | "span";
 

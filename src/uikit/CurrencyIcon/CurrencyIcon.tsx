@@ -6,7 +6,7 @@ import {
   IconDiamond,
 } from "@tabler/icons-react";
 
-import { TextCurrencyType } from "store/models";
+import { TextCurrencyType } from "models";
 
 export const CurrencyIcon: FC<{ currencyType: TextCurrencyType }> = (props) => {
   const currencyIcon = {

@@ -26,7 +26,7 @@ import { businessSelector } from "store/business";
 import { IconUsers } from "@tabler/icons-react";
 
 import type { BusinessEmploymentRecruitProps } from "./BusinessEmploymentRecruit.interface";
-import { Mode, UserType } from "store/models";
+import { Mode, UserType } from "models";
 
 export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
   const tKey = "management.employment.page";
@@ -34,30 +34,15 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
   const d = useDispatch();
   const navigate = useNavigate();
   const getUser = useGetUser();
-  const { primaryBusinessId } = useSelector(businessSelector);
-  const { isLoadingBusinessStaffPage, businessesStaff } = useSelector(
+  const { isLoadingBusinessStaffRecruitPage, recruitStaff } = useSelector(
     businessStaffSelector,
   );
 
-  const staffs = useMemo(() => {
-    if (!primaryBusinessId || !businessesStaff[primaryBusinessId]) {
-      return;
-    }
-
-    return businessesStaff[primaryBusinessId];
-  }, [primaryBusinessId, businessesStaff]);
-
   useEffect(() => {
-    if (primaryBusinessId) {
-      d(
-        businessStaffActions.loadBusinessStaff({
-          businessId: primaryBusinessId,
-        }),
-      );
-    }
-  }, [primaryBusinessId]);
+    d(businessStaffActions.loadBusinessStaffRecruit());
+  }, []);
 
-  if ((isLoadingBusinessStaffPage && !staffs) || !primaryBusinessId) {
+  if (isLoadingBusinessStaffRecruitPage && recruitStaff.length < 1) {
     return (
       <Placeholder isCenter isFullPage>
         <Spinner />
@@ -65,27 +50,26 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
     );
   }
 
-  if (staffs && staffs.length < 1) {
-    return (
-      <Placeholder
-        icon={<IconUsers color="var(--accent)" />}
-        title={t(`${tKey}.list.undefined.title`)}
-        text={t(`${tKey}.list.undefined.subtitle`)}
-        bottom={
-          <div className="Profile__placeholder-button">
-            <Button text={t(`${tKey}.list.undefined.goto`)} type="primary" />
-          </div>
-        }
-      />
-    );
-  }
-
   return (
     <Grid
       title={t(`${tKey}.recruit.title`)}
       headerAfter={
-        <>{staffs && <Tag value={`${staffs?.length}`} mode={Mode.Default} />}</>
+        <>
+          {recruitStaff.length >= 1 && (
+            <Tag value={`${recruitStaff.length}`} mode={Mode.Default} />
+          )}
+        </>
       }
-    ></Grid>
+    >
+      {recruitStaff.map((it) => {
+        return (
+          <RichCell
+            key={"" + it.id + it.type + it.rarity}
+            title={""}
+            subtitle={""}
+          />
+        );
+      })}
+    </Grid>
   );
 };

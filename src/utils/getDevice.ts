@@ -1,4 +1,4 @@
-import { Device, Platform } from "store/models";
+import { Device, Platform } from "models";
 
 const getUserAgent = () => navigator.userAgent || navigator.vendor;
 const checkIsAndroid = () => /android/i.test(getUserAgent());

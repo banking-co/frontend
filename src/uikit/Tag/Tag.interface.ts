@@ -1,5 +1,5 @@
 import type { FC, HTMLAttributes, ReactNode } from "react";
-import { Mode } from "store/models";
+import { Mode } from "models";
 
 export interface TagParams extends HTMLAttributes<HTMLElement> {
   mode?: Mode;

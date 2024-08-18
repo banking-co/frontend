@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { UserModel } from "store/models";
+import { UserModel } from "models";
 
 export interface UsersState {
   primaryUserId: number | null;

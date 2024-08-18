@@ -1,5 +1,5 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { BusinessEmployerRoleModel, BusinessModel } from "store/models";
+import { BusinessEmployerRoleModel, BusinessModel } from "models";
 
 export interface BusinessState {
   primaryBusinessId: number | null;

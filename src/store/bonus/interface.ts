@@ -1,4 +1,4 @@
-import { BonusModel } from "store/models";
+import { BonusModel } from "models";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export interface BonusState {

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { appActions, appSelector } from "store/app";
-import { Modals } from "store/models";
+import { Modals } from "models";
 
 const useModal = () => {
   const dispatch = useDispatch();

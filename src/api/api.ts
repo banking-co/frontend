@@ -3,8 +3,7 @@ import { vkSign } from "utils";
 import { realtimeActions } from "../store/realtime";
 
 import type { Dispatch } from "@reduxjs/toolkit";
-import type { SendMessagePayload } from "store/realtime/interface";
-import { SocketEvent } from "store/models";
+import { SocketEvent, SendMessagePayload } from "models";
 
 export const apiUrl =
   localStorage.getItem("server_url") ||

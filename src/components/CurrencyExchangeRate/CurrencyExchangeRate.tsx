@@ -11,7 +11,7 @@ import {
   CurrencyExchangeRateProps,
   CurrencyExchangeRateItem,
 } from "./CurrencyExchangeRate.interface";
-import { Currency, Mode } from "store/models";
+import { Currency, Mode } from "models";
 import { IconCurrencyDollar } from "@tabler/icons-react";
 
 export const CurrencyExchangeRate: CurrencyExchangeRateProps = () => {

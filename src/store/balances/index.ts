@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import type { RootState } from "../rootReducer";
-import { BalanceState, SetUsersBalancesPayload } from "./interface";
-import { BalanceModel } from "../models";
+import type { BalanceState, SetUsersBalancesPayload } from "./interface";
+import type { BalanceModel } from "models";
 
 export const initialState: BalanceState = {
   isLoadingBalances: true,

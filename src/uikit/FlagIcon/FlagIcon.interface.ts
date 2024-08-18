@@ -1,5 +1,5 @@
 import type { FC, HTMLAttributes } from "react";
-import { Currency } from "store/models";
+import { Currency } from "models";
 
 interface FlagIconParams extends HTMLAttributes<HTMLImageElement> {
   currency: Currency;

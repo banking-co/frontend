@@ -1,4 +1,4 @@
-import { Currency } from "store/models";
+import { Currency } from "models";
 
 import Russia from "assets/flags/4x3/ru.svg";
 import Belarus from "assets/flags/4x3/by.svg";

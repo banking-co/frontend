@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { usersSelector } from "../store/users";
-import { UserModel } from "../store/models";
+import { UserModel } from "models";
 
 export const useGetUser = () => {
   const { primaryUserId, users } = useSelector(usersSelector);

@@ -1,11 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
 import type { RootState } from "../rootReducer";
-import {
-  RealtimeState,
-  SendMessagePayload,
-  SetConnectionStatusPayload,
-  WebSocketListenerPayload,
-} from "./interface";
+import type { RealtimeState, SetConnectionStatusPayload } from "./interface";
+import type { SendMessagePayload, WebSocketListenerPayload } from "models";
 
 export const initialState: RealtimeState = {
   isConnected: false,

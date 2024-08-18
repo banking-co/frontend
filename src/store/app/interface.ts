@@ -1,4 +1,4 @@
-import { Modals } from "store/models";
+import { Modals } from "models";
 
 export interface AppState {
   activeModal: Modals | null;

@@ -4,12 +4,16 @@ import type {
   BusinessStaffState,
   LoadBusinessStaffPayload,
   SetBusinessStaffPayload,
+  SetBusinessStaffRecruitItemsPayload,
 } from "./interface";
-import type { BusinessEmployeeModel } from "../models";
+import type { BusinessEmployeeModel } from "models";
 
 export const initialState: BusinessStaffState = {
   isLoadingBusinessStaffPage: true,
+  isLoadingBusinessStaffRecruitPage: true,
+
   businessesStaff: {},
+  recruitStaff: [],
 };
 
 export const { reducer, actions } = createSlice({
@@ -18,6 +22,10 @@ export const { reducer, actions } = createSlice({
   reducers: {
     setStopLoadingBusinessStaffPage(state) {
       state.isLoadingBusinessStaffPage = false;
+    },
+
+    setStopLoadingBusinessStaffRecruitPage(state) {
+      state.isLoadingBusinessStaffRecruitPage = false;
     },
 
     setBusinessesStaffs(state, action: SetBusinessStaffPayload) {
@@ -32,8 +40,20 @@ export const { reducer, actions } = createSlice({
       }
     },
 
+    setBusinessStaffRecruitItems(
+      state,
+      action: SetBusinessStaffRecruitItemsPayload,
+    ) {
+      if (!action.payload.items || action.payload.items.length < 1) return;
+      state.recruitStaff = action.payload.items;
+    },
+
     loadBusinessStaff(state, _: LoadBusinessStaffPayload) {
       state.isLoadingBusinessStaffPage = true;
+    },
+
+    loadBusinessStaffRecruit(state) {
+      state.isLoadingBusinessStaffRecruitPage = true;
     },
 
     clearBusinessesStaffs(state) {
