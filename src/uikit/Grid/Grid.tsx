@@ -13,6 +13,9 @@ export const Grid: GridProps = (props) => {
           {props.headerAfter}
         </div>
       )}
+      {props.subHeader && (
+        <div className="Grid__subheader">{props.subHeader}</div>
+      )}
       {props.children}
       {props.description && (
         <Text

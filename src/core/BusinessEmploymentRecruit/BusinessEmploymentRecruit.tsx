@@ -9,6 +9,7 @@ import {
   Avatar,
   Button,
   Grid,
+  Input,
   Placeholder,
   Position,
   RichCell,
@@ -29,11 +30,10 @@ import type { BusinessEmploymentRecruitProps } from "./BusinessEmploymentRecruit
 import { Mode, UserType } from "models";
 
 export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
-  const tKey = "management.employment.page";
+  const tKey = "management.employment.page.recruit";
   const t = useTranslation();
   const d = useDispatch();
   const navigate = useNavigate();
-  const getUser = useGetUser();
   const { isLoadingBusinessStaffRecruitPage, recruitStaff } = useSelector(
     businessStaffSelector,
   );
@@ -52,24 +52,54 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
 
   return (
     <Grid
-      title={t(`${tKey}.recruit.title`)}
+      title={t(`${tKey}.title`)}
       headerAfter={
         <>
           {recruitStaff.length >= 1 && (
-            <Tag value={`${recruitStaff.length}`} mode={Mode.Default} />
+            <Tag value={`${recruitStaff?.length}`} mode={Mode.Default} />
           )}
         </>
       }
+      subHeader={
+        <>
+          <Input placeholder={"12312312312"} stretched />
+        </>
+      }
     >
-      {recruitStaff.map((it) => {
-        return (
-          <RichCell
-            key={"" + it.id + it.type + it.rarity}
-            title={""}
-            subtitle={""}
-          />
-        );
-      })}
+      <Position type="column" gap={12}>
+        {recruitStaff?.map((it) => {
+          const mode = Mode.Progress;
+          const fmtCurrency = formatCurrency(it.cost, { symbol: "$" });
+          const isBot = it.name.toLowerCase().includes("bot");
+
+          return (
+            <RichCell
+              key={"" + it.id + it.rarity + it.type}
+              onClick={() => {}}
+              title={isBot ? t("user.bot") : it.name}
+              subtitle={t("item.created_at", {
+                date: formatDate(it.createdAt),
+              })}
+              after={<Tag value={fmtCurrency} mode={mode} />}
+              before={<></>}
+            />
+          );
+        })}
+        <Position
+          type="line"
+          justifyContent="center"
+          style={{ width: "100%", padding: "12px 0" }}
+        >
+          <Button
+            type="secondary"
+            onClick={() =>
+              navigate("/management/employment/recruit", { replace: true })
+            }
+          >
+            <Text text={t("user.invite_more")} tag={"p"} isMuted />
+          </Button>
+        </Position>
+      </Position>
     </Grid>
   );
 };

@@ -217,5 +217,8 @@
     "user": "Пользователь",
     "invited_at": "Принят: {{date}}",
     "invite_more": "Нанять еще"
+  },
+  "item": {
+    "created_at": "Создано: {{date}}"
   }
 }
