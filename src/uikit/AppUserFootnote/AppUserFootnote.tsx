@@ -22,7 +22,14 @@ export const AppUserFootnote: AppUserFootnoteProps = () => {
 
   return (
     <div className="AppUserFootnote__user">
-      <Avatar src={user.personalInfo?.photo200} isSquare />
+      <Avatar
+        src={
+          user.personalInfo?.photo50 ||
+          user.personalInfo?.photo100 ||
+          user.personalInfo?.photo200
+        }
+        isSquare
+      />
       <UnitName isShortLastName />
     </div>
   );

@@ -106,7 +106,11 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
               before={
                 <Avatar
                   isBot={isBot}
-                  src={user?.personalInfo?.photo200}
+                  src={
+                    user?.personalInfo?.photo100 ||
+                    user?.personalInfo?.photo200 ||
+                    ""
+                  }
                   isSquare
                   size="medium"
                 />
