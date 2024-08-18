@@ -2,10 +2,11 @@ import "./Input.sass";
 
 import classNames from "classnames";
 
-import { Events, Text } from "uikit";
+import { Events } from "uikit";
 
 import { InputProps } from "./Input.interface";
 import { useRef, useState } from "react";
+import { IconSquareRoundedX } from "@tabler/icons-react";
 
 export const Input: InputProps = ({
   className,
@@ -20,8 +21,16 @@ export const Input: InputProps = ({
 }) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  const [value, setValue] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState(props?.defaultValue || "");
+  // const [isFocused, setIsFocused] = useState(false);
+
+  const handleOnClick = (e: any) => {
+    if (ref && ref.current) {
+      ref.current.focus();
+    }
+
+    props.onClick && props.onClick(e);
+  };
 
   const handleInputChange = (e: any) => {
     setValue(e.target.value);
@@ -30,41 +39,33 @@ export const Input: InputProps = ({
 
   return (
     <div
-      // className={classNames("Input", {})}
-      style={{
-        position: "relative",
-        display: "inline-block",
-        width: "100%",
-        borderBottom: "1px solid gray",
-        padding: "8px 0",
-      }}
+      className={classNames("Input", {
+        [`Input_size--${size}`]: size,
+        [`Input_type--${type}`]: type,
+        [`Input--stretched`]: stretched,
+        [`${className}`]: !!className,
+      })}
+      onClick={handleOnClick}
     >
+      {icon && <div className="Input__icon">{icon}</div>}
+
       <input
-        type="text"
+        className={classNames("Input__inherit")}
+        placeholder={props.placeholder}
+        ref={ref}
         value={value}
         onChange={handleInputChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0,
-          zIndex: 1,
-        }}
       />
-      <div style={{ pointerEvents: "none" }}>
-        {!isFocused && !value && (
-          <Text
-            tag="p"
-            text={props.placeholder || ""}
-            style={{ color: "gray", fontSize: "16px" }}
-          />
-        )}
-        <Text tag="p" text={value} />
-      </div>
+
+      <Events
+        type={"div"}
+        className={classNames("Input__icon", "Input__icon-remove", {
+          "Input__icon-remove--hidden": !(value.toString().length >= 1),
+        })}
+        onClick={() => setValue("")}
+      >
+        <IconSquareRoundedX />
+      </Events>
     </div>
   );
 };

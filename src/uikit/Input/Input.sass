@@ -1,13 +1,48 @@
+$font-family: var(--font-family)
+
 .Input
+  position: relative
   outline: none
   box-sizing: border-box
-  position: relative
   width: auto
   background: transparent
   color: var(--text-primary)
   border: 2px solid var(--secondary)
   border-radius: 15px
   overflow: hidden
+  font-family: $font-family
+  display: flex
+  align-items: center
+  gap: 12px
+
+  &__inherit
+    width: 100%
+
+  &__icon
+    color: var(--primary)
+    height: 100%
+    aspect-ratio: 1 / 1
+    border-radius: 5px
+    overflow: hidden
+    display: flex
+    align-items: center
+    justify-content: center
+
+    & > svg
+      $size: 18px
+      height: $size
+      width: $size
+
+    &-remove
+      opacity: 1
+      transition: opacity .2s
+
+      &--hidden
+        opacity: 0
+
+  &__wrapper
+    width: 100%
+    height: 100%
 
   &--stretched
     width: 100%
@@ -18,11 +53,12 @@
       overflow: hidden
 
     &--small
-      padding: 4px 20px
+      padding: 4px 6px
 
     &--regular
-      padding: 8px 20px
+      padding: 4px 12px
+      height: 41px
 
     &--large
-      padding: 12px 24px
+      padding: 12px 16px
 

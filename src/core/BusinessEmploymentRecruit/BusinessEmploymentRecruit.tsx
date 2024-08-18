@@ -24,7 +24,7 @@ import {
 } from "store/businessStaff";
 import { businessSelector } from "store/business";
 
-import { IconUsers } from "@tabler/icons-react";
+import { IconSearch, IconUsers } from "@tabler/icons-react";
 
 import type { BusinessEmploymentRecruitProps } from "./BusinessEmploymentRecruit.interface";
 import { Mode, UserType } from "models";
@@ -62,7 +62,7 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
       }
       subHeader={
         <>
-          <Input placeholder={"12312312312"} stretched />
+          <Input icon={<IconSearch />} placeholder={"12312312312"} stretched />
         </>
       }
     >
