@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import classNames from "classnames";
 
 import { PositionProps } from "./Position.interface";
-import { Events } from "../Events/Events";
 
 const getDefaultStyles = ({
   justifyContent,
@@ -35,16 +34,16 @@ export const Position: PositionProps = (props) => {
   }, [props.type]);
 
   return (
-    <Events
-      type="div"
+    <div
       onClick={props.onClick}
       className={classNames({
+        "Position--stretched": !!props.stretched,
         [componentClassName]: !!componentClassName,
         [`${props.className}`]: !!props.className,
       })}
       style={Object.assign(getDefaultStyles(props), props.style)}
     >
       {props.children}
-    </Events>
+    </div>
   );
 };

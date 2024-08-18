@@ -1,21 +1,30 @@
 import "./Grid.sass";
 
-import { Text } from "uikit";
+import { Position, Text } from "uikit";
 
 import type { GridProps } from "./Grid.interface";
 
 export const Grid: GridProps = (props) => {
   return (
-    <div className="Grid">
-      {props.title && (
-        <div className="Grid__header">
-          <Text className="Grid__title" tag="h2" text={props.title} />
-          {props.headerAfter}
-        </div>
-      )}
-      {props.subHeader && (
-        <div className="Grid__subheader">{props.subHeader}</div>
-      )}
+    <Position type="column" stretched gap={12}>
+      <Position type={"column"} stretched gap={8}>
+        {props.title && (
+          <Position
+            type={"line"}
+            className="Grid__header"
+            gap={12}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            stretched
+          >
+            <Text className="Grid__title" tag="h2" text={props.title} />
+            {props.headerAfter}
+          </Position>
+        )}
+        {props.subHeader && (
+          <div className="Grid__subheader">{props.subHeader}</div>
+        )}
+      </Position>
       {props.children}
       {props.description && (
         <Text
@@ -25,6 +34,6 @@ export const Grid: GridProps = (props) => {
           isMuted
         />
       )}
-    </div>
+    </Position>
   );
 };

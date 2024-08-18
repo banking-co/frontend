@@ -8,6 +8,7 @@ interface PositionParams extends HTMLAttributes<HTMLElement> {
 
   gap?: number | string;
   disableWrap?: boolean;
+  stretched?: boolean;
 }
 
 export type PositionProps = FC<PositionParams>;

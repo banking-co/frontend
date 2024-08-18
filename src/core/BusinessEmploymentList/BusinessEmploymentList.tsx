@@ -87,7 +87,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
         <>{staffs && <Tag value={`${staffs?.length}`} mode={Mode.Default} />}</>
       }
     >
-      <Position type="column" gap={12}>
+      <Position type="column" stretched gap={12}>
         {staffs?.map((emp) => {
           const symbol = emp.salary >= 1 ? "-" : "";
           const mode = Mode.Destroy;
@@ -103,7 +103,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
               subtitle={t("user.invited_at", {
                 date: formatDate(emp.createdAt),
               })}
-              after={<Tag value={fmtCurrency} mode={mode} />}
+              after={<Text tag={"span"} text={fmtCurrency} mode={mode} />}
               before={
                 <Avatar
                   isBot={isBot}
@@ -122,7 +122,8 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
         <Position
           type="line"
           justifyContent="center"
-          style={{ width: "100%", padding: "12px 0" }}
+          stretched
+          style={{ padding: "12px 0" }}
         >
           <Button
             type="secondary"

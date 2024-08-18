@@ -22,7 +22,6 @@ export const Input: InputProps = ({
   const ref = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState(props?.defaultValue || "");
-  // const [isFocused, setIsFocused] = useState(false);
 
   const handleOnClick = (e: any) => {
     if (ref && ref.current) {
@@ -33,7 +32,17 @@ export const Input: InputProps = ({
   };
 
   const handleInputChange = (e: any) => {
-    setValue(e.target.value);
+    setValue((str) => {
+      if (props.maxLength && props.maxLength > e.target.value.length) {
+        return e.target.value;
+      }
+
+      if (!props.maxLength) {
+        return e.target.value;
+      }
+
+      return str;
+    });
     props.onChange && props.onChange(e.target.value);
   };
 
@@ -50,7 +59,7 @@ export const Input: InputProps = ({
       {icon && <div className="Input__icon">{icon}</div>}
 
       <input
-        className={classNames("Input__inherit")}
+        className={"Input__inherit"}
         placeholder={props.placeholder}
         ref={ref}
         value={value}

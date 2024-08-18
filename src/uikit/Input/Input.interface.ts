@@ -8,6 +8,7 @@ interface InputParams extends HTMLAttributes<HTMLInputElement> {
   text?: string;
   disabled?: boolean;
   placeholder?: string;
+  maxLength?: number;
 }
 
 export type InputProps = FC<InputParams>;

@@ -1,13 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "i18nano";
-import { formatCurrency, formatDate, shrinkUserName } from "utils";
-import { useGetUser } from "hooks";
+import { formatCurrency, formatDate } from "utils";
 
 import {
   Avatar,
-  Button,
   Grid,
   Input,
   Placeholder,
@@ -22,18 +19,16 @@ import {
   businessStaffActions,
   businessStaffSelector,
 } from "store/businessStaff";
-import { businessSelector } from "store/business";
 
-import { IconSearch, IconUsers } from "@tabler/icons-react";
+import { IconSearch } from "@tabler/icons-react";
 
+import { Mode } from "models";
 import type { BusinessEmploymentRecruitProps } from "./BusinessEmploymentRecruit.interface";
-import { Mode, UserType } from "models";
 
 export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
   const tKey = "management.employment.page.recruit";
   const t = useTranslation();
   const d = useDispatch();
-  const navigate = useNavigate();
   const { isLoadingBusinessStaffRecruitPage, recruitStaff } = useSelector(
     businessStaffSelector,
   );
@@ -62,13 +57,17 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
       }
       subHeader={
         <>
-          <Input icon={<IconSearch />} placeholder={"12312312312"} stretched />
+          <Input
+            icon={<IconSearch />}
+            placeholder={t(`${tKey}.search`)}
+            maxLength={30}
+            stretched
+          />
         </>
       }
     >
-      <Position type="column" gap={12}>
+      <Position type="column" stretched gap={12}>
         {recruitStaff?.map((it) => {
-          const mode = Mode.Progress;
           const fmtCurrency = formatCurrency(it.cost, { symbol: "$" });
           const isBot = it.name.toLowerCase().includes("bot");
 
@@ -80,25 +79,13 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
               subtitle={t("item.created_at", {
                 date: formatDate(it.createdAt),
               })}
-              after={<Tag value={fmtCurrency} mode={mode} />}
-              before={<></>}
+              after={
+                <Text text={fmtCurrency} tag={"span"} mode={Mode.Progress} />
+              }
+              before={<Avatar isBot={isBot} src="" isSquare size="medium" />}
             />
           );
         })}
-        <Position
-          type="line"
-          justifyContent="center"
-          style={{ width: "100%", padding: "12px 0" }}
-        >
-          <Button
-            type="secondary"
-            onClick={() =>
-              navigate("/management/employment/recruit", { replace: true })
-            }
-          >
-            <Text text={t("user.invite_more")} tag={"p"} isMuted />
-          </Button>
-        </Position>
       </Position>
     </Grid>
   );
