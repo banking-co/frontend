@@ -1,3 +1,4 @@
+import { ScrollRestoration } from "react-router-dom";
 import { useTranslation } from "i18nano";
 
 import { Grid, List, Position } from "uikit";
@@ -11,6 +12,7 @@ export const Menu: MenuProps = () => {
 
   return (
     <Position type="column" gap={24}>
+      <ScrollRestoration />
       {Object.keys(itemsIds).map((key) => (
         <Grid
           key={key}

@@ -10,9 +10,12 @@ import { shrinkUserName } from "utils";
 
 export const UnitName: UnitNameProps = (props) => {
   const getUser = useGetUser();
-  const user = useMemo(() => getUser(props.userId), [props.userId]);
+  const user = useMemo(
+    () => props.user || getUser(props.userId),
+    [props.userId],
+  );
   const userLastName = useMemo(
-    () => shrinkUserName(user, true),
+    () => shrinkUserName(user, props.isShortLastName),
     [props.isShortLastName, user],
   );
 

@@ -12,8 +12,8 @@ export interface BusinessEmployeeModel extends ModelsDefaultKeys {
   roleId: string;
   salary: number;
 
-  employerID: number;
-  workerID: number;
+  employerId: number;
+  workerId: number;
 
   workerPersonalInfo: UserPersonalInfoModel;
   employerPersonalInfo: UserPersonalInfoModel;

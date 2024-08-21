@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useGetUser } from "hooks";
 
 import { Text } from "uikit";
@@ -6,5 +7,12 @@ import type { UnitIdentifierProps } from "./UnitIdentifier.interface";
 
 export const UnitIdentifier: UnitIdentifierProps = (props) => {
   const getUser = useGetUser();
-  return <Text text={`@${getUser(props.userId)}`} tag="p" isMuted />;
+
+  const user = useMemo(
+    () => props.user || getUser(props.userId) || undefined,
+    [],
+  );
+
+  if (!user) return null;
+  return <Text text={`@uid${user.id}`} tag={props.tagName || "p"} isMuted />;
 };

@@ -1,29 +1,36 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { NavigateOptions, useSearchParams } from "react-router-dom";
 
-import { appActions, appSelector } from "store/app";
 import { Modals } from "models";
 
-const useModal = () => {
-  const dispatch = useDispatch();
-  const { activeModal } = useSelector(appSelector);
+export const useModal = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const key = "modal";
 
-  const showModal = useCallback(
-    (modalType: Modals, modalProps = {}) => {
-      dispatch(appActions.openModal(modalType, modalProps));
+  const activeModal = searchParams.get(key) as Modals | undefined;
+
+  const openModal = useCallback(
+    (id: Modals, params?: NavigateOptions) => {
+      if (!activeModal || activeModal !== id) {
+        setSearchParams({ [key]: id }, params);
+      }
     },
-    [dispatch],
+    [activeModal],
   );
 
-  const hideModal = useCallback(() => {
-    dispatch(appActions.closeModal());
-  }, [dispatch]);
+  const closeModal = useCallback(() => {
+    setSearchParams(
+      (prev) => {
+        prev.delete(key);
+        return prev;
+      },
+      { replace: true },
+    );
+  }, [activeModal]);
 
   return {
     activeModal,
-    showModal,
-    hideModal,
+    openModal,
+    closeModal,
   };
 };
-
-export default useModal;

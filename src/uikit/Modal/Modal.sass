@@ -1,0 +1,91 @@
+.Modal
+  $margin: 12px
+  $radius: 15px
+
+  &__wrapper
+    position: fixed
+    background: var(--secondary)
+    min-height: 200px
+    overflow: hidden
+
+    &--animate-in
+      animation: slideIn 0.3s ease forwards
+
+    &--animate-out
+      animation: slideOut 0.3s ease forwards
+
+    &--page
+      border-radius: $radius $radius 0 0
+      width: 100%
+
+    &--card
+      border-radius: $radius
+      width: calc(100% - ($margin * 2))
+      bottom: $margin
+
+  &__header
+    position: relative
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: calc($margin / 2) $margin
+
+    &::before
+      content: ""
+      position: absolute
+      height: 1px
+      width: 100%
+      right: 0
+      bottom: 0
+      background: var(--tertiary)
+
+    &-close
+      position: relative
+      overflow: hidden
+      display: flex
+      justify-content: center
+      align-items: center
+      padding: 4px
+      border-radius: calc($radius / 2) !important
+
+  &__container
+    padding: $margin
+    height: 100%
+    box-sizing: border-box
+
+  &__overlay
+    $overlay-transition: 0.3s
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    background: rgba(0, 0, 0, 0.5)
+    z-index: 1000
+    pointer-events: none
+    opacity: 0
+    transition: opacity $overlay-transition ease, visibility $overlay-transition ease
+
+    &--visible
+      opacity: 1
+      pointer-events: auto
+      transition: opacity $overlay-transition ease, visibility $overlay-transition ease
+
+@keyframes slideIn
+  0%
+    transform: translateY(20px)
+    opacity: 0
+  100%
+    transform: translateY(0)
+    opacity: 1
+
+@keyframes slideOut
+  0%
+    transform: translateY(0)
+    opacity: 1
+  100%
+    transform: translateY(20px)
+    opacity: 0

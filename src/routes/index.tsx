@@ -7,6 +7,7 @@ import {
   Management,
   BusinessEmploymentList,
   BusinessEmploymentRecruit,
+  UsersProfile,
 } from "core";
 import { RouteObject } from "react-router-dom";
 
@@ -26,6 +27,11 @@ const routes: RouteObject[] = [
       {
         path: "/menu",
         element: <Menu />,
+      },
+
+      {
+        path: "/profile/:id",
+        element: <UsersProfile />,
       },
 
       {

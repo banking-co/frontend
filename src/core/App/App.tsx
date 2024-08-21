@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { Outlet } from "react-router-dom";
+import { ModalProvider } from "modals";
 import { AppContainer } from "uikit";
 import { AppLoading } from "../AppLoading/AppLoading";
 
@@ -28,6 +29,7 @@ export const App: AppProps = () => {
   return (
     <AppLoading>
       <AppContainer children={<Outlet />} />
+      <ModalProvider />
     </AppLoading>
   );
 };

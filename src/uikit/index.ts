@@ -26,3 +26,4 @@ export * from "./RichCell/RichCell";
 export * from "./Button/Button";
 export * from "./Events/Events";
 export * from "./Input/Input";
+export * from "./Modal/Modal";

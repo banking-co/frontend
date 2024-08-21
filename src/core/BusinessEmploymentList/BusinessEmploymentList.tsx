@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "i18nano";
 import { formatCurrency, formatDate, shrinkUserName } from "utils";
-import { useGetUser } from "hooks";
+import { useGetUser, useModal } from "hooks";
 
 import {
   Avatar,
@@ -38,6 +38,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const { isLoadingBusinessStaffPage, businessesStaff } = useSelector(
     businessStaffSelector,
   );
+  const { openModal } = useModal();
 
   const staffs = useMemo(() => {
     if (!primaryBusinessId || !businessesStaff[primaryBusinessId]) {
@@ -81,60 +82,71 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   }
 
   return (
-    <Grid
-      title={t(`${tKey}.list.title`)}
-      headerAfter={
-        <>{staffs && <Tag value={`${staffs?.length}`} mode={Mode.Default} />}</>
-      }
-    >
-      <Position type="column" stretched gap={12}>
-        {staffs?.map((emp) => {
-          const symbol = emp.salary >= 1 ? "-" : "";
-          const mode = Mode.Destroy;
-          const fmtCurrency = `${symbol}${formatCurrency(emp.salary, { symbol: "$" })}`;
-          const isBot = emp.userType === UserType.Bot;
-          const user = !isBot ? getUser(emp.workerID) : undefined;
+    <>
+      <Grid
+        title={t(`${tKey}.list.title`)}
+        headerAfter={
+          <>
+            {staffs && <Tag value={`${staffs?.length}`} mode={Mode.Default} />}
+          </>
+        }
+      >
+        <Position type="column" stretched gap={12}>
+          {staffs?.map((emp) => {
+            const symbol = emp.salary >= 1 ? "-" : "";
+            const mode = Mode.Destroy;
+            const fmtCurrency = `${symbol}${formatCurrency(emp.salary, { symbol: "$" })}`;
+            const isBot = emp.userType === UserType.Bot;
+            const user = !isBot ? getUser(emp.workerId) : undefined;
 
-          return (
-            <RichCell
-              key={"" + emp.id + emp.workerID + emp.userType}
-              onClick={() => {}}
-              title={isBot ? t("user.bot") : shrinkUserName(user)}
-              subtitle={t("user.invited_at", {
-                date: formatDate(emp.createdAt),
-              })}
-              after={<Text tag={"span"} text={fmtCurrency} mode={mode} />}
-              before={
-                <Avatar
-                  isBot={isBot}
-                  src={
-                    user?.personalInfo?.photo100 ||
-                    user?.personalInfo?.photo200 ||
-                    ""
-                  }
-                  isSquare
-                  size="medium"
-                />
-              }
-            />
-          );
-        })}
-        <Position
-          type="line"
-          justifyContent="center"
-          stretched
-          style={{ padding: "12px 0" }}
-        >
-          <Button
-            type="secondary"
-            onClick={() =>
-              navigate("/management/employment/recruit", { replace: true })
-            }
+            return (
+              <RichCell
+                key={"" + emp.id + emp.workerId + emp.userType}
+                onClick={
+                  isBot
+                    ? undefined
+                    : () => {
+                        console.log(emp);
+                        navigate(`/profile/${emp.workerId}`);
+                      }
+                }
+                title={isBot ? t("user.bot") : shrinkUserName(user)}
+                subtitle={t("user.invited_at", {
+                  date: formatDate(emp.createdAt),
+                })}
+                after={<Text tag={"span"} text={fmtCurrency} mode={mode} />}
+                before={
+                  <Avatar
+                    isBot={isBot}
+                    src={
+                      user?.personalInfo?.photo100 ||
+                      user?.personalInfo?.photo200 ||
+                      ""
+                    }
+                    isSquare
+                    size="medium"
+                  />
+                }
+              />
+            );
+          })}
+          <Position
+            type="line"
+            justifyContent="center"
+            stretched
+            style={{ padding: "12px 0" }}
           >
-            <Text text={t("user.invite_more")} tag={"p"} isMuted />
-          </Button>
+            <Button
+              type="secondary"
+              onClick={() =>
+                navigate("/management/employment/recruit", { replace: true })
+              }
+            >
+              <Text text={t("user.invite_more")} tag={"p"} isMuted />
+            </Button>
+          </Position>
         </Position>
-      </Position>
-    </Grid>
+      </Grid>
+    </>
   );
 };

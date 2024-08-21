@@ -1,12 +1,18 @@
 import "./ModalProvider.sass";
 
-import { useSelector } from "react-redux";
-
-import { appSelector } from "store/app";
+import { useEffect } from "react";
+import { useModal } from "hooks";
 
 import { ModalProviderProps } from "./ModalProvider.interface";
 
+import { modals } from "./ModalProvider.routing";
+
 export const ModalProvider: ModalProviderProps = () => {
-  const { activeModal } = useSelector(appSelector);
-  return <></>;
+  const { activeModal } = useModal();
+
+  useEffect(() => {
+    console.log("ModalProvider - active modal: ", activeModal);
+  }, [activeModal]);
+
+  return <>{activeModal ? modals[activeModal].element : null}</>;
 };

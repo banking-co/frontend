@@ -1,7 +1,7 @@
 import "./Profile.sass";
 
 import { useTranslation } from "i18nano";
-import { useNavigate } from "react-router-dom";
+import { ScrollRestoration, useNavigate } from "react-router-dom";
 import { calculatingRating, formatCurrency } from "utils";
 
 import { Card, PercentageVisualization, Position, Tag, Text } from "uikit";
@@ -9,23 +9,26 @@ import { BalanceCard, CurrencyExchangeRate } from "components";
 
 import {
   IconArrowBigDown,
-  IconGift,
   IconArrowsExchange,
+  IconCurrencyDollar,
+  IconGift,
   IconReload,
   IconTrendingUp,
-  IconCurrencyDollar,
 } from "@tabler/icons-react";
 
-import { Mode } from "models";
+import { Modals, Mode } from "models";
 import type { ProfileProps } from "./Profile.interface";
+import { useModal } from "hooks";
 
 export const Profile: ProfileProps = () => {
+  const { openModal } = useModal();
   const t = useTranslation();
   const n = useNavigate();
   const isDisable = false;
 
   return (
     <>
+      <ScrollRestoration />
       <BalanceCard
         tags={[
           {
@@ -98,7 +101,7 @@ export const Profile: ProfileProps = () => {
         icon={<IconGift />}
         title={t("bonus.title")}
         propagation={"text"}
-        onClick={() => {}}
+        onClick={() => openModal(Modals.Bonus)}
       >
         <Text text={t("bonus.info.available")} tag={"span"} isMuted />
       </Card>
@@ -106,7 +109,7 @@ export const Profile: ProfileProps = () => {
         title={t("currency.title")}
         icon={<IconArrowsExchange />}
         propagation={"text"}
-        onClick={() => {}}
+        onClick={() => openModal(Modals.Currency)}
       >
         <CurrencyExchangeRate />
       </Card>

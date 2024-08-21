@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from "react";
+import { UserModel } from "models";
 
 interface UnitNameParams {
   userId?: number;
@@ -7,6 +8,7 @@ interface UnitNameParams {
   after?: ReactNode;
   visibleUserId?: boolean;
   isShortLastName?: boolean;
+  user?: UserModel;
 }
 
 export type UnitNameProps = FC<UnitNameParams>;

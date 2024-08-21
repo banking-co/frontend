@@ -9,7 +9,10 @@ export enum Platform {
   Android = "android",
 }
 
-export enum Modals {}
+export enum Modals {
+  Bonus = "bonus",
+  Currency = "currency",
+}
 
 export enum Theme {
   Dark = "dark",

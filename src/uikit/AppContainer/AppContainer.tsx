@@ -2,7 +2,8 @@ import "./AppContainer.sass";
 
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import { useTranslation } from "i18nano";
 import classNames from "classnames";
 
 import { AppHeader, BottomNavbar, Placeholder, Spinner } from "uikit";
@@ -10,9 +11,8 @@ import { AppHeader, BottomNavbar, Placeholder, Spinner } from "uikit";
 import { realtimeSelector } from "store/realtime";
 
 import type { AppContainerProps } from "./AppContainer.interface";
-import { useTranslation } from "i18nano";
 
-export const AppContainer: AppContainerProps = (props) => {
+export const AppContainer: AppContainerProps = memo((props) => {
   const location = useLocation();
   const [showBackButton, setShowBackButton] = useState(false);
   const { isLoggedIn, isConnected } = useSelector(realtimeSelector);
@@ -53,4 +53,4 @@ export const AppContainer: AppContainerProps = (props) => {
       <BottomNavbar />
     </div>
   );
-};
+});
