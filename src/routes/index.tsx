@@ -43,12 +43,12 @@ const routes: RouteObject[] = [
         element: <BusinessEmploymentList />,
       },
       {
-        path: "/management/employment/recruit",
+        path: "/management/employment/search",
         element: <BusinessEmploymentRecruit />,
       },
 
       {
-        path: "/menu/settings/settings",
+        path: "/menu/settings",
         element: <Settings />,
       },
     ],

@@ -1,5 +1,3 @@
-import type { ItemsIds, ItemsIcons } from "./Management.interface";
-
 import {
   IconCoins,
   IconInfoSquareRounded,
@@ -14,35 +12,138 @@ import {
   IconBolt,
   IconWalk,
   IconMoneybag,
-  IconChecklist,
-  IconFileSearch,
   IconUsers,
+  IconFiles,
 } from "@tabler/icons-react";
+import { ListItemsModel, Modals } from "models";
 
-export const itemsIds: ItemsIds = {
-  bank: ["info", "rating", "transactions", "more"],
-  contracts: ["take_contract", "close_contract"],
-  employment: ["list", "recruit", "salary", "dismiss"],
-  boost: ["boost_bank"],
-  tax: ["pay_tax", "benefits", "reduce_tax"],
-  wiki: ["how_start", "how_start_make_money"],
-};
+const route = "/management";
 
-export const itemsIcons: ItemsIcons = {
-  recruit: <IconUserSearch />,
-  list: <IconUsers />,
-  info: <IconInfoSquareRounded />,
-  rating: <IconChartLine />,
-  transactions: <IconCreditCardPay />,
-  more: <IconDots />,
-  salary: <IconCoins />,
-  dismiss: <IconUserMinus />,
-  pay_tax: <IconCashBanknote />,
-  benefits: <IconSparkles />,
-  reduce_tax: <IconRosetteDiscount />,
-  boost_bank: <IconBolt />,
-  how_start: <IconWalk />,
-  how_start_make_money: <IconMoneybag />,
-  take_contract: <IconFileSearch />,
-  close_contract: <IconChecklist />,
-};
+export const items: ListItemsModel = [
+  {
+    title: `bank.title`,
+    description: `bank.description`,
+    children: [
+      {
+        type: "modal",
+        modal: Modals.RenameBank,
+        icon: <IconInfoSquareRounded />,
+        translate_key: `bank.info`,
+      },
+      {
+        type: "route",
+        to: `${route}/bank/rating`,
+        icon: <IconChartLine />,
+        translate_key: `bank.rating`,
+      },
+      {
+        type: "route",
+        to: `${route}/bank/transactions`,
+        icon: <IconCreditCardPay />,
+        translate_key: `bank.transactions`,
+      },
+      {
+        type: "modal",
+        modal: Modals.Bonus,
+        icon: <IconDots />,
+        translate_key: `bank.more`,
+      },
+    ],
+  },
+  {
+    title: `contracts.title`,
+    description: `contracts.description`,
+    children: [
+      {
+        type: "route",
+        to: `${route}/contracts/list`,
+        icon: <IconFiles />,
+        translate_key: `contracts.list`,
+      },
+    ],
+  },
+  {
+    title: `employment.title`,
+    description: `employment.description`,
+    children: [
+      {
+        type: "route",
+        to: `${route}/employment/list`,
+        icon: <IconUsers />,
+        translate_key: `employment.list`,
+      },
+      {
+        type: "route",
+        to: `${route}/employment/search`,
+        icon: <IconUserSearch />,
+        translate_key: `employment.search`,
+      },
+      {
+        type: "route",
+        to: `${route}/employment/salary`,
+        icon: <IconCoins />,
+        translate_key: `employment.salary`,
+      },
+      {
+        type: "route",
+        to: `${route}/employment/dismiss`,
+        icon: <IconUserMinus />,
+        translate_key: `employment.dismiss`,
+      },
+    ],
+  },
+  {
+    title: `boost.title`,
+    description: `boost.description`,
+    children: [
+      {
+        type: "route",
+        to: `${route}/boost/upgrade`,
+        icon: <IconBolt />,
+        translate_key: `boost.upgrade`,
+      },
+    ],
+  },
+  {
+    title: `tax.title`,
+    description: `tax.description`,
+    children: [
+      {
+        type: "route",
+        to: `${route}/tax/pay`,
+        icon: <IconCashBanknote />,
+        translate_key: `tax.pay`,
+      },
+      {
+        type: "route",
+        to: `${route}/tax/benefits`,
+        icon: <IconSparkles />,
+        translate_key: `tax.benefits`,
+      },
+      {
+        type: "route",
+        to: `${route}/tax/reduce`,
+        icon: <IconRosetteDiscount />,
+        translate_key: `tax.reduce`,
+      },
+    ],
+  },
+  {
+    title: `wiki.title`,
+    description: `wiki.description`,
+    children: [
+      {
+        type: "modal",
+        modal: Modals.Bonus,
+        icon: <IconWalk />,
+        translate_key: `wiki.how_start`,
+      },
+      {
+        type: "modal",
+        modal: Modals.Bonus,
+        icon: <IconMoneybag />,
+        translate_key: `wiki.how_start_make_money`,
+      },
+    ],
+  },
+];

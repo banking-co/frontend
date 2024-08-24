@@ -1,7 +1,7 @@
 import "./Text.sass";
 
 import classNames from "classnames";
-import { createElement, useMemo } from "react";
+import { createElement, useEffect, useMemo } from "react";
 import { debounce } from "lodash";
 
 import { IconChevronRight } from "@tabler/icons-react";
@@ -13,8 +13,12 @@ const Text: TextProps = (props) => {
     return props.text.replaceAll("=>", "→").replaceAll("$interpunct", "·");
   }, [props.text]);
 
+  useEffect(() => {
+    console.log(props.mode);
+  }, [props.mode]);
+
   return (
-    <div>
+    <div className="Text__wrapper">
       {createElement(
         props.tag,
         {

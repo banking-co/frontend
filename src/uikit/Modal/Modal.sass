@@ -1,91 +1,123 @@
-.Modal
-  $margin: 12px
-  $radius: 15px
+$background: var(--background)
 
-  &__wrapper
-    position: fixed
-    background: var(--secondary)
-    min-height: 200px
-    overflow: hidden
+.ModalChildren
+  display: flex
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  flex-direction: column
+  cursor: pointer
+  z-index: 999999
+  transform: translateZ(1px)
 
-    &--animate-in
-      animation: slideIn 0.3s ease forwards
-
-    &--animate-out
-      animation: slideOut 0.3s ease forwards
-
-    &--page
-      border-radius: $radius $radius 0 0
-      width: 100%
-
-    &--card
-      border-radius: $radius
-      width: calc(100% - ($margin * 2))
-      bottom: $margin
+  &::before
+    content: ""
+    display: flex
+    height: calc(55px + var(--safe-area-inset-top))
 
   &__header
-    position: relative
     display: flex
-    justify-content: space-between
+    width: 100%
+    height: 44px
+    justify-content: center
+    box-sizing: border-box
+    padding: 10px 0 0
+    transform: translateZ(10px)
+    z-index: 999
+
+    & div
+      width: 48px
+      height: 4px
+      background: var(--primary)
+      border-radius: 3px
+
+  &__inner
+    display: flex
+    position: relative
+    flex: 1 1
+    flex-direction: column-reverse
+    flex-wrap: nowrap
+    overflow: hidden
     align-items: center
-    padding: calc($margin / 2) $margin
+    background: rgba(0,0,0,.2)
+
+  &--snow
+    & .ModalChildren__children
+      border-radius: 12px 12px 0 0
+
+  &__children
+    display: flex
+    flex-direction: column
+    flex: 1 1
+    position: relative
+    overflow: hidden
+
+  &__after
+    display: flex
+    width: 100%
+    height: 100vh
+    background-color: $background
+
+  &__content
+    display: flex
+    background: $background
+    border-radius: 18px 18px 0 0
+    box-sizing: border-box
+    flex-direction: column
+    flex-wrap: nowrap
+    cursor: default
+    overflow: hidden
+    z-index: 999
+    padding: 0 12px 12px
+
+  &--page
+    & .ModalChildren__inner
+      padding: 0
+
+    & .ModalChildren__content
+      border-radius: 18px 18px 0 0
+      width: 100%
+      box-sizing: border-box
+
+  &--card
+    &.ModalChildren__inner
+      padding: 12px 12px calc(12px + var(--safe-area-inset-bottom)) 12px
+
+    & .ModalChildren__content
+      border-radius: 18px
+      width: calc(100% - 24px)
+      margin-bottom: 12px
+      border: 1px solid var(--primary)
+
+    & .ModalChildren__background
+      display: none
+
+  &__background
+    position: absolute
+    width: 100%
+    height: 100%
 
     &::before
       content: ""
-      position: absolute
-      height: 1px
+      display: block
       width: 100%
-      right: 0
-      bottom: 0
-      background: var(--tertiary)
+      height: 100%
+      z-index: 1
 
-    &-close
-      position: relative
-      overflow: hidden
-      display: flex
-      justify-content: center
-      align-items: center
-      padding: 4px
-      border-radius: calc($radius / 2) !important
-
-  &__container
-    padding: $margin
+  &__scroll
+    overflow-y: scroll
+    overflow-x: hidden
     height: 100%
-    box-sizing: border-box
 
-  &__overlay
-    $overlay-transition: 0.3s
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    display: flex
-    justify-content: center
-    align-items: center
-    background: rgba(0, 0, 0, 0.5)
-    z-index: 1000
-    pointer-events: none
-    opacity: 0
-    transition: opacity $overlay-transition ease, visibility $overlay-transition ease
+  &--animation
+    & .ModalChildren__after
+      transition: .24s
 
-    &--visible
-      opacity: 1
-      pointer-events: auto
-      transition: opacity $overlay-transition ease, visibility $overlay-transition ease
+    & .ModalChildren__content
+      transition: .24s
 
-@keyframes slideIn
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0)
-    opacity: 1
-
-@keyframes slideOut
-  0%
-    transform: translateY(0)
-    opacity: 1
-  100%
-    transform: translateY(20px)
-    opacity: 0
+      //-webkit-box-shadow: 0px -10px 36px 0px rgba(34, 60, 80, 0.05)
+  //-moz-box-shadow: 0px -10px 36px 0px rgba(34, 60, 80, 0.05)
+  //box-shadow: 0px -10px 36px 0px rgba(34, 60, 80, 0.05)

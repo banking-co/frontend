@@ -1,34 +1,13 @@
-import { ScrollRestoration } from "react-router-dom";
-import { useTranslation } from "i18nano";
+import { List, Position } from "uikit";
 
-import { Grid, List, Position } from "uikit";
-
-import { itemsIds, itemsIcons } from "./Menu.constants";
+import { items } from "./Menu.constants";
 
 import type { MenuProps } from "./Menu.interface";
 
 export const Menu: MenuProps = () => {
-  const t = useTranslation();
-
   return (
     <Position type="column" gap={24}>
-      <ScrollRestoration />
-      {Object.keys(itemsIds).map((key) => (
-        <Grid
-          key={key}
-          title={t(`menu.${key}.title`)}
-          description={t(`menu.${key}.description`)}
-        >
-          <List
-            items={itemsIds[key].map((subKey) => ({
-              type: "pagination",
-              icon: itemsIcons[subKey],
-              title: t(`menu.${key}.${subKey}`),
-              to: `/menu/${key}/${subKey}`,
-            }))}
-          />
-        </Grid>
-      ))}
+      <List items={items} />
     </Position>
   );
 };

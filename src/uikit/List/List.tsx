@@ -1,13 +1,15 @@
 import "./List.sass";
 
+import { useTranslation } from "i18nano";
 import { useNavigate } from "react-router-dom";
 import { throttle } from "lodash";
 
-import { ListItem } from "uikit";
+import { Grid, ListItem } from "uikit";
 
-import type { ListProps, ListItemsType } from "./List.interface";
+import type { ListProps } from "./List.interface";
 
 const List: ListProps = (props) => {
+  const t = useTranslation();
   const navigation = useNavigate();
 
   const throttledNextPage = throttle(
@@ -16,30 +18,50 @@ const List: ListProps = (props) => {
     250,
   );
 
-  return (
-    <div className="List">
-      {props.items.map((item) => {
-        switch (item.type) {
-          case "pagination":
-            return (
-              <ListItem.Pagination
-                key={`list-item-${item.to}`}
-                icon={item.icon}
-                title={item.title}
-                disablePropagation={item.disablePropagation}
-                onClick={() =>
-                  throttledNextPage(!item.disablePropagation && item.to)
-                }
-              />
-            );
-          case "switch":
-            return <ListItem.Switch icon={item.icon} title={item.title} />;
-          default:
-            return;
-        }
-      })}
-    </div>
-  );
+  return props.items.map((item, index) => {
+    return (
+      <Grid
+        title={t(item.title)}
+        key={item.title + item.description + index}
+        description={t(item.description)}
+      >
+        <div className="List">
+          {item.children.map((item) => {
+            switch (item.type) {
+              case "route":
+                return (
+                  <ListItem.Pagination
+                    key={`list-item-modal-${item.type}-${item.translate_key}-${item.to}`}
+                    icon={item.icon}
+                    title={t(item.translate_key) || item.translate_key}
+                    onClick={() => throttledNextPage(item.to)}
+                  />
+                );
+              case "modal":
+                return (
+                  <ListItem.Modal
+                    key={`list-item-modal-${item.type}-${item.translate_key}`}
+                    icon={item.icon}
+                    title={t(item.translate_key) || item.translate_key}
+                    modal={item.modal}
+                  />
+                );
+              case "switch":
+                return (
+                  <ListItem.Switch
+                    key={`list-item-modal-${item.type}-${item.translate_key}`}
+                    icon={item.icon}
+                    title={t(item.translate_key) || item.translate_key}
+                  />
+                );
+              default:
+                return;
+            }
+          })}
+        </div>
+      </Grid>
+    );
+  });
 };
 
-export { List, ListItemsType };
+export { List };

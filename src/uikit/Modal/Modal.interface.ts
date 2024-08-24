@@ -1,20 +1,18 @@
-import type { FC, HTMLAttributes, ReactNode } from "react";
+import type { FC, HTMLAttributes } from "react";
 
 interface ModalDefaultParams {
-  header?: string;
-  bottom?: ReactNode;
-
-  headerIcon?: ReactNode;
+  onClick?: () => void;
 }
 
 interface ModalChildrenParams
-  extends HTMLAttributes<HTMLElement>,
+  extends Omit<HTMLAttributes<HTMLElement>, "onClick">,
     ModalDefaultParams {
-  children?: ReactNode;
-  isPage?: boolean;
+  mode?: "card" | "page";
 }
 
-interface ModalParams extends HTMLAttributes<HTMLElement>, ModalDefaultParams {}
+interface ModalParams
+  extends Omit<HTMLAttributes<HTMLElement>, "onClick">,
+    ModalDefaultParams {}
 
 export type ModalChildrenProps = FC<ModalChildrenParams>;
 export type ModalProps = FC<ModalParams>;

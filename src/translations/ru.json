@@ -105,41 +105,14 @@
     "balance": "счетах",
     "rating": "рейтинге"
   },
-  "menu" : {
-    "user": {
-      "title": "Профиль",
-      "description": "",
-      "inventory": "Инвентарь"
-    },
-    "store": {
-      "title": "Покупки",
-      "description": "",
-      "stocks": "Акции",
-      "store": "Обычный магазин",
-      "donate": "Премиум магазин",
-      "market": "Рынок",
-      "auction": "Аукцион"
-    },
-    "wiki": {
-      "title": "FAQ",
-      "description": "Не знаешь что делать? Мы тебе поможет!",
-      "how_start": "Как начать играть?"
-    },
-    "entertainments": {
-      "title": "Развлечения",
-      "description": "Здесь начинается настоящее веселье!",
-      "quests": "Квесты",
-      "coin": "Монетка",
-      "clicker": "Копилка",
-      "bag": "Кот в мешке"
-    },
-    "settings": {
-      "title": "Настройки",
-      "description": "",
-      "settings": "Настройки"
-    }
-  },
   "bank": {
+    "title": "Банк",
+    "description": "",
+    "info": "Информация",
+    "rating": "Рейтинг",
+    "transactions": "Транзакции",
+    "more": "Еще",
+    "rename": "Переименовать",
     "staking": {
       "card": {
         "title": "Стейкинг",
@@ -157,67 +130,81 @@
       }
     }
   },
-  "management": {
-    "bank": {
-      "title": "Банк",
-      "description": "",
-      "info": "Информация",
-      "rating": "Рейтинг",
-      "transactions": "Транзакции",
-      "more": "Еще"
-    },
-    "contracts": {
-      "title": "Контракты",
-      "description": "",
-      "take_contract": "Взять контракт",
-      "close_contract": "Сдать контракт"
-    },
-    "employment": {
-      "title": "Сотрудники",
-      "description": "Тут можно нанять рабочих! Главное помнить, что количество мест ограничено!",
-      "list": "Список",
-      "recruit": "Поиск",
-      "salary": "Зарплаты",
-      "dismiss": "Уволить",
-      "page": {
-        "list": {
-          "title": "Сотрудники",
-          "undefined": {
-            "title": "У вас нет сотрудников",
-            "subtitle": "Найм сотрудников доступен в управлении банком!",
-            "goto": "Нанять!"
-          }
-        },
-        "recruit": {
-          "title": "Найм сотрудников",
-          "search": "Поиск..."
-        }
-      }
-    },
-    "boost": {
-      "title": "Улучшить",
-      "description": "",
-      "boost_bank": "Улучшить банк"
-    },
-    "tax": {
-      "title": "Налоговая",
-      "description": "",
-      "pay_tax": "Оплатить налог",
-      "benefits": "Налоговые льготы",
-      "reduce_tax": "Уменьшить налог"
-    },
-    "wiki": {
-      "title": "FAQ",
-      "description": "Всегда поможем, нажимай и изучай!",
-      "how_start": "Как управлять банком?",
-      "how_start_make_money": "Как заработать деньги?"
-    }
-  },
   "user": {
     "bot": "Бот",
     "user": "Пользователь",
+    "profile": "Профиль",
+    "profile_description": "",
     "invited_at": "Принят: {{date}}",
-    "invite_more": "Нанять еще"
+    "invite_more": "Нанять еще",
+    "inventory": "Инвентарь"
+  },
+  "contracts": {
+    "title": "Контракты",
+    "description": "",
+    "list": "Контракты"
+  },
+  "employment": {
+    "title": "Сотрудники",
+    "description": "Тут можно нанять рабочих! Главное помнить, что количество мест ограничено!",
+    "list": "Список",
+    "search": "Поиск",
+    "salary": "Зарплаты",
+    "dismiss": "Уволить",
+    "page": {
+      "list": {
+        "title": "Сотрудники",
+        "undefined": {
+          "title": "У вас нет сотрудников",
+          "subtitle": "Найм сотрудников доступен в управлении банком!",
+          "goto": "Нанять!"
+        }
+      },
+      "recruit": {
+        "title": "Найм сотрудников",
+        "search": "Поиск..."
+      }
+    }
+  },
+  "boost": {
+    "title": "Улучшения",
+    "description": "",
+    "upgrade": "Улучшить"
+  },
+  "tax": {
+    "title": "Налоговая",
+    "description": "",
+    "pay": "Оплатить налог",
+    "benefits": "Налоговые льготы",
+    "reduce": "Уменьшить налог"
+  },
+  "wiki": {
+    "title": "FAQ",
+    "description": "Не знаешь что делать? Мы тебе поможет!",
+    "how_start": "Что делать?",
+    "how_start_make_money": "Как заработать деньги?"
+  },
+  "store": {
+    "title": "Покупки",
+    "description": "",
+    "stocks": "Скидки на товары",
+    "store": "Обычный магазин",
+    "donate": "Премиумный магазин",
+    "market": "БУ товары",
+    "auction": "Аукцион"
+  },
+  "entertainments": {
+    "title": "Развлечения",
+    "description": "Здесь начинается настоящее веселье!",
+    "quests": "Квесты",
+    "coin": "Монетка",
+    "clicker": "Копилка",
+    "bag": "Кот в мешке"
+  },
+  "settings": {
+    "title": "Настройки",
+    "description": "",
+    "settings": "Настройки"
   },
   "item": {
     "created_at": "Создано: {{date}}"

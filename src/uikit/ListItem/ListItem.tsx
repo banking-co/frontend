@@ -1,10 +1,13 @@
 import "./ListItem.sass";
 
+import { useModal } from "hooks";
+
 import { Text, Switch as SwitchComponent, Events } from "uikit";
 
-import { IconChevronRight } from "@tabler/icons-react";
+import { IconChevronRight, IconClick } from "@tabler/icons-react";
 
 import type {
+  ListItemModalProps,
   ListItemPaginationProps,
   ListItemProps,
   ListItemSwitchProps,
@@ -52,7 +55,23 @@ const Switch: ListItemSwitchProps = (props) => {
   );
 };
 
+const Modal: ListItemModalProps = (props) => {
+  const { openModal } = useModal();
+
+  return (
+    <Component
+      icon={props.icon}
+      title={props.title}
+      after={
+        <IconClick width={14} height={14} strokeWidth={4} color="var(--gray)" />
+      }
+      onClick={() => openModal(props.modal)}
+    />
+  );
+};
+
 export const ListItem = {
   Pagination,
   Switch,
+  Modal,
 };

@@ -1,4 +1,5 @@
 import { FC, HTMLAttributes, ReactNode } from "react";
+import { Mode } from "models";
 
 interface ButtonParams extends HTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
@@ -7,6 +8,8 @@ interface ButtonParams extends HTMLAttributes<HTMLButtonElement> {
   type?: "primary" | "secondary" | "outline";
   text?: string;
   disabled?: boolean;
+  mode?: Mode;
+  isTextBold?: boolean;
 }
 
 export type ButtonProps = FC<ButtonParams>;

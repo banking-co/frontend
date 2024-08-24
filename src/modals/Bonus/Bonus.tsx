@@ -1,9 +1,22 @@
 import { useTranslation } from "i18nano";
 
-import { Modal } from "uikit";
+import { Modal, Text } from "uikit";
 
 export const Bonus = () => {
   const t = useTranslation();
 
-  return <Modal.Card header={t("bonus.title")}></Modal.Card>;
+  return (
+    <Modal.Card>
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+      <Text text={"12312321312"} tag={"p"} />
+    </Modal.Card>
+  );
 };
