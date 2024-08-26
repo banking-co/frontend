@@ -75,11 +75,16 @@ $background: var(--background)
   &--page
     & .ModalChildren__inner
       padding: 0
+      border: 1px solid var(--primary)
+      border-top: none
+      border-bottom: none
+      box-sizing: border-box
 
     & .ModalChildren__content
       border-radius: 18px 18px 0 0
       width: 100%
       box-sizing: border-box
+      border-top: 1px solid var(--primary)
 
   &--card
     &.ModalChildren__inner

@@ -1,27 +1,45 @@
 import "./AppUserFootnote.sass";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetUser } from "hooks";
+import { useGetUser, useModal } from "hooks";
 
-import { Avatar, UnitName } from "uikit";
+import { Avatar, Events } from "uikit";
 
 import { usersSelector } from "store/users";
 
 import type { AppUserFootnoteProps } from "./AppUserFootnote.interface";
+import { Modals } from "models";
+import { useLocation } from "react-router-dom";
+import classNames from "classnames";
 
 export const AppUserFootnote: AppUserFootnoteProps = () => {
   const getUser = useGetUser();
   const { primaryUserId } = useSelector(usersSelector);
+  const { openModal } = useModal();
+  const location = useLocation();
 
   const user = useMemo(() => getUser(), [primaryUserId]);
 
-  if (!user) {
+  if (!user || (location.pathname !== "/" && location.pathname !== "/menu")) {
     return null;
   }
 
+  if (location) {
+  }
+
   return (
-    <div className="AppUserFootnote__user">
+    <Events
+      type={"div"}
+      className={classNames("AppUserFootnote", "AppUserFootnote__user")}
+      onClick={() =>
+        openModal(Modals.UserProfile, {
+          state: {
+            uid: primaryUserId,
+          },
+        })
+      }
+    >
       <Avatar
         src={
           user.personalInfo?.photo50 ||
@@ -30,7 +48,8 @@ export const AppUserFootnote: AppUserFootnoteProps = () => {
         }
         isSquare
       />
-      <UnitName isShortLastName />
-    </div>
+
+      <div className={"AppUserFootnote__badge"} />
+    </Events>
   );
 };

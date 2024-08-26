@@ -13,10 +13,6 @@ const Text: TextProps = (props) => {
     return props.text.replaceAll("=>", "→").replaceAll("$interpunct", "·");
   }, [props.text]);
 
-  useEffect(() => {
-    console.log(props.mode);
-  }, [props.mode]);
-
   return (
     <div className="Text__wrapper">
       {createElement(

@@ -1,20 +1,20 @@
 import "./List.sass";
 
 import { useTranslation } from "i18nano";
-import { useNavigate } from "react-router-dom";
 import { throttle } from "lodash";
+import { useRouter } from "hooks";
 
 import { Grid, ListItem } from "uikit";
 
 import type { ListProps } from "./List.interface";
+import { RouteId } from "models";
 
 const List: ListProps = (props) => {
   const t = useTranslation();
-  const navigation = useNavigate();
+  const { goTo } = useRouter();
 
   const throttledNextPage = throttle(
-    (value: string | undefined | false) =>
-      value && navigation(value.toString()),
+    (value: RouteId) => value && goTo(value),
     250,
   );
 
@@ -52,6 +52,15 @@ const List: ListProps = (props) => {
                     key={`list-item-modal-${item.type}-${item.translate_key}`}
                     icon={item.icon}
                     title={t(item.translate_key) || item.translate_key}
+                  />
+                );
+              case "edit":
+                return (
+                  <ListItem.Edit
+                    key={`list-item-edit-${item.type}-${item.translate_key}`}
+                    icon={item.icon}
+                    title={t(item.translate_key) || item.translate_key}
+                    modal={item.modal}
                   />
                 );
               default:

@@ -1,6 +1,6 @@
 import "./Avatar.sass";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import classNames from "classnames";
 
 import { IconRobot, IconUser } from "@tabler/icons-react";

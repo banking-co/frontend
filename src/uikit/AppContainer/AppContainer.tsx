@@ -11,11 +11,14 @@ import { AppHeader, BottomNavbar, Placeholder, Spinner } from "uikit";
 import { realtimeSelector } from "store/realtime";
 
 import type { AppContainerProps } from "./AppContainer.interface";
+import { useModal } from "hooks";
 
 export const AppContainer: AppContainerProps = memo((props) => {
   const location = useLocation();
   const [showBackButton, setShowBackButton] = useState(false);
+  const [isReconnectionStatus, setReconnectionStatus] = useState(false);
   const { isLoggedIn, isConnected } = useSelector(realtimeSelector);
+  const { closeModal } = useModal();
   const t = useTranslation();
 
   useEffect(() => {
@@ -27,7 +30,16 @@ export const AppContainer: AppContainerProps = memo((props) => {
     }
   }, [location.pathname]);
 
-  if (!isConnected && isLoggedIn) {
+  useEffect(() => {
+    if (!isConnected && isLoggedIn) {
+      closeModal();
+      setReconnectionStatus(true);
+    } else {
+      setReconnectionStatus(false);
+    }
+  }, [isConnected, isLoggedIn]);
+
+  if (isReconnectionStatus) {
     return (
       <Placeholder
         icon={<Spinner />}

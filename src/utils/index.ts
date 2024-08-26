@@ -11,3 +11,4 @@ export * from "./queueExecute";
 export * from "./vkSign";
 export * from "./shrinkUserName";
 export * from "./clamp";
+export * from "./getRouteWithId";

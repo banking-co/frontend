@@ -7,6 +7,7 @@ import { businessSaga } from "./business/sagas";
 import { bonusSaga } from "./bonus/sagas";
 import { balancesSaga } from "./balances/sagas";
 import { businessStaffSaga } from "./businessStaff/sagas";
+import { workSaga } from "./work/sagas";
 
 export function* rootSaga() {
   yield all([
@@ -17,5 +18,6 @@ export function* rootSaga() {
     bonusSaga(),
     balancesSaga(),
     businessStaffSaga(),
+    workSaga(),
   ]);
 }

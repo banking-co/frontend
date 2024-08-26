@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../rootReducer";
 import {
+  LoadUserPayload,
   SetPrimaryUserPayload,
   SetUserPayload,
   SetUsersPayload,
@@ -8,6 +9,8 @@ import {
 } from "./interface";
 
 export const initialState: UsersState = {
+  isLoadingUser: false,
+
   primaryUserId: null,
   users: {},
 };
@@ -16,6 +19,10 @@ export const { reducer, actions } = createSlice({
   name: "users",
   initialState,
   reducers: {
+    loadUser(state, _: LoadUserPayload) {
+      state.isLoadingUser = true;
+    },
+
     setPrimaryUser(state, action: SetPrimaryUserPayload) {
       if (!action.payload) return;
       state.primaryUserId = action.payload;

@@ -4,7 +4,7 @@ import { realtimeActions } from "./index";
 import { usersActions } from "../users";
 import { balancesActions } from "../balances";
 
-import { setBusinessWorker, setPrimaryBusinessWorker } from "../business/sagas";
+import { setBusinessWorker } from "../business/sagas";
 import { appErrorWorker } from "../app/sagas";
 import { setBalancesWorker } from "../balances/sagas";
 import {
@@ -58,10 +58,6 @@ function* listenSocketMessageWorker(
 
       case SocketEvent.GetBusiness:
         yield call(setBusinessWorker, payload);
-        break;
-
-      case SocketEvent.GetPrimaryBusiness:
-        yield call(setPrimaryBusinessWorker, payload);
         break;
 
       case SocketEvent.GetBusinessStaff:

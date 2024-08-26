@@ -32,6 +32,7 @@ export enum Platform {
 }
 
 export enum Modals {
+  UserProfile = "user_profile",
   Bonus = "bonus",
   Currency = "currency",
   RenameBank = "rename_bank",
@@ -54,10 +55,38 @@ export type ListItemsModel = Array<{
   description: string;
   children: Array<
     (
-      | { type: "route"; to: string }
+      | { type: "route"; to: RouteId }
       | { type: "switch"; onSwitch: Function }
       | { type: "modal"; modal: Modals }
+      | { type: "edit"; modal: Modals }
     ) &
       DefaultListItemsParams
   >;
 }>;
+
+export enum RouteId {
+  App = "app",
+  Fallback = "fallback",
+  Profile = "profile",
+  Settings = "settings",
+
+  Management = "management",
+  ManagementEmployeeList = "management-employee-list",
+  ManagementEmployeeSearch = "management-employee-search",
+  ManagementBusinessRating = "management-business-rating",
+  ManagementBusinessTransactions = "management-business-transactions",
+  ManagementContractsList = "management-contracts-list",
+  ManagementEmployeeSalary = "management-employee-salary",
+  ManagementEmployeeDismiss = "management-employee-dismiss",
+  ManagementBoostUpgrade = "management-boost-upgrade",
+  ManagementTaxPay = "management-tax-pay",
+  ManagementTaxBenefits = "management-tax-benefits",
+  ManagementTaxReduce = "management-tax-reduce",
+
+  Menu = "menu",
+  MenuStoreStock = "menu-store-stock",
+  MenuStoreStore = "menu-store-store",
+  MenuStoreDonate = "menu-store-donate",
+  MenuStoreMarket = "menu-store-market",
+  MenuStoreAuction = "menu-store-auction",
+}

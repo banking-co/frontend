@@ -12,7 +12,7 @@ import {
   IconSquareRoundedPercentage,
   IconTrolley,
 } from "@tabler/icons-react";
-import { ListItemsModel, Modals } from "models";
+import { ListItemsModel, Modals, RouteId } from "models";
 
 const route = "/menu";
 
@@ -65,31 +65,31 @@ export const items: ListItemsModel = [
     children: [
       {
         type: "route",
-        to: `${route}/store/stocks`,
+        to: RouteId.MenuStoreStock,
         icon: <IconSquareRoundedPercentage />,
         translate_key: `store.stocks`,
       },
       {
         type: "route",
-        to: `${route}/store/store`,
+        to: RouteId.MenuStoreStore,
         icon: <IconShoppingCart />,
         translate_key: `store.store`,
       },
       {
         type: "route",
-        to: `${route}/store/donate`,
+        to: RouteId.MenuStoreDonate,
         icon: <IconDiamond />,
         translate_key: `store.donate`,
       },
       {
         type: "route",
-        to: `${route}/store/market`,
+        to: RouteId.MenuStoreMarket,
         icon: <IconTrolley />,
         translate_key: `store.market`,
       },
       {
         type: "route",
-        to: `${route}/store/auction`,
+        to: RouteId.MenuStoreAuction,
         icon: <IconGavel />,
         translate_key: `store.auction`,
       },

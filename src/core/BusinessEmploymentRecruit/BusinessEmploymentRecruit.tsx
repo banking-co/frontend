@@ -22,8 +22,9 @@ import {
 
 import { IconSearch } from "@tabler/icons-react";
 
-import { Mode } from "models";
+import { Modals, Mode } from "models";
 import type { BusinessEmploymentRecruitProps } from "./BusinessEmploymentRecruit.interface";
+import { useModal } from "hooks";
 
 export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
   const tKey = "management.employment.page.recruit";
@@ -32,6 +33,7 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
   const { isLoadingBusinessStaffRecruitPage, recruitStaff } = useSelector(
     businessStaffSelector,
   );
+  const { openModal } = useModal();
 
   useEffect(() => {
     d(businessStaffActions.loadBusinessStaffRecruit());
@@ -74,7 +76,16 @@ export const BusinessEmploymentRecruit: BusinessEmploymentRecruitProps = () => {
           return (
             <RichCell
               key={"" + it.id + it.rarity + it.type}
-              onClick={() => {}}
+              onClick={
+                () => {}
+                // isBot
+                //   ? undefined
+                //   : () => {
+                //       openModal(Modals.UserProfile, {
+                //         state: { uid: it.id },
+                //       });
+                //     }
+              }
               title={isBot ? t("user.bot") : it.name}
               subtitle={t("item.created_at", {
                 date: formatDate(it.createdAt),

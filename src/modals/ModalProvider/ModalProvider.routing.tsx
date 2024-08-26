@@ -4,6 +4,7 @@ import { Modals } from "models";
 import { Bonus } from "../Bonus/Bonus";
 import { Currency } from "../Currency/Currency";
 import { RenameBusiness } from "../RenameBusiness/RenameBusiness";
+import { UserProfile } from "../UserProfile/UserProfile";
 
 export const modals: ModalsInterface = {
   [Modals.Bonus]: {
@@ -14,5 +15,8 @@ export const modals: ModalsInterface = {
   },
   [Modals.RenameBank]: {
     element: <RenameBusiness key={Modals.Currency} />,
+  },
+  [Modals.UserProfile]: {
+    element: <UserProfile key={Modals.UserProfile} />,
   },
 };

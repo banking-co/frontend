@@ -5,6 +5,7 @@ import {
   BusinessEmployerRoleModel,
   BusinessModel,
   ItemModel,
+  WorkModel,
 } from "models";
 
 export enum SocketEvent {
@@ -19,10 +20,11 @@ export enum SocketEvent {
   Ping = "ping",
   Pong = "pong",
 
+  GetUser = "get_usr",
+
   GetBalances = "bal_get",
 
   GetBusiness = "get_bus",
-  GetPrimaryBusiness = "get_pr_bus",
   GetBusinessStaff = "get_st_bus",
   GetBusinessStaffRecruit = "get_st_r_bus",
   BuyBusinessStaffRecruit = "buy_st_r_bus",
@@ -75,6 +77,7 @@ export interface GetBalancesEvent {
 }
 
 interface DataGetBusinessModel {
+  type: "primary" | "default";
   bankId: number;
   bank: BusinessModel;
   bankRoles: BusinessEmployerRoleModel[];
@@ -82,11 +85,6 @@ interface DataGetBusinessModel {
 
 export interface GetBusinessEvent {
   event: SocketEvent.GetBusiness;
-  data: DataGetBusinessModel;
-}
-
-export interface GetPrimaryBusinessEvent {
-  event: SocketEvent.GetPrimaryBusiness;
   data: DataGetBusinessModel;
 }
 
@@ -106,14 +104,24 @@ export interface GetBusinessEmployersRecruitEvent {
   };
 }
 
+export interface GetUserEvent {
+  event: SocketEvent.GetUser;
+  data: {
+    user: UserModel;
+    bank: BusinessModel;
+    bankRoles: Array<BusinessEmployerRoleModel>;
+    work?: BusinessEmployeeModel;
+  };
+}
+
 export type WebSocketListenerPayload =
   | ConnWebSocketEvent
   | StartAppEvent
   | DiscWebSocketEvent
   | GetBusinessEvent
-  | GetPrimaryBusinessEvent
   | GetBalancesEvent
   | ErrorEvent
   | PongEvent
   | GetBusinessEmployersEvent
-  | GetBusinessEmployersRecruitEvent;
+  | GetBusinessEmployersRecruitEvent
+  | GetUserEvent;

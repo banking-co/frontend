@@ -1,9 +1,14 @@
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "i18nano";
-import { formatCurrency, formatDate, shrinkUserName } from "utils";
-import { useGetUser, useModal } from "hooks";
+import {
+  formatCurrency,
+  formatDate,
+  getRouteWithId,
+  shrinkUserName,
+} from "utils";
+import { useGetUser, useModal, useRouter } from "hooks";
 
 import {
   Avatar,
@@ -25,7 +30,7 @@ import { businessSelector } from "store/business";
 
 import { IconUsers } from "@tabler/icons-react";
 
-import { Mode, UserType } from "models";
+import { Modals, Mode, RouteId, UserType } from "models";
 import type { BusinessEmploymentListProps } from "./BusinessEmploymentList.interface";
 
 export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
@@ -33,6 +38,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
   const t = useTranslation();
   const d = useDispatch();
   const navigate = useNavigate();
+  const { goTo } = useRouter();
   const getUser = useGetUser();
   const { primaryBusinessId } = useSelector(businessSelector);
   const { isLoadingBusinessStaffPage, businessesStaff } = useSelector(
@@ -77,6 +83,9 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
             <Button text={t(`${tKey}.list.undefined.goto`)} type="primary" />
           </div>
         }
+        onClick={() =>
+          goTo(RouteId.ManagementEmployeeSearch, { replace: true })
+        }
       />
     );
   }
@@ -106,8 +115,9 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
                   isBot
                     ? undefined
                     : () => {
-                        console.log(emp);
-                        navigate(`/profile/${emp.workerId}`);
+                        openModal(Modals.UserProfile, {
+                          state: { uid: emp.workerId },
+                        });
                       }
                 }
                 title={isBot ? t("user.bot") : shrinkUserName(user)}
@@ -139,7 +149,7 @@ export const BusinessEmploymentList: BusinessEmploymentListProps = () => {
             <Button
               type="secondary"
               onClick={() =>
-                navigate("/management/employment/recruit", { replace: true })
+                goTo(RouteId.ManagementEmployeeSearch, { replace: true })
               }
             >
               <Text text={t("user.invite_more")} tag={"p"} isMuted />

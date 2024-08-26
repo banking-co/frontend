@@ -7,3 +7,4 @@ export * from "./balance";
 export * from "./items";
 export * from "./bonus";
 export * from "./business";
+export * from "./work";

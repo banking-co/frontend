@@ -1,7 +1,7 @@
 import "./BottomNavbar.sass";
 
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "i18nano";
 import classNames from "classnames";
 
@@ -10,42 +10,42 @@ import { Position, Text } from "uikit";
 import type { BottomNavbarProps } from "./BottomNavbar.interface";
 
 import { IconBuildingBank, IconLayoutDashboard } from "@tabler/icons-react";
+import { RouteId } from "models";
+import { useRouter } from "hooks";
+import { getRouteWithId } from "utils";
 
 const items = [
   {
     icon: <IconBuildingBank />,
-    key: "/",
+    key: RouteId.Profile,
     title: "home",
   },
   {
     icon: <IconLayoutDashboard />,
-    key: "/menu",
+    key: RouteId.Menu,
     title: "menu",
   },
 ];
 
 export const BottomNavbar: BottomNavbarProps = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("");
+  const { goTo } = useRouter();
+  const [activeTab, setActiveTab] = useState<RouteId>();
   const t = useTranslation();
 
   const setActiveTabFromUrl = () => {
     const pathname = location.pathname;
-    if (pathname.length <= 1) {
-      return setActiveTab("/");
-    }
-
     for (let item of items) {
-      if (pathname.match(item.key)) {
-        return setActiveTab(item.key);
+      const route = getRouteWithId(item.key);
+      if (route && pathname.match(route.path || "")) {
+        setActiveTab(item.key);
       }
     }
   };
 
   useEffect(() => {
     setActiveTabFromUrl();
-  }, []);
+  }, [location]);
 
   return (
     <nav className="BottomNavbar">
@@ -58,7 +58,7 @@ export const BottomNavbar: BottomNavbarProps = () => {
                 BottomNavbar__item_active: activeTab === item.key,
               })}
               onClick={() => {
-                navigate(item.key, { replace: true });
+                goTo(item.key, { replace: true });
                 setActiveTab(item.key);
               }}
             >

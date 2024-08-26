@@ -1,23 +1,21 @@
 import {
-  IconCoins,
-  IconInfoSquareRounded,
+  IconBolt,
+  IconCashBanknote,
   IconChartLine,
+  IconCoins,
   IconCreditCardPay,
   IconDots,
-  IconUserSearch,
-  IconUserMinus,
-  IconSparkles,
-  IconRosetteDiscount,
-  IconCashBanknote,
-  IconBolt,
-  IconWalk,
-  IconMoneybag,
-  IconUsers,
   IconFiles,
+  IconInfoSquareRounded,
+  IconMoneybag,
+  IconRosetteDiscount,
+  IconSparkles,
+  IconUserMinus,
+  IconUsers,
+  IconUserSearch,
+  IconWalk,
 } from "@tabler/icons-react";
-import { ListItemsModel, Modals } from "models";
-
-const route = "/management";
+import { ListItemsModel, Modals, RouteId } from "models";
 
 export const items: ListItemsModel = [
   {
@@ -25,20 +23,20 @@ export const items: ListItemsModel = [
     description: `bank.description`,
     children: [
       {
-        type: "modal",
+        type: "edit",
         modal: Modals.RenameBank,
         icon: <IconInfoSquareRounded />,
         translate_key: `bank.info`,
       },
       {
         type: "route",
-        to: `${route}/bank/rating`,
+        to: RouteId.ManagementBusinessRating,
         icon: <IconChartLine />,
         translate_key: `bank.rating`,
       },
       {
         type: "route",
-        to: `${route}/bank/transactions`,
+        to: RouteId.ManagementBusinessTransactions,
         icon: <IconCreditCardPay />,
         translate_key: `bank.transactions`,
       },
@@ -56,7 +54,7 @@ export const items: ListItemsModel = [
     children: [
       {
         type: "route",
-        to: `${route}/contracts/list`,
+        to: RouteId.ManagementContractsList,
         icon: <IconFiles />,
         translate_key: `contracts.list`,
       },
@@ -68,25 +66,25 @@ export const items: ListItemsModel = [
     children: [
       {
         type: "route",
-        to: `${route}/employment/list`,
+        to: RouteId.ManagementEmployeeList,
         icon: <IconUsers />,
         translate_key: `employment.list`,
       },
       {
         type: "route",
-        to: `${route}/employment/search`,
+        to: RouteId.ManagementEmployeeSearch,
         icon: <IconUserSearch />,
         translate_key: `employment.search`,
       },
       {
         type: "route",
-        to: `${route}/employment/salary`,
+        to: RouteId.ManagementEmployeeSalary,
         icon: <IconCoins />,
         translate_key: `employment.salary`,
       },
       {
         type: "route",
-        to: `${route}/employment/dismiss`,
+        to: RouteId.ManagementEmployeeDismiss,
         icon: <IconUserMinus />,
         translate_key: `employment.dismiss`,
       },
@@ -98,7 +96,7 @@ export const items: ListItemsModel = [
     children: [
       {
         type: "route",
-        to: `${route}/boost/upgrade`,
+        to: RouteId.ManagementBoostUpgrade,
         icon: <IconBolt />,
         translate_key: `boost.upgrade`,
       },
@@ -110,19 +108,19 @@ export const items: ListItemsModel = [
     children: [
       {
         type: "route",
-        to: `${route}/tax/pay`,
+        to: RouteId.ManagementTaxPay,
         icon: <IconCashBanknote />,
         translate_key: `tax.pay`,
       },
       {
         type: "route",
-        to: `${route}/tax/benefits`,
+        to: RouteId.ManagementTaxBenefits,
         icon: <IconSparkles />,
         translate_key: `tax.benefits`,
       },
       {
         type: "route",
-        to: `${route}/tax/reduce`,
+        to: RouteId.ManagementTaxReduce,
         icon: <IconRosetteDiscount />,
         translate_key: `tax.reduce`,
       },

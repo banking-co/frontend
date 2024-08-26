@@ -2,11 +2,7 @@ import { all, put, takeLatest } from "redux-saga/effects";
 import { businessActions } from "./index";
 import { realtimeActions } from "../realtime";
 import { LoadPrimaryBusinessPayload } from "./interface";
-import { SocketEvent } from "models";
-import {
-  GetBusinessEvent,
-  GetPrimaryBusinessEvent,
-} from "../realtime/interface";
+import { SocketEvent, GetBusinessEvent } from "models";
 
 function* loadPrimaryBusinessWorker(
   action: LoadPrimaryBusinessPayload,
@@ -16,8 +12,9 @@ function* loadPrimaryBusinessWorker(
   try {
     yield put(
       realtimeActions.sendMessage({
-        event: SocketEvent.GetPrimaryBusiness,
+        event: SocketEvent.GetBusiness,
         data: {
+          type: "primary",
           userId: action.payload.userId,
         },
       }),
@@ -30,22 +27,15 @@ function* loadPrimaryBusinessWorker(
 export function* setBusinessWorker(action: GetBusinessEvent): unknown {
   try {
     if (!action.data?.bank) return;
+
+    if (action.data.type === "primary") {
+      yield put(businessActions.setPrimaryBusiness(action.data.bankId));
+      yield put(businessActions.stopLoadingPrimaryBusiness());
+    }
+
     yield put(businessActions.setBusiness(action.data));
   } catch (e) {
     console.error("Set business error:", e);
-  }
-}
-
-export function* setPrimaryBusinessWorker(
-  action: GetPrimaryBusinessEvent,
-): unknown {
-  try {
-    if (!action.data?.bank) return;
-    yield put(businessActions.setBusiness(action.data));
-    yield put(businessActions.setPrimaryBusiness(action.data.bankId));
-    yield put(businessActions.stopLoadingPrimaryBusiness());
-  } catch (e) {
-    console.error("Set primary business error:", e);
   }
 }
 

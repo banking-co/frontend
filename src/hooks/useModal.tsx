@@ -1,9 +1,14 @@
 import { useCallback } from "react";
-import { NavigateOptions, useSearchParams } from "react-router-dom";
+import {
+  NavigateOptions,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 import { Modals } from "models";
 
 export const useModal = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const key = "modal";
 

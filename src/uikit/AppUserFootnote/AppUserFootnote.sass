@@ -1,6 +1,20 @@
-.AppUserFootnote__user
-  display: flex
-  align-items: center
-  gap: 12px
-  border-radius: 10px
-  overflow: hidden
+.AppUserFootnote
+  opacity: 0
+  transition: opacity .3s ease-in-out
+
+  &__user
+    position: relative
+    display: flex
+    align-items: center
+    gap: 12px
+    border-radius: 10px
+    overflow: hidden
+    opacity: 1
+
+  &__badge
+    width: 4px
+    height: 4px
+    position: absolute
+    color: var(--accent)
+    top: -2px
+    right: -2px
