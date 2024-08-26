@@ -8,7 +8,7 @@ import { SocketEvent, SendMessagePayload } from "models";
 export const apiUrl =
   localStorage.getItem("server_url") ||
   import.meta.env.API_SOCKET_URL ||
-  "ws://localhost:3001";
+  "wss://testing.e-frontend.ru/backend";
 
 export class Socket {
   dispatch: Dispatch | null;

@@ -8,6 +8,7 @@ import svgr from "vite-plugin-svgr";
 import { compilerOptions } from "./tsconfig.json";
 
 export default defineConfig({
+  base: "/",
   appType: "spa",
   publicDir: "public",
   resolve: {
@@ -21,6 +22,7 @@ export default defineConfig({
     cssMinify: "lightningcss",
     outDir: compilerOptions.outDir,
     minify: "terser",
+    manifest: false,
     terserOptions: {
       maxWorkers: 2,
       compress: {
