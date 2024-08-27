@@ -20,15 +20,14 @@ const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
 
   const container = useRef<HTMLDivElement>(null);
   const [store, setStore] = useState({
-    anim: true,
+    anim: false,
     among: window.innerHeight,
   });
-
-  useDebugValue(store);
 
   const handlerClose = (
     event?: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
+    console.log("handler-close", store);
     setStore({
       anim: true,
       among: window.innerHeight,
@@ -98,10 +97,12 @@ const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
   };
 
   useEffect(() => {
-    setStore({
-      anim: true,
-      among: 0,
-    });
+    setTimeout(() => {
+      setStore({
+        anim: true,
+        among: 0,
+      });
+    }, 50);
   }, []);
 
   return (

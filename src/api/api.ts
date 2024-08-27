@@ -6,9 +6,8 @@ import type { Dispatch } from "@reduxjs/toolkit";
 import { SocketEvent, SendMessagePayload } from "models";
 
 export const apiUrl =
-  localStorage.getItem("server_url") ||
-  import.meta.env.API_SOCKET_URL ||
-  "wss://testing.e-frontend.ru/backend";
+  import.meta.env.VITE_API_SOCKET_URL ||
+  "wss://production.e-frontend.ru/backend";
 
 export class Socket {
   dispatch: Dispatch | null;
