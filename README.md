@@ -9,11 +9,10 @@
 2. Usage npm
 
 ## Install
-1. Set ```.env```
+1. Set ```.env```, set ```VITE_PRODUCTION='0'``` and ```VITE_API_SOCKET_URL=ws://localhost:3001``` 
 2. Run ```npm i```
 3. Run ```npm run dev```
-4. Set backend URL in ```apiUrl``` ```ws://localhost:3000```
-5. Set in ```devtools > application > localStorage```: ```app-dev-sign: <your-vk-sign>```
+4. Set in ```devtools > application > localStorage```: ```app-dev-sign: <your-vk-sign>```
 
 ### CI/CD
 In the future, production will move to Docker + GitHub Pages. Currently, CI/CD provides timeweb.cloud

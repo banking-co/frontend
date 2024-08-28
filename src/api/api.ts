@@ -5,9 +5,11 @@ import { realtimeActions } from "../store/realtime";
 import type { Dispatch } from "@reduxjs/toolkit";
 import { SocketEvent, SendMessagePayload } from "models";
 
-export const apiUrl =
-  import.meta.env.VITE_API_SOCKET_URL ||
-  "wss://production.e-frontend.ru/backend";
+export const localApiUrl = import.meta.env.VITE_API_SOCKET_URL;
+export const devApiUrl = "wss://testing.e-frontend.ru/backend";
+export const productionApiUrl = "wss://production.e-frontend.ru/backend";
+
+export const apiUrl = import.meta.env.VITE_PRODUCTION === "0" ? (localApiUrl || devApiUrl) : productionApiUrl
 
 export class Socket {
   dispatch: Dispatch | null;
