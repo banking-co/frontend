@@ -14,3 +14,6 @@
 3. Run ```npm run dev```
 4. Set backend URL in ```apiUrl``` ```ws://localhost:3000```
 5. Set in ```devtools > application > localStorage```: ```app-dev-sign: <your-vk-sign>```
+
+### CI/CD
+In the future, production will move to Docker + GitHub Pages. Currently, CI/CD provides timeweb.cloud
