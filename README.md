@@ -1,36 +1,16 @@
-## Usage
+# Banking Game Frontend
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+## Warning
+1. Currently, all work with the WebSocket API is adapted for development with a static IP address. It is necessary to show the service to people!
+2. You will not be able to launch the service without vk-sign key!
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Requirements
+1. Node 20.13.x 
+2. Usage npm
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev` or `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
-
-## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
+## Install
+1. Set ```.env```
+2. Run ```npm i```
+3. Run ```npm run dev```
+4. Set backend URL in ```apiUrl``` ```ws://localhost:3000```
+5. Set in ```devtools > application > localStorage```: ```app-dev-sign: <your-vk-sign>```
