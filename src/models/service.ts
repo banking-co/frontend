@@ -36,6 +36,7 @@ export enum Modals {
   Bonus = "bonus",
   Currency = "currency",
   RenameBank = "rename_bank",
+  BankRating = "bank_rating",
 }
 
 export enum Theme {

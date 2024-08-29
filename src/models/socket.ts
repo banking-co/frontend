@@ -5,7 +5,6 @@ import {
   BusinessEmployerRoleModel,
   BusinessModel,
   ItemModel,
-  WorkModel,
 } from "models";
 
 export enum SocketEvent {
@@ -28,6 +27,7 @@ export enum SocketEvent {
   GetBusinessStaff = "get_st_bus",
   GetBusinessStaffRecruit = "get_st_r_bus",
   BuyBusinessStaffRecruit = "buy_st_r_bus",
+  GetBusinessRating = "get_bus_rtng",
 
   Error = "error",
 }

@@ -1,6 +1,6 @@
 import "./Avatar.sass";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 
 import { IconRobot, IconUser } from "@tabler/icons-react";
@@ -18,6 +18,8 @@ export const Avatar: AvatarProps = (props) => {
         "Avatar--rounded": !!props.isRounded,
         "Avatar--square": !!props.isSquare,
         [`Avatar_size--${props.size || "regular"}`]: true,
+        [`Avatar--rating`]: !!props.rating,
+        [`Avatar--rating-${props.rating}`]: !!props.rating,
         [`${props.className}`]: !!props.className,
       })}
       style={props.style}

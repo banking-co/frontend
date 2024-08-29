@@ -1,0 +1,36 @@
+.RatingUserItem
+  padding: 12px
+  border-radius: 15px
+
+  background: var(--secondary)
+
+  box-sizing: border-box
+
+  &__leader
+    position: relative
+
+    &-position
+      $size: 25px
+
+      position: absolute
+      bottom: -10px
+      display: flex
+      justify-content: center
+      align-items: center
+      border-radius: 100px
+      background: orange
+      width: $size
+      height: $size
+      overflow: hidden
+
+      &-1
+        background: var(--gold)
+
+      &-2
+        background: var(--silver)
+
+      &-3
+        background: var(--bronze)
+
+      & > * > *
+        color: var(--dark)

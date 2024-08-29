@@ -19,6 +19,7 @@ interface TextParams extends HTMLAttributes<HTMLElement> {
   isAccent?: boolean;
   isAccentChevron?: boolean;
   isLink?: boolean;
+  isCentered?: boolean;
 }
 
 export type TextProps = FC<TextParams>;

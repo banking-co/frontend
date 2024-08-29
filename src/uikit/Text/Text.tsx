@@ -1,7 +1,7 @@
 import "./Text.sass";
 
 import classNames from "classnames";
-import { createElement, useEffect, useMemo } from "react";
+import { createElement, useMemo } from "react";
 import { debounce } from "lodash";
 
 import { IconChevronRight } from "@tabler/icons-react";
@@ -29,6 +29,7 @@ const Text: TextProps = (props) => {
             [`Text__link`]: props.isLink,
             [`Text_reverse`]: props.reverse,
             [`Text__link_accent-chevron`]: props.isAccentChevron,
+            [`Text_centered`]: !!props.isCentered,
             [`${props.className}`]: !!props.className,
           }),
           style: props.style,

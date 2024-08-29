@@ -1,13 +1,14 @@
 import "./Modal.sass";
 
-import { useDebugValue, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useModal } from "hooks";
+import { clamp } from "utils";
+import classNames from "classnames";
+
+import { Touch } from "uikit";
 
 import { GestureEvent } from "models";
 import type { ModalChildrenProps, ModalProps } from "./Modal.interface";
-import classNames from "classnames";
-import { clamp } from "utils";
-import { Touch } from "uikit";
-import { useModal } from "hooks";
 
 const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
   const { closeModal } = useModal();
@@ -38,13 +39,13 @@ const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
     }, 200);
   };
 
-  const Start = (event: GestureEvent) =>
+  const handleStart = (event: GestureEvent) =>
     setStore({
       anim: false,
       among: store.among,
     });
 
-  const Move = (event: GestureEvent) => {
+  const handleMove = (event: GestureEvent) => {
     const target = event.originalEvent.currentTarget as HTMLDivElement;
     if (!target || !target.parentElement) {
       return;
@@ -77,7 +78,7 @@ const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
     }
   };
 
-  const End = (event: GestureEvent) => {
+  const handleEnd = (event: GestureEvent) => {
     if (store.among > 50) {
       return handlerClose();
     }
@@ -126,9 +127,9 @@ const ModalChildren: ModalChildrenProps = ({ children, mode = "card" }) => {
         >
           <Touch
             className={"ModalChildren__header"}
-            onStartY={Start}
-            onMoveY={Move}
-            onEndY={End}
+            onStartY={handleStart}
+            onMoveY={handleMove}
+            onEndY={handleEnd}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();

@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes } from "react";
+import { FC, HTMLAttributes } from "react";
 
 interface PositionParams extends HTMLAttributes<HTMLElement> {
   type: "line" | "column";

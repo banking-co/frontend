@@ -7,6 +7,8 @@ export interface AvatarParams extends HTMLAttributes<HTMLImageElement> {
 
   src?: string;
   size?: "small" | "regular" | "large" | "medium" | "auto" | "inherit";
+
+  rating?: number;
 }
 
 export type AvatarProps = FC<AvatarParams>;

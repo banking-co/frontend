@@ -23,14 +23,14 @@ export const items: ListItemsModel = [
     description: `bank.description`,
     children: [
       {
-        type: "edit",
+        type: "modal",
         modal: Modals.RenameBank,
         icon: <IconInfoSquareRounded />,
         translate_key: `bank.info`,
       },
       {
-        type: "route",
-        to: RouteId.ManagementBusinessRating,
+        type: "modal",
+        modal: Modals.BankRating,
         icon: <IconChartLine />,
         translate_key: `bank.rating`,
       },
