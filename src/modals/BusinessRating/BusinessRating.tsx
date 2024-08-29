@@ -20,8 +20,7 @@ export const BusinessRating = () => {
           <Position
             type={"line"}
             stretched
-            justifyContent={"center"}
-            gap={24}
+            justifyContent={"space-evenly"}
             alignItems={"flex-end"}
           >
             <RatingUserItem uid={ids[1]} />

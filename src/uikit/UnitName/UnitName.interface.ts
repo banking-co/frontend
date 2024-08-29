@@ -9,6 +9,7 @@ interface UnitNameParams {
   visibleUserId?: boolean;
   isShortLastName?: boolean;
   user?: UserModel;
+  maxLength?: number;
 }
 
 export type UnitNameProps = FC<UnitNameParams>;

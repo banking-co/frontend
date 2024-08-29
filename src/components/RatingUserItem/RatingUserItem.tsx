@@ -67,19 +67,28 @@ export const RatingUserItem: RatingUserItemProps = (props) => {
         {position === 1 && (
           <IconCrown color={color} fill={color} enableBackground={1} />
         )}
-        <Avatar
-          src={userAvatar}
-          size={position === 1 ? "large" : "medium"}
-          isRounded
-          rating={position}
-        />
-        <div
-          className={classNames("RatingUserItem__leader-position", {
-            [`RatingUserItem__leader-position-${position}`]: !!position,
-          })}
-        >
-          <Text text={position.toString()} tag={"span"} isBold />
-        </div>
+        <Position type={"column"} alignItems={"center"} gap={24}>
+          <Position
+            className={"RatingUserItem__container"}
+            type={"column"}
+            alignItems={"center"}
+          >
+            <Avatar
+              src={userAvatar}
+              size={position === 1 ? "large" : "medium"}
+              isRounded
+              rating={position}
+            />
+            <div
+              className={classNames("RatingUserItem__leader-position", {
+                [`RatingUserItem__leader-position-${position}`]: !!position,
+              })}
+            >
+              <Text text={position.toString()} tag={"span"} isBold />
+            </div>
+          </Position>
+          <UnitName isShortLastName user={user} maxLength={12} />
+        </Position>
       </Position>
     );
   }

@@ -14,10 +14,10 @@ export const UnitName: UnitNameProps = (props) => {
     () => props.user || getUser(props.userId),
     [props.userId],
   );
-  const userLastName = useMemo(
-    () => shrinkUserName(user, props.isShortLastName),
-    [props.isShortLastName, user],
-  );
+  const userName = useMemo(() => {
+    console.log(props.maxLength);
+    return shrinkUserName(user, props.isShortLastName, props.maxLength);
+  }, [props.isShortLastName, user]);
 
   if (!user || !user.personalInfo) {
     return null;
@@ -25,7 +25,7 @@ export const UnitName: UnitNameProps = (props) => {
 
   return (
     <div className="UnitName">
-      <Text text={userLastName} tag={props.tagName || "p"} />
+      <Text text={userName} tag={props.tagName || "p"} />
       {props.visibleUserId && (
         <Text
           className="UnitName__uid"
